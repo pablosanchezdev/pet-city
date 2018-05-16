@@ -1,6 +1,6 @@
 package com.pablosanchezegido.petcity.features.login;
 
-public interface LoginInteractor {
+public interface AuthInteractor {
 
     enum AuthType {
         LOGIN,

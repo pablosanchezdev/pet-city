@@ -5,9 +5,9 @@ import android.util.Patterns;
 public class LoginPresenterImpl implements LoginPresenter {
 
     private LoginView view;
-    private LoginInteractor interactor;
+    private AuthInteractor interactor;
 
-    LoginPresenterImpl(LoginView view, LoginInteractor interactor) {
+    LoginPresenterImpl(LoginView view, AuthInteractor interactor) {
         this.view = view;
         this.interactor = interactor;
     }
@@ -20,18 +20,20 @@ public class LoginPresenterImpl implements LoginPresenter {
         return password.length() >= pwdMinLength;
     }
 
-    private final LoginInteractor.OnAuthFinishedListener authListener =
-            new LoginInteractor.OnAuthFinishedListener() {
+    private final AuthInteractor.OnAuthFinishedListener loginListener =
+            new AuthInteractor.OnAuthFinishedListener() {
         @Override
         public void onSuccess() {
-            view.shouldShowProgressIndicator(false);
+            view.setProgressIndicatorVisible(false);
+            view.setLoginButtonEnabled(true);
             view.onLoginSuccess();
         }
 
         @Override
         public void onError(String error) {
-            view.shouldShowProgressIndicator(false);
+            view.setProgressIndicatorVisible(false);
             view.onError(error);
+            view.setLoginButtonEnabled(true);
         }
     };
 
@@ -43,24 +45,25 @@ public class LoginPresenterImpl implements LoginPresenter {
     @Override
     public void loginButtonClicked(String email, String pwd, int pwdMinLength) {
         if (!validateEmail(email)) {
-            view.shouldShowEmailError(true);
-            view.shouldShowPasswordError(false);
             view.setEmailError();
+            view.setEmailErrorVisible(true);
+            view.setPasswordErrorVisible(false);
         } else if (!validatePassword(pwd, pwdMinLength)) {
-            view.shouldShowEmailError(false);
-            view.shouldShowPasswordError(true);
             view.setPasswordError();
+            view.setEmailErrorVisible(false);
+            view.setPasswordErrorVisible(true);
         } else {
-            view.shouldShowEmailError(false);
-            view.shouldShowPasswordError(false);
-            view.shouldShowProgressIndicator(true);
-            interactor.authUser(LoginInteractor.AuthType.LOGIN, email, pwd, authListener);
+            view.setEmailErrorVisible(false);
+            view.setPasswordErrorVisible(false);
+            view.setProgressIndicatorVisible(true);
+            view.setLoginButtonEnabled(false);
+            interactor.authUser(AuthInteractor.AuthType.LOGIN, email, pwd, loginListener);
         }
     }
 
     @Override
     public void registerClicked() {
-
+        view.onRegisterClicked();
     }
 
     @Override

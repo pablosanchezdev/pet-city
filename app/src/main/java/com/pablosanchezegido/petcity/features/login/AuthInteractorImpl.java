@@ -2,17 +2,12 @@ package com.pablosanchezegido.petcity.features.login;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class LoginInteractorImpl implements LoginInteractor {
+public class AuthInteractorImpl implements AuthInteractor {
 
     private final FirebaseAuth auth;
 
-    LoginInteractorImpl() {
+    AuthInteractorImpl() {
         this.auth = FirebaseAuth.getInstance();
-    }
-
-    @Override
-    public boolean isUserLoggedIn() {
-        return auth.getCurrentUser() != null;
     }
 
     private void login(String email, String password, OnAuthFinishedListener listener) {
@@ -43,6 +38,11 @@ public class LoginInteractorImpl implements LoginInteractor {
                         }
                     }
                 });
+    }
+
+    @Override
+    public boolean isUserLoggedIn() {
+        return auth.getCurrentUser() != null;
     }
 
     @Override

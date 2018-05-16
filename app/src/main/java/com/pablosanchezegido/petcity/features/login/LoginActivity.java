@@ -1,6 +1,8 @@
 package com.pablosanchezegido.petcity.features.login;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
@@ -11,25 +13,25 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pablosanchezegido.petcity.MainActivity;
 import com.pablosanchezegido.petcity.R;
 import com.pablosanchezegido.petcity.utils.ExtensionsKt;
+import com.pablosanchezegido.petcity.views.custom.CircularProgressButton;
 
 import butterknife.BindColor;
 import butterknife.BindInt;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
+import butterknife.OnFocusChange;
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @BindView(R.id.root_view)
-    RelativeLayout rootView;
+    LinearLayout rootView;
 
     @BindView(R.id.ed_email)
     TextInputEditText edEmail;
@@ -43,6 +45,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @BindView(R.id.tv_error_password)
     TextView tvErrorPassword;
 
+    @BindView(R.id.bt_login)
+    CircularProgressButton btLogin;
+
     @BindInt(R.integer.password_min_length)
     int passwordMinLength;
 
@@ -52,10 +57,11 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @BindString(R.string.not_account)
     String notAccount;
 
-    @BindColor(R.color.light_blue)
-    int lightBlueColor;
+    @BindColor(R.color.primary_dark)
+    int focusedColor;
 
-    private ProgressBar progress;
+    @BindColor(R.color.black)
+    int unfocusedColor;
 
     private LoginPresenterImpl presenter;
 
@@ -64,9 +70,11 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        presenter = new LoginPresenterImpl(this, new LoginInteractorImpl());
+        presenter = new LoginPresenterImpl(this, new AuthInteractorImpl());
+
         ButterKnife.bind(this);
         initTvRegister();
+        bindListeners();
     }
 
     @Override
@@ -82,13 +90,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     protected void onDestroy() {
         presenter.destroy();
         super.onDestroy();
-    }
-
-    @OnClick(R.id.bt_login)
-    public void onButtonClicked(View view) {
-        String email = edEmail.getText().toString();
-        String password = edPassword.getText().toString();
-        presenter.loginButtonClicked(email, password, passwordMinLength);
     }
 
     private void initTvRegister() {
@@ -109,14 +110,34 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         tvRegister.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
+    @OnFocusChange({R.id.ed_email, R.id.ed_password})
+    public void onEditTextFocusChanged(View view, boolean hasFocus) {
+        TextInputEditText ed = (TextInputEditText) view;
+        Drawable leftDrawable = ed.getCompoundDrawables()[0];
+
+        if (leftDrawable != null) {
+            int color = hasFocus ? focusedColor : unfocusedColor;
+            leftDrawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
+        }
+    }
+
+    private void bindListeners() {
+        btLogin.setOnButtonClickListener(view -> {
+            String email = edEmail.getText().toString();
+            String password = edPassword.getText().toString();
+            presenter.loginButtonClicked(email, password, passwordMinLength);
+        });
+    }
+
     private void launchMainActivity() {
-        startActivity(new Intent(this, MainActivity.class));
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
         finish();
     }
 
     @Override
-    public void shouldShowEmailError(boolean show) {
-        tvErrorEmail.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+    public void setEmailErrorVisible(boolean visible) {
+        tvErrorEmail.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
@@ -125,8 +146,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
-    public void shouldShowPasswordError(boolean show) {
-        tvErrorPassword.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+    public void setPasswordErrorVisible(boolean visible) {
+        tvErrorPassword.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
@@ -136,16 +157,13 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
-    public void shouldShowProgressIndicator(boolean show) {
-        if (show) {
-            progress = ExtensionsKt.makeProgressBar(rootView);
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100, 100);
-            params.addRule(RelativeLayout.CENTER_IN_PARENT);
-            progress.setLayoutParams(params);
-            rootView.addView(progress);
-        } else {
-            rootView.removeView(progress);
-        }
+    public void setProgressIndicatorVisible(boolean visible) {
+        btLogin.setProgressVisible(visible);
+    }
+
+    @Override
+    public void setLoginButtonEnabled(boolean enabled) {
+        btLogin.setButtonEnabled(enabled);
     }
 
     @Override

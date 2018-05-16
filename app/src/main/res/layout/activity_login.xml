@@ -9,27 +9,25 @@
     android:fitsSystemWindows="true"
     tools:context=".features.login.LoginActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/root_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:padding="@dimen/window_large_padding">
 
         <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/login_title_margin_bottom"
             android:fontFamily="@font/roboto_slab_light"
+            android:gravity="center_horizontal"
             android:text="@string/app_name"
             android:textSize="@dimen/login_title_text_size" />
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_title"
             android:layout_marginBottom="@dimen/login_email_margin_bottom"
             app:hintEnabled="false">
 
@@ -50,17 +48,14 @@
             style="@style/ErrorTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/til_email"
             android:layout_marginBottom="@dimen/login_email_error_margin_bottom"
             android:visibility="invisible"
             tools:text="Error"
             tools:visibility="visible" />
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_error_email"
             android:layout_marginBottom="@dimen/login_password_margin_bottom"
             app:hintEnabled="false"
             app:passwordToggleEnabled="true">
@@ -82,31 +77,27 @@
             style="@style/ErrorTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/til_password"
             android:layout_marginBottom="@dimen/login_password_error_margin_bottom"
             android:visibility="invisible"
             tools:text="Error"
             tools:visibility="visible" />
 
-        <Button
+        <com.pablosanchezegido.petcity.views.custom.CircularProgressButton
             android:id="@+id/bt_login"
-            style="@style/RoundedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_error_password"
             android:layout_marginBottom="@dimen/bt_login_margin_bottom"
-            android:text="@string/login" />
+            app:buttonText="@string/login" />
 
         <TextView
             android:id="@+id/tv_register"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/bt_login"
-            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
             android:textColor="@color/white"
             android:textColorLink="@color/light_blue"
             android:textSize="@dimen/not_account_text_size" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
