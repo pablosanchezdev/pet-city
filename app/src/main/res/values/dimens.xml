@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <dimen name="window_large_padding">32dp</dimen>
+    <dimen name="login_title_margin_bottom">48dp</dimen>
+    <dimen name="login_title_text_size">60dp</dimen>
+    <dimen name="login_email_margin_bottom">8dp</dimen>
+    <dimen name="login_email_error_margin_bottom">18dp</dimen>
+    <dimen name="login_password_margin_bottom">8dp</dimen>
+    <dimen name="login_password_error_margin_bottom">48dp</dimen>
+    <dimen name="ed_rounded_stroke_width">2dp</dimen>
+    <dimen name="ed_rounded_drawable_padding">8dp</dimen>
+    <dimen name="ed_rounded_padding">16dp</dimen>
+    <dimen name="error_small_text_size">15dp</dimen>
+    <dimen name="bt_rounded_corner_radius">56dp</dimen>
+    <dimen name="bt_rounded_padding">16dp</dimen>
+    <dimen name="bt_rounded_text_size">15dp</dimen>
+    <dimen name="bt_login_margin_bottom">40dp</dimen>
+    <dimen name="not_account_text_size">16dp</dimen>
+
+</resources>
