@@ -1,13 +1,18 @@
 package com.pablosanchezegido.petcity.features.login;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.pablosanchezegido.petcity.features.registration.UserInteractor;
+import com.pablosanchezegido.petcity.features.registration.UserInteractorImpl;
 
 public class AuthInteractorImpl implements AuthInteractor {
 
     private final FirebaseAuth auth;
+    private UserInteractor userInteractor;
 
     public AuthInteractorImpl() {
         this.auth = FirebaseAuth.getInstance();
+        this.userInteractor = new UserInteractorImpl();
     }
 
     @Override
@@ -36,7 +41,18 @@ public class AuthInteractorImpl implements AuthInteractor {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        listener.onSuccess();
+                        userInteractor.createUser(getCurrentUser().getUid(), email, fullName, phoneNumber, birthDate,
+                                new UserInteractor.OnUserCreatedListener() {
+                            @Override
+                            public void onSuccess() {
+                                listener.onSuccess();
+                            }
+
+                            @Override
+                            public void onError(String error) {
+                                listener.onError(error);
+                            }
+                        });
                     } else {
                         if (task.getException() != null) {
                             listener.onError(task.getException().getMessage());
@@ -45,5 +61,9 @@ public class AuthInteractorImpl implements AuthInteractor {
                         }
                     }
                 });
+    }
+
+    private FirebaseUser getCurrentUser() {
+        return auth.getCurrentUser();
     }
 }

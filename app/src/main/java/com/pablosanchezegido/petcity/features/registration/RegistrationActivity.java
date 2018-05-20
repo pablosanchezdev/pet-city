@@ -234,6 +234,9 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
     @Override
     public void onRegisterSuccess() {
         Intent mainActivityIntent = new Intent(this, MainActivity.class);
+
+        // Remove login activity from stack
+        mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(mainActivityIntent);
         finish();
     }
