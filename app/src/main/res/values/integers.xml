@@ -3,5 +3,6 @@
 <resources>
 
     <integer name="password_min_length">6</integer>
+    <integer name="phone_number_length">9</integer>
 
 </resources>

@@ -4,7 +4,7 @@
 
     <dimen name="window_large_padding">32dp</dimen>
     <dimen name="login_title_margin_bottom">48dp</dimen>
-    <dimen name="login_title_text_size">60dp</dimen>
+    <dimen name="login_title_text_size">50dp</dimen>
     <dimen name="login_email_margin_bottom">8dp</dimen>
     <dimen name="login_email_error_margin_bottom">18dp</dimen>
     <dimen name="login_password_margin_bottom">8dp</dimen>

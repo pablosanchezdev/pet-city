@@ -6,11 +6,17 @@ public class AuthInteractorImpl implements AuthInteractor {
 
     private final FirebaseAuth auth;
 
-    AuthInteractorImpl() {
+    public AuthInteractorImpl() {
         this.auth = FirebaseAuth.getInstance();
     }
 
-    private void login(String email, String password, OnAuthFinishedListener listener) {
+    @Override
+    public boolean isUserLoggedIn() {
+        return auth.getCurrentUser() != null;
+    }
+
+    @Override
+    public void loginUser(String email, String password, OnAuthFinishedListener listener) {
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -25,7 +31,8 @@ public class AuthInteractorImpl implements AuthInteractor {
                 });
     }
 
-    private void signup(String email, String password, OnAuthFinishedListener listener) {
+    @Override
+    public void registerUser(String email, String password, String fullName, String phoneNumber, String birthDate, OnAuthFinishedListener listener) {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -38,19 +45,5 @@ public class AuthInteractorImpl implements AuthInteractor {
                         }
                     }
                 });
-    }
-
-    @Override
-    public boolean isUserLoggedIn() {
-        return auth.getCurrentUser() != null;
-    }
-
-    @Override
-    public void authUser(AuthType type, String email, String password, OnAuthFinishedListener listener) {
-        if (type == AuthType.LOGIN) {
-            login(email, password, listener);
-        } else {
-            signup(email, password, listener);
-        }
     }
 }

@@ -8,7 +8,7 @@ public interface LoginView {
     void setPasswordError();
     void setProgressIndicatorVisible(boolean visible);
     void setLoginButtonEnabled(boolean enabled);
-    void onError(String error);
+    void onLoginError(String error);
     void onLoginSuccess();
     void onRegisterClicked();
 }

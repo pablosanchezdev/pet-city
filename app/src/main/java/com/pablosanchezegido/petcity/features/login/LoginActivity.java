@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.pablosanchezegido.petcity.MainActivity;
 import com.pablosanchezegido.petcity.R;
+import com.pablosanchezegido.petcity.features.registration.RegistrationActivity;
 import com.pablosanchezegido.petcity.utils.ExtensionsKt;
 import com.pablosanchezegido.petcity.views.custom.CircularProgressButton;
 
@@ -167,7 +168,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
-    public void onError(String error) {
+    public void onLoginError(String error) {
         ExtensionsKt.makeSnackbar(rootView, error, Snackbar.LENGTH_LONG);
     }
 
@@ -178,6 +179,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
     @Override
     public void onRegisterClicked() {
-
+        Intent registerIntent = new Intent(this, RegistrationActivity.class);
+        startActivity(registerIntent);
     }
 }

@@ -2,6 +2,11 @@
 
 <resources>
 
+    <style name="BigTextView" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">@dimen/login_title_text_size</item>
+    </style>
+
     <style name="RoundedButton" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/rounded_button</item>
         <item name="android:padding">@dimen/bt_rounded_padding</item>
@@ -13,6 +18,7 @@
         <item name="android:background">@drawable/rounded_edittext</item>
         <item name="android:drawablePadding">@dimen/ed_rounded_drawable_padding</item>
         <item name="android:padding">@dimen/ed_rounded_padding</item>
+        <item name="android:textColorHint">@color/white_smoke</item>
     </style>
 
     <style name="ErrorTextView" parent="TextAppearance.AppCompat.Caption">

@@ -32,7 +32,7 @@ public class LoginPresenterImpl implements LoginPresenter {
         @Override
         public void onError(String error) {
             view.setProgressIndicatorVisible(false);
-            view.onError(error);
+            view.onLoginError(error);
             view.setLoginButtonEnabled(true);
         }
     };
@@ -57,7 +57,7 @@ public class LoginPresenterImpl implements LoginPresenter {
             view.setPasswordErrorVisible(false);
             view.setProgressIndicatorVisible(true);
             view.setLoginButtonEnabled(false);
-            interactor.authUser(AuthInteractor.AuthType.LOGIN, email, pwd, loginListener);
+            interactor.loginUser(email, pwd, loginListener);
         }
     }
 

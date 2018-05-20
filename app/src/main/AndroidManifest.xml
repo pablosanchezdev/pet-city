@@ -22,6 +22,12 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".features.registration.RegistrationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.TranslucentStatusBar"
+            android:windowSoftInputMode="adjustPan" />
+
         <activity android:name=".MainActivity" />
 
         <meta-data
