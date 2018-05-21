@@ -16,7 +16,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.pablosanchezegido.petcity.MainActivity;
+import com.pablosanchezegido.petcity.features.main.MainActivity;
 import com.pablosanchezegido.petcity.R;
 import com.pablosanchezegido.petcity.features.registration.RegistrationActivity;
 import com.pablosanchezegido.petcity.utils.ExtensionsKt;

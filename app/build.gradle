@@ -25,14 +25,17 @@ android {
 }
 
 dependencies {
-    def support_version = '27.1.1'
-    def firebase_version = '15.1.0'
+    def versions = [
+            support: '27.1.1',
+            firebase: '15.1.0'
+    ]
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "com.android.support:appcompat-v7:$support_version"
-    implementation "com.android.support:design:$support_version"
+    implementation "com.android.support:appcompat-v7:$versions.support"
+    implementation "com.android.support:design:$versions.support"
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-    implementation "com.google.firebase:firebase-auth:$firebase_version"
+    implementation "com.android.support:support-v4:$versions.support"
+    implementation "com.google.firebase:firebase-auth:$versions.firebase"
     implementation 'com.google.firebase:firebase-firestore:16.0.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.jakewharton:butterknife:8.8.1'

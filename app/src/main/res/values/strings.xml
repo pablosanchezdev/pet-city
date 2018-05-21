@@ -16,5 +16,12 @@
     <string name="error_name">El nombre sólo puede contener letras y espacios</string>
     <string name="error_phone_number">El número de teléfono debe contener %1$d números sin espacios en blanco</string>
     <string name="error_birth_date">La fecha de nacimiento no puede estar vacía</string>
+    <string name="navigation_offers">Ofertas</string>
+    <string name="navigation_publish">Publicar</string>
+    <string name="navigation_profile">Perfil</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="offers_list">Lista</string>
+    <string name="offers_calendar">Calendario</string>
+    <string name="offers_map">Mapa</string>
 
 </resources>

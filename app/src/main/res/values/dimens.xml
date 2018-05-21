@@ -18,5 +18,8 @@
     <dimen name="bt_rounded_text_size">15dp</dimen>
     <dimen name="bt_login_margin_bottom">40dp</dimen>
     <dimen name="not_account_text_size">16dp</dimen>
+    <dimen name="elevation">6dp</dimen>
+    <dimen name="tab_text_size">14dp</dimen>
+    <dimen name="tab_indicator_height">2dp</dimen>
 
 </resources>

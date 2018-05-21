@@ -26,4 +26,19 @@
         <item name="android:textSize">@dimen/error_small_text_size</item>
     </style>
 
+    <style name="Tabs" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/TabText</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabIndicatorColor">@color/accent</item>
+        <item name="tabIndicatorHeight">@dimen/tab_indicator_height</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabGravity">fill</item>
+    </style>
+
+    <style name="TabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/tab_text_size</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 </resources>

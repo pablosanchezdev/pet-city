@@ -10,14 +10,12 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import com.pablosanchezegido.petcity.MainActivity;
+import com.pablosanchezegido.petcity.features.main.MainActivity;
 import com.pablosanchezegido.petcity.R;
 import com.pablosanchezegido.petcity.features.login.AuthInteractorImpl;
 import com.pablosanchezegido.petcity.utils.CalendarUtilsKt;

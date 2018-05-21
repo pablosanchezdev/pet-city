@@ -28,7 +28,7 @@
             android:theme="@style/AppTheme.TranslucentStatusBar"
             android:windowSoftInputMode="adjustPan" />
 
-        <activity android:name=".MainActivity" />
+        <activity android:name=".features.main.MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
