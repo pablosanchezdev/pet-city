@@ -1,4 +1,4 @@
-package com.pablosanchezegido.petcity.features.home.calendar;
+package com.pablosanchezegido.petcity.features.offers.calendar;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

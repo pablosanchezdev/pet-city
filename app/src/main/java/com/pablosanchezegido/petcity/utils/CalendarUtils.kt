@@ -31,3 +31,12 @@ fun getDateTimestamp(dateString: String): Long {
 
     return date.time
 }
+
+fun getDateFromTimestamp(timestamp: Long, format: String? = null): String {
+    val formatter = SimpleDateFormat(format ?: DATE_PATTERN, Locale.getDefault())
+
+    val calendar = Calendar.getInstance()
+    calendar.timeInMillis = timestamp
+
+    return formatter.format(calendar.time)
+}

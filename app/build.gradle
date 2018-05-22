@@ -36,8 +36,11 @@ dependencies {
     implementation "com.android.support:cardview-v7:$versions.support"
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation "com.android.support:support-v4:$versions.support"
+    implementation 'com.squareup.picasso:picasso:2.71828'
     implementation "com.google.firebase:firebase-auth:$versions.firebase"
     implementation 'com.google.firebase:firebase-firestore:16.0.0'
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation 'com.google.maps.android:android-maps-utils:0.5'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'

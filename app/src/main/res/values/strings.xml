@@ -23,5 +23,10 @@
     <string name="offers_list">Lista</string>
     <string name="offers_calendar">Calendario</string>
     <string name="offers_map">Mapa</string>
+    <string name="offer_date">%1$s | %2$s</string>
+    <string name="offer_distance">%1$d m</string>
+    <string name="offer_price">%.2f €</string>
+    <string name="retry">Reintentar</string>
+    <string name="no_results_search">Búsqueda sin resultados</string>
 
 </resources>

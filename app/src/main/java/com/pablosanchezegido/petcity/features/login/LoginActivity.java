@@ -16,8 +16,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.pablosanchezegido.petcity.features.main.MainActivity;
 import com.pablosanchezegido.petcity.R;
+import com.pablosanchezegido.petcity.features.main.MainActivity;
 import com.pablosanchezegido.petcity.features.registration.RegistrationActivity;
 import com.pablosanchezegido.petcity.utils.ExtensionsKt;
 import com.pablosanchezegido.petcity.views.custom.CircularProgressButton;

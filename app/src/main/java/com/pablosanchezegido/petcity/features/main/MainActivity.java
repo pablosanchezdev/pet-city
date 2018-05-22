@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.pablosanchezegido.petcity.R;
-import com.pablosanchezegido.petcity.features.home.OffersFragment;
+import com.pablosanchezegido.petcity.features.offers.OffersFragment;
 import com.pablosanchezegido.petcity.features.profile.ProfileFragment;
 import com.pablosanchezegido.petcity.features.publish.PublishFragment;
 

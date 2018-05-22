@@ -1,4 +1,4 @@
-package com.pablosanchezegido.petcity.features.home;
+package com.pablosanchezegido.petcity.features.offers;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,9 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.pablosanchezegido.petcity.R;
-import com.pablosanchezegido.petcity.features.home.calendar.OffersCalendarFragment;
-import com.pablosanchezegido.petcity.features.home.list.OffersListFragment;
-import com.pablosanchezegido.petcity.features.home.map.OffersMapFragment;
+import com.pablosanchezegido.petcity.features.offers.calendar.OffersCalendarFragment;
+import com.pablosanchezegido.petcity.features.offers.list.OffersListFragment;
+import com.pablosanchezegido.petcity.features.offers.map.OffersMapFragment;
 import com.pablosanchezegido.petcity.views.adapters.TabsAdapter;
 
 import butterknife.BindString;

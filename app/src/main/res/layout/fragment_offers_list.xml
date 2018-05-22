@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <ProgressBar
+        android:id="@+id/pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/xxx_large_padding"
+        android:visibility="gone" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv"
@@ -11,5 +21,24 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/small_padding"
         tools:listitem="@layout/item_offer" />
+
+    <com.pablosanchezegido.petcity.views.custom.CircularProgressButton
+        android:id="@+id/bt_retry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:buttonText="@string/retry" />
+
+    <TextView
+        android:id="@+id/tv_no_results"
+        style="@style/EmphasisTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawableTop="@drawable/ic_data_search"
+        android:text="@string/no_results_search"
+        android:textColor="@color/black"
+        android:visibility="gone" />
 
 </FrameLayout>

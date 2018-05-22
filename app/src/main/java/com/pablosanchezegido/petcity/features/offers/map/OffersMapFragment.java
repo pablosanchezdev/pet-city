@@ -1,4 +1,4 @@
-package com.pablosanchezegido.petcity.features.home.map;
+package com.pablosanchezegido.petcity.features.offers.map;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
