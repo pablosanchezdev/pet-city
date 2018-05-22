@@ -2,24 +2,34 @@
 
 <resources>
 
-    <dimen name="window_large_padding">32dp</dimen>
-    <dimen name="login_title_margin_bottom">48dp</dimen>
-    <dimen name="login_title_text_size">50dp</dimen>
-    <dimen name="login_email_margin_bottom">8dp</dimen>
-    <dimen name="login_email_error_margin_bottom">18dp</dimen>
-    <dimen name="login_password_margin_bottom">8dp</dimen>
-    <dimen name="login_password_error_margin_bottom">48dp</dimen>
-    <dimen name="ed_rounded_stroke_width">2dp</dimen>
-    <dimen name="ed_rounded_drawable_padding">8dp</dimen>
-    <dimen name="ed_rounded_padding">16dp</dimen>
-    <dimen name="error_small_text_size">15dp</dimen>
-    <dimen name="bt_rounded_corner_radius">56dp</dimen>
-    <dimen name="bt_rounded_padding">16dp</dimen>
-    <dimen name="bt_rounded_text_size">15dp</dimen>
-    <dimen name="bt_login_margin_bottom">40dp</dimen>
-    <dimen name="not_account_text_size">16dp</dimen>
+    <dimen name="xxx_large_padding">56dp</dimen>
+    <dimen name="xx_large_padding">48dp</dimen>
+    <dimen name="very_x_large_padding">40dp</dimen>
+    <dimen name="x_large_padding">32dp</dimen>
+    <dimen name="very_large_padding">20dp</dimen>
+    <dimen name="large_padding">16dp</dimen>
+    <dimen name="padding">8dp</dimen>
+    <dimen name="small_padding">4dp</dimen>
+    <dimen name="x_small_padding">2dp</dimen>
+
+    <dimen name="xxx_large_text_size">50dp</dimen>
+    <dimen name="normal_text_size">15dp</dimen>
+    <dimen name="heading_text_size">20dp</dimen>
+    <dimen name="sub_heading_text_size">17dp</dimen>
+
+    <dimen name="ed_rounded_stroke_width">@dimen/x_small_padding</dimen>
+    <dimen name="ed_rounded_drawable_padding">@dimen/padding</dimen>
+    <dimen name="ed_rounded_padding">@dimen/large_padding</dimen>
+
+    <dimen name="bt_rounded_corner_radius">@dimen/xxx_large_padding</dimen>
+    <dimen name="bt_rounded_padding">@dimen/large_padding</dimen>
+
     <dimen name="elevation">6dp</dimen>
+
     <dimen name="tab_text_size">14dp</dimen>
     <dimen name="tab_indicator_height">2dp</dimen>
+
+    <dimen name="card_offer_corner_radius">3dp</dimen>
+    <dimen name="card_offer_elevation">4dp</dimen>
 
 </resources>

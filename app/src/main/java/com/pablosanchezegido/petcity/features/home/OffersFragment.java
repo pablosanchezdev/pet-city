@@ -14,7 +14,7 @@ import com.pablosanchezegido.petcity.R;
 import com.pablosanchezegido.petcity.features.home.calendar.OffersCalendarFragment;
 import com.pablosanchezegido.petcity.features.home.list.OffersListFragment;
 import com.pablosanchezegido.petcity.features.home.map.OffersMapFragment;
-import com.pablosanchezegido.petcity.views.adapters.ViewPagerAdapter;
+import com.pablosanchezegido.petcity.views.adapters.TabsAdapter;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -41,7 +41,7 @@ public class OffersFragment extends Fragment {
     }
 
     private void initViews() {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+        TabsAdapter adapter = new TabsAdapter(getChildFragmentManager());
         adapter.addFragment(new OffersListFragment(), listFragmentTitle);
         adapter.addFragment(new OffersCalendarFragment(), calendarFragmentTitle);
         adapter.addFragment(new OffersMapFragment(), mapFragmentTitle);
