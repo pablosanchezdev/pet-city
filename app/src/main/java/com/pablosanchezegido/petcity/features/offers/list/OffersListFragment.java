@@ -28,7 +28,7 @@ import butterknife.ButterKnife;
 
 public class OffersListFragment extends Fragment implements OffersListView, CircularProgressButton.OnButtonClickListener {
 
-    private static final float CARD_VIEW_HEIGHT_RATIO = 0.7f;
+    private static final float CARD_VIEW_HEIGHT_RATIO = 0.75f;
 
     @BindView(R.id.root_view) FrameLayout rootView;
     @BindView(R.id.pb) ProgressBar pb;
@@ -46,13 +46,9 @@ public class OffersListFragment extends Fragment implements OffersListView, Circ
         View view = inflater.inflate(R.layout.fragment_offers_list, container, false);
         ButterKnife.bind(this, view);
         initViews();
-        return view;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         presenter = new OffersListPresenterImpl(this, new OffersListInteractorImpl());
         presenter.fetchData();
+        return view;
     }
 
     private void initViews() {

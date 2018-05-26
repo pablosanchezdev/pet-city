@@ -32,13 +32,12 @@
 
     <TextView
         android:id="@+id/tv_no_results"
-        style="@style/EmphasisTextView"
+        style="@style/BlackEmphasisTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:drawableTop="@drawable/ic_data_search"
         android:text="@string/no_results_search"
-        android:textColor="@color/black"
         android:visibility="gone" />
 
 </FrameLayout>

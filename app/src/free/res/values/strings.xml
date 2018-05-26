@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="app_name">Pet City</string>
+    <string name="feature_map_free_flavor">La vista de mapa sólo está disponible en la versión premium</string>
+    <string name="go_premium">Descargar versión premium</string>
+
+</resources>

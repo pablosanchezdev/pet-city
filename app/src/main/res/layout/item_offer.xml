@@ -35,7 +35,7 @@
             android:layout_alignEnd="@id/iv_offer_image"
             android:layout_marginBottom="@dimen/large_padding"
             android:layout_marginEnd="@dimen/large_padding"
-            android:textAppearance="@style/EmphasisTextView"
+            android:textAppearance="@style/WhiteEmphasisTextView"
             tools:text="12.50 €" />
 
         <TextView
@@ -73,7 +73,7 @@
             android:layout_above="@id/tv_offer_date"
             android:layout_alignStart="@id/tv_offer_date"
             android:layout_marginTop="@dimen/x_large_padding"
-            android:textAppearance="@style/EmphasisTextView"
+            android:textAppearance="@style/WhiteEmphasisTextView"
             tools:text="Cuido perros en mi amplio jardín" />
 
         <Space
