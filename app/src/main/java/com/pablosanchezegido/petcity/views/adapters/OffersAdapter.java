@@ -13,6 +13,7 @@ import com.pablosanchezegido.petcity.R;
 import com.pablosanchezegido.petcity.models.OfferView;
 import com.pablosanchezegido.petcity.utils.CalendarUtilsKt;
 import com.pablosanchezegido.petcity.utils.ExtensionsKt;
+import com.pablosanchezegido.petcity.utils.LocaleUtilsKt;
 import com.pablosanchezegido.petcity.utils.SpannableFactoryKt;
 import com.squareup.picasso.Picasso;
 
@@ -76,7 +77,7 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
             tvDistance.setText(distance);
 
             String price = res.getString(R.string.offer_price, offer.getPrice());
-            int endIndex = price.indexOf(".");
+            int endIndex = price.indexOf(LocaleUtilsKt.getLocaleDecimalSeparator());
             SpannableString spannablePrice = SpannableFactoryKt.makeRelativeSizeSpan(price, 1.4f,  0, endIndex);
             tvPrice.setText(spannablePrice);
         }
