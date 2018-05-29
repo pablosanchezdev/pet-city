@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.View;
@@ -17,11 +16,13 @@ import com.pablosanchezegido.petcity.features.publish.SlideRightSlideBottomTrans
 import com.pablosanchezegido.petcity.features.publish.images.PublishImagesActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
 public class PublishTitleDetailActivity extends SlideRightSlideBottomTransitionActivity implements PublishTitleDetailView {
+
+    public static final String TITLE_KEY = "offerTitle";
+    public static final String DETAIL_KEY = "offerDetail";
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.tv_steps) TextView tvSteps;
@@ -93,8 +94,8 @@ public class PublishTitleDetailActivity extends SlideRightSlideBottomTransitionA
     @Override
     public void requestNextPage() {
         Intent nextActivityIntent = new Intent(this, PublishImagesActivity.class);
-        nextActivityIntent.putExtra(PublishImagesActivity.OFFER_TITLE_KEY, offerTitle);
-        nextActivityIntent.putExtra(PublishImagesActivity.OFFER_DETAIL_KEY, offerDetail);
+        nextActivityIntent.putExtra(TITLE_KEY, offerTitle);
+        nextActivityIntent.putExtra(DETAIL_KEY, offerDetail);
         launchNextActivity(nextActivityIntent);
     }
 }

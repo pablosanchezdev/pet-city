@@ -50,7 +50,7 @@
             android:drawablePadding="@dimen/padding"
             android:drawableStart="@drawable/ic_location"
             android:gravity="center_vertical"
-            android:textAppearance="@style/MediumTextView"
+            android:textAppearance="@style/WhiteMediumTextView"
             tools:text="0.5 km" />
 
         <TextView

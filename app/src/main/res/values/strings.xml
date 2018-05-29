@@ -41,5 +41,8 @@
     <string name="permissions_not_granted">Algún permiso necesario no concedido</string>
     <string name="camera_not_available">Cámara no disponible</string>
     <string name="external_storage_not_available">Almacenamiento externo no disponible</string>
+    <string name="publish_place">¿Dónde vas a cuidar a los animales?</string>
+    <string name="choose_place">Escoger lugar</string>
+    <string name="error_google_places">Ha ocurrido un error inesperado: %1$d</string>
 
 </resources>

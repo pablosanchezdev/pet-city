@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/very_xxx_large_padding"
         android:text="@string/publish_subtitle"
-        android:textAppearance="@style/MediumTextView" />
+        android:textAppearance="@style/WhiteMediumTextView" />
 
     <Button
         android:id="@+id/bt_publish_offer"

@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.pablosanchezegido.petcity.R;
 import com.pablosanchezegido.petcity.features.publish.SlideRightSlideBottomTransitionActivity;
+import com.pablosanchezegido.petcity.features.publish.place.PublishPlaceActivity;
+import com.pablosanchezegido.petcity.features.publish.titledetail.PublishTitleDetailActivity;
 import com.pablosanchezegido.petcity.models.PetCityException;
 import com.pablosanchezegido.petcity.utils.CameraUtils;
 import com.pablosanchezegido.petcity.utils.ExtensionsKt;
@@ -32,10 +34,8 @@ import butterknife.OnClick;
 public class PublishImagesActivity extends SlideRightSlideBottomTransitionActivity
         implements PublishImagesView, CameraGalleryBottomSheet.OnItemClickListener {
 
-    public static final String OFFER_TITLE_KEY = "offerTitle";
-    public static final String OFFER_DETAIL_KEY = "offerDetail";
-    private static final String FIRST_IMAGE_URI_KEY = "firstImageUri";
-    private static final String SECOND_IMAGE_URI_KEY = "secondImageUri";
+    public static final String FIRST_IMAGE_URI_KEY = "firstImageUri";
+    public static final String SECOND_IMAGE_URI_KEY = "secondImageUri";
     private static final String BUTTON_NEXT_VISIBILITY_KEY  = "buttonNextVisibility";
     private static final int CAMERA_PERMISSIONS_REQUEST_CODE = 1;
     private static final int GALLERY_PERMISSIONS_REQUEST_CODE = 2;
@@ -118,6 +118,11 @@ public class PublishImagesActivity extends SlideRightSlideBottomTransitionActivi
         presenter.imageButtonClicked();
     }
 
+    @OnClick(R.id.bt_next)
+    public void onNextButtonClicked(View view) {
+        presenter.nextButtonClicked();
+    }
+
     @Override
     public void openDialog() {
         CameraGalleryBottomSheet bottomSheet = new CameraGalleryBottomSheet();
@@ -153,7 +158,13 @@ public class PublishImagesActivity extends SlideRightSlideBottomTransitionActivi
 
     @Override
     public void requestNextPage() {
-
+        Intent nextActivityIntent = new Intent(this, PublishPlaceActivity.class);
+        Intent previousIntent = getIntent();
+        nextActivityIntent.putExtra(PublishTitleDetailActivity.TITLE_KEY, previousIntent.getStringExtra(PublishTitleDetailActivity.TITLE_KEY));
+        nextActivityIntent.putExtra(PublishTitleDetailActivity.DETAIL_KEY, previousIntent.getStringExtra(PublishTitleDetailActivity.DETAIL_KEY));
+        nextActivityIntent.putExtra(FIRST_IMAGE_URI_KEY, firstImageUri);
+        nextActivityIntent.putExtra(SECOND_IMAGE_URI_KEY, secondImageUri);
+        launchNextActivity(nextActivityIntent);
     }
 
     @Override
