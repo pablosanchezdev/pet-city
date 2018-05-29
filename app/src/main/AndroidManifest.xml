@@ -37,6 +37,18 @@
             android:name=".features.publish.titledetail.PublishTitleDetailActivity"
             android:windowSoftInputMode="stateVisible" />
 
+        <activity android:name=".features.publish.images.PublishImagesActivity" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.pablosanchezegido.petcity.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -34,5 +34,12 @@
     <string name="hint_offer_title">Título breve y conciso</string>
     <string name="hint_offer_detail">Detalle explicativo</string>
     <string name="next">Continuar</string>
+    <string name="publish_images">Sube dos imágenes llamativas</string>
+    <string name="image">Imagen</string>
+    <string name="camera">Cámara</string>
+    <string name="gallery">Galería</string>
+    <string name="permissions_not_granted">Algún permiso necesario no concedido</string>
+    <string name="camera_not_available">Cámara no disponible</string>
+    <string name="external_storage_not_available">Almacenamiento externo no disponible</string>
 
 </resources>
