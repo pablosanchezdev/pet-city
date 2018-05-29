@@ -10,13 +10,38 @@ import android.view.ViewGroup;
 
 import com.pablosanchezegido.petcity.R;
 
-public class PublishFragment extends Fragment {
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+public class PublishFragment extends Fragment implements PublishView {
+
+    private PublishPresenterImpl presenter;
 
     public PublishFragment() { }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_publish, container, false);
+        View view = inflater.inflate(R.layout.fragment_publish, container, false);
+        ButterKnife.bind(this, view);
+        presenter = new PublishPresenterImpl(this);
+        return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        presenter.destroy();
+        super.onDestroy();
+    }
+
+    @OnClick(R.id.bt_publish_offer)
+    public void onPublishOfferClicked() {
+        presenter.publishOfferClicked();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void startPublishProcess() {
+        
     }
 }

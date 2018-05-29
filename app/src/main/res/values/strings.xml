@@ -27,5 +27,8 @@
     <string name="offer_price">%.2f €</string>
     <string name="retry">Reintentar</string>
     <string name="no_results_search">Búsqueda sin resultados</string>
+    <string name="publish_title">¿Tienes un lugar donde cuidar mascotas ajenas?</string>
+    <string name="publish_subtitle">¡No lo dudes y publica aquí tu oferta!</string>
+    <string name="publish_offer">Publicar oferta</string>
 
 </resources>
