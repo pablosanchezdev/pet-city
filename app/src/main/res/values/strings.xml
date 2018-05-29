@@ -30,5 +30,9 @@
     <string name="publish_title">¿Tienes un lugar donde cuidar mascotas ajenas?</string>
     <string name="publish_subtitle">¡No lo dudes y publica aquí tu oferta!</string>
     <string name="publish_offer">Publicar oferta</string>
+    <string name="publish_title_detail">Indica un título y un detalle</string>
+    <string name="hint_offer_title">Título breve y conciso</string>
+    <string name="hint_offer_detail">Detalle explicativo</string>
+    <string name="next">Continuar</string>
 
 </resources>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/AppTheme.Toolbar"
+        android:layout_width="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back" />
+
+    <TextView
+        android:id="@+id/tv_steps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/large_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:text="1/5" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/large_padding"
+        android:layout_marginStart="@dimen/large_padding"
+        android:layout_marginTop="@dimen/padding"
+        android:text="@string/publish_title_detail"
+        android:textAppearance="@style/BlackEmphasisTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_steps" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_offer_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/x_large_padding"
+        android:layout_marginStart="@dimen/x_large_padding"
+        android:layout_marginTop="@dimen/x_large_padding"
+        android:theme="@style/FloatingHint"
+        app:counterEnabled="true"
+        app:counterMaxLength="@integer/offer_title_max_length"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/ed_offer_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_offer_title"
+            android:inputType="textMultiLine"
+            android:maxLength="@integer/offer_title_max_length" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/til_offer_detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/x_large_padding"
+        android:layout_marginStart="@dimen/x_large_padding"
+        android:theme="@style/FloatingHint"
+        app:counterEnabled="true"
+        app:counterMaxLength="@integer/offer_detail_max_length"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_offer_title">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/ed_offer_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_offer_detail"
+            android:inputType="textMultiLine"
+            android:maxLength="@integer/offer_detail_max_length" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/bt_next"
+        style="@style/RoundedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x_large_padding"
+        android:layout_marginEnd="@dimen/x_large_padding"
+        android:layout_marginStart="@dimen/x_large_padding"
+        android:text="@string/next"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

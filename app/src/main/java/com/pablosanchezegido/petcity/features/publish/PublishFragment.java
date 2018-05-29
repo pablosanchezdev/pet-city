@@ -1,14 +1,18 @@
 package com.pablosanchezegido.petcity.features.publish;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.pablosanchezegido.petcity.R;
+import com.pablosanchezegido.petcity.features.publish.titledetail.PublishTitleDetailActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -42,6 +46,8 @@ public class PublishFragment extends Fragment implements PublishView {
     @SuppressWarnings("unchecked")
     @Override
     public void startPublishProcess() {
-        
+        Intent publishIntent = new Intent(getContext(), PublishTitleDetailActivity.class);
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity());
+        ActivityCompat.startActivity(getContext(), publishIntent, options.toBundle());
     }
 }

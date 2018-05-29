@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:textColorPrimary">@color/low_light_black</item>
+        <item name="android:textColorSecondary">@color/light_gray</item>
+        <item name="colorControlHighlight">@color/primary_light</item>
+    </style>
+
+    <style name="AppTheme.TranslucentStatusBar">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="AppTheme.Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+    </style>
+
+    <style name="AppTheme.SlideRightSlideBottomTransition">
+        <item name="android:windowEnterTransition">@transition/slide_right_exclude_status</item>
+        <item name="android:windowReturnTransition">@transition/slide_bottom_exclude_status</item>
+    </style>
+
+</resources>
