@@ -210,7 +210,8 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
         int year = CalendarUtilsKt.getCurrentYear();
         int month = CalendarUtilsKt.getCurrentMonth();
         int day = CalendarUtilsKt.getCurrentDay();
-        DatePickerFragment dialog = DatePickerFragment.newInstance(year, month, day);
+        DatePickerFragment dialog = DatePickerFragment
+                .newInstance(year, month, day, DatePickerFragment.DATE_BOUNDS_NOT_SET, CalendarUtilsKt.getDateTimestamp(year, month, day));
         dialog.show(getSupportFragmentManager(), dialog.getClass().getSimpleName());
     }
 

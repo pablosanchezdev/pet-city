@@ -10,17 +10,29 @@ import android.widget.DatePicker;
 
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
+    public interface DateSetListener {
+        void onDateSet(int year, int month, int day);
+    }
+
+    private DateSetListener listener;
+
+    public static final int DATE_BOUNDS_NOT_SET = -1;
     private static final String YEAR = "year";
     private static final String MONTH = "month";
     private static final String DAY = "day";
+    private static final String MIN_DATE = "minDate";
+    private static final String MAX_DATE = "maxDate";
 
-    public static DatePickerFragment newInstance(int year, int month, int day) {
+    public static DatePickerFragment newInstance(int year, int month, int day, long minDate, long maxDate) {
         DatePickerFragment dialog = new DatePickerFragment();
 
         Bundle args = new Bundle();
         args.putInt(YEAR, year);
         args.putInt(MONTH, month);
         args.putInt(DAY, day);
+        args.putLong(MIN_DATE, minDate);
+        args.putLong(MAX_DATE, maxDate);
+
         dialog.setArguments(args);
 
         return dialog;
@@ -35,7 +47,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         if (context instanceof DateSetListener) {
             listener = (DateSetListener) context;
         } else {
-            throw new ClassCastException(context.getClass().getSimpleName() + " must implement DateSetListener");
+            throw new ClassCastException(context + " must implement DateSetListener");
         }
     }
 
@@ -48,7 +60,9 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         int month = args.getInt(MONTH);
         int day = args.getInt(DAY);
 
-        return new DatePickerDialog(getContext(), this, year, month, day);
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), this, year, month, day);
+        configDatePicker(datePickerDialog.getDatePicker());
+        return datePickerDialog;
     }
 
     @Override
@@ -63,9 +77,14 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         listener.onDateSet(year, month, dayOfMonth);
     }
 
-    public interface DateSetListener {
-        void onDateSet(int year, int month, int day);
-    }
+    private void configDatePicker(DatePicker datePicker) {
+        Bundle args = getArguments();
 
-    private DateSetListener listener;
+        if (args != null && args.getLong(MIN_DATE) != DATE_BOUNDS_NOT_SET) {
+            datePicker.setMinDate(args.getLong(MIN_DATE));
+        }
+        if (args != null && args.getLong(MAX_DATE) != DATE_BOUNDS_NOT_SET) {
+            datePicker.setMaxDate(args.getLong(MAX_DATE));
+        }
+    }
 }

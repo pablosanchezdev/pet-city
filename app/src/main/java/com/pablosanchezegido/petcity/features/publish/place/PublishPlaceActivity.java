@@ -1,6 +1,7 @@
 package com.pablosanchezegido.petcity.features.publish.place;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -19,14 +20,20 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.pablosanchezegido.petcity.R;
 import com.pablosanchezegido.petcity.features.publish.SlideRightSlideBottomTransitionActivity;
+import com.pablosanchezegido.petcity.features.publish.dates.PublishDatesActivity;
+import com.pablosanchezegido.petcity.features.publish.images.PublishImagesActivity;
+import com.pablosanchezegido.petcity.features.publish.titledetail.PublishTitleDetailActivity;
 import com.pablosanchezegido.petcity.utils.ExtensionsKt;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 public class PublishPlaceActivity extends SlideRightSlideBottomTransitionActivity implements PublishPlaceView {
-    
+
+    public static final String PLACE_ADDRESS_KEY = "placeAddress";
     private static final int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
+    private static final int PLAY_SERVICES_REPAIRABLE_EXCEPTION_CODE = 2;
+    private static final int PLAY_SERVICES_NOT_AVAILABLE_EXCEPTION_CODE = 3;
 
     @BindView(R.id.root_view) ConstraintLayout rootView;
     @BindView(R.id.toolbar) Toolbar toolbar;
@@ -35,6 +42,8 @@ public class PublishPlaceActivity extends SlideRightSlideBottomTransitionActivit
     @BindView(R.id.bt_next) Button btNext;
 
     private PublishPlacePresenterImpl presenter;
+
+    private String placeAddress;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -104,17 +113,18 @@ public class PublishPlaceActivity extends SlideRightSlideBottomTransitionActivit
         } catch (GooglePlayServicesRepairableException e) {
             int statusCode = e.getConnectionStatusCode();
             GoogleApiAvailability availability = GoogleApiAvailability.getInstance();
-            availability.getErrorDialog(this, statusCode, 2);
+            availability.getErrorDialog(this, statusCode, PLAY_SERVICES_REPAIRABLE_EXCEPTION_CODE);
         } catch (GooglePlayServicesNotAvailableException e) {
             int statusCode = e.errorCode;
             GoogleApiAvailability availability = GoogleApiAvailability.getInstance();
-            availability.getErrorDialog(this, statusCode, 2);
+            availability.getErrorDialog(this, statusCode, PLAY_SERVICES_NOT_AVAILABLE_EXCEPTION_CODE);
         }
     }
 
     @Override
     public void setPlaceAddress(CharSequence address) {
         tvAddress.setText(address);
+        placeAddress = address.toString();
     }
 
     @Override
@@ -124,7 +134,14 @@ public class PublishPlaceActivity extends SlideRightSlideBottomTransitionActivit
 
     @Override
     public void requestNextPage() {
-
+        Intent nextActivityIntent = new Intent(this, PublishDatesActivity.class);
+        Intent previousIntent = getIntent();
+        nextActivityIntent.putExtra(PublishTitleDetailActivity.TITLE_KEY, previousIntent.getStringExtra(PublishTitleDetailActivity.TITLE_KEY));
+        nextActivityIntent.putExtra(PublishTitleDetailActivity.DETAIL_KEY, previousIntent.getStringExtra(PublishTitleDetailActivity.DETAIL_KEY));
+        nextActivityIntent.putExtra(PublishImagesActivity.FIRST_IMAGE_URI_KEY, (Uri) previousIntent.getParcelableExtra(PublishImagesActivity.FIRST_IMAGE_URI_KEY));
+        nextActivityIntent.putExtra(PublishImagesActivity.SECOND_IMAGE_URI_KEY, (Uri) previousIntent.getParcelableExtra(PublishImagesActivity.SECOND_IMAGE_URI_KEY));
+        nextActivityIntent.putExtra(PLACE_ADDRESS_KEY, placeAddress);
+        launchNextActivity(nextActivityIntent);
     }
 
     private void showMessage(String message) {

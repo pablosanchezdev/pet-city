@@ -41,6 +41,8 @@
 
         <activity android:name=".features.publish.place.PublishPlaceActivity" />
 
+        <activity android:name=".features.publish.dates.PublishDatesActivity" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.pablosanchezegido.petcity.fileprovider"

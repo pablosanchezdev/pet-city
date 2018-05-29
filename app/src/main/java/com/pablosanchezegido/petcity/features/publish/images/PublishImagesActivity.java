@@ -60,6 +60,7 @@ public class PublishImagesActivity extends SlideRightSlideBottomTransitionActivi
         super.onCreate(savedInstanceState);
 
         presenter = new PublishImagesPresenterImpl(this);
+        firstImageSet = secondImageSet = false;
     }
 
     @Override

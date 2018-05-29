@@ -44,5 +44,9 @@
     <string name="publish_place">¿Dónde vas a cuidar a los animales?</string>
     <string name="choose_place">Escoger lugar</string>
     <string name="error_google_places">Ha ocurrido un error inesperado: %1$d</string>
+    <string name="publish_dates">Indica tus fechas de disponibilidad</string>
+    <string name="hint_start_date">Fecha de inicio</string>
+    <string name="hint_end_date">Fecha de fin</string>
+    <string name="error_first_date_previous_second">La primera fecha debe ser anterior a la segunda</string>
 
 </resources>

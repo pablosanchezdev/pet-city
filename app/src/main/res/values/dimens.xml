@@ -19,7 +19,7 @@
     <dimen name="sub_heading_text_size">17dp</dimen>
 
     <dimen name="ed_rounded_stroke_width">@dimen/x_small_padding</dimen>
-    <dimen name="ed_rounded_drawable_padding">@dimen/padding</dimen>
+    <dimen name="ed_drawable_padding">@dimen/padding</dimen>
     <dimen name="ed_rounded_padding">@dimen/large_padding</dimen>
 
     <dimen name="bt_rounded_corner_radius">@dimen/xxx_large_padding</dimen>
