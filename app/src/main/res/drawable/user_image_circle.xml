@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <solid android:color="@android:color/transparent" />
+
+    <stroke
+        android:width="@dimen/user_profile_circle_width"
+        android:color="@color/primary_light" />
+
+    <size
+        android:width="250dp"
+        android:height="250dp" />
+
+</shape>

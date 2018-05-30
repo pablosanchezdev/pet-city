@@ -54,6 +54,8 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation "com.android.support:support-v4:$versions.support"
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.fxn769:oblique:2.0'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation "com.google.android.gms:play-services-places:$versions.google"
     implementation "com.google.android.gms:play-services-maps:$versions.google"
     implementation 'com.google.maps.android:android-maps-utils:0.5'

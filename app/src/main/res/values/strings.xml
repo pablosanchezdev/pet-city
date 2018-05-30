@@ -56,5 +56,6 @@
     <string name="price">Precio</string>
     <string name="publish_success">Oferta publicada correctamente</string>
     <string name="view">Ver</string>
+    <string name="last_activities">Actividad reciente</string>
 
 </resources>

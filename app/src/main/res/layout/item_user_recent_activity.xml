@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/large_padding"
+        android:layout_marginStart="@dimen/large_padding">
+
+        <View
+            android:layout_width="@dimen/x_small_padding"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:background="@color/primary" />
+
+        <View
+            android:layout_width="@dimen/x_large_padding"
+            android:layout_height="@dimen/x_large_padding"
+            android:layout_centerVertical="true"
+            android:background="@drawable/recent_activity_circle_outline" />
+
+        <View
+            android:layout_width="@dimen/very_large_padding"
+            android:layout_height="@dimen/very_large_padding"
+            android:layout_centerInParent="true"
+            android:background="@drawable/recent_activity_circle" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/large_padding">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="@dimen/large_padding"
+            android:layout_marginEnd="@dimen/large_padding"
+            android:layout_toStartOf="@id/tv_price"
+            android:maxLines="2"
+            android:textAppearance="@style/WhiteMediumTextView.BlackMediumTextView"
+            tools:text="Cuido mascotas en mi jardín" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tv_title"
+            android:layout_alignParentEnd="true"
+            android:textAppearance="@style/WhiteMediumTextView.BlackMediumTextView"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/tv_dates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/tv_title"
+            android:layout_below="@id/tv_title"
+            android:layout_marginStart="@dimen/large_padding"
+            android:drawablePadding="@dimen/padding"
+            android:drawableStart="@drawable/ic_event"
+            android:gravity="center"
+            android:textAppearance="@style/WhiteThinTextView.BlackThinTextView"
+            tools:text="26-May-2018 | 29-May-2018" />
+
+    </RelativeLayout>
+
+</LinearLayout>

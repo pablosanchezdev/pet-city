@@ -63,7 +63,7 @@
             android:drawablePadding="@dimen/padding"
             android:drawableStart="@drawable/ic_event"
             android:gravity="center_vertical"
-            android:textAppearance="@style/ThinTextView"
+            android:textAppearance="@style/WhiteThinTextView"
             tools:text="24-may-2018 · 26-may-2018" />
 
         <TextView

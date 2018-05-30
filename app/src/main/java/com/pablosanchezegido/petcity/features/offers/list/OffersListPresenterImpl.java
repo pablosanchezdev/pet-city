@@ -1,7 +1,7 @@
 package com.pablosanchezegido.petcity.features.offers.list;
 
 import com.pablosanchezegido.petcity.models.Offer;
-import com.pablosanchezegido.petcity.utils.OfferMapperKt;
+import com.pablosanchezegido.petcity.utils.ModelMapperKt;
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ class OffersListPresenterImpl implements OffersListPresenter {
                 view.setNoResultsVisible(true);
             } else {
                 view.setNoResultsVisible(false);
-                view.layoutData(OfferMapperKt.offersToOfferViews(offers));
+                view.layoutData(ModelMapperKt.offersToOfferViews(offers));
             }
         }
 

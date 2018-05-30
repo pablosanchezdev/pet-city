@@ -34,5 +34,9 @@
     <dimen name="card_offer_elevation">4dp</dimen>
     <dimen name="sb_num_pets_width">250dp</dimen>
     <dimen name="ed_price_width">100dp</dimen>
+    <dimen name="user_profile_oblique_view_height">180dp</dimen>
+    <dimen name="user_profile_circle_size">180dp</dimen>
+    <dimen name="user_profile_image_size">160dp</dimen>
+    <dimen name="user_profile_circle_width">2dp</dimen>
 
 </resources>

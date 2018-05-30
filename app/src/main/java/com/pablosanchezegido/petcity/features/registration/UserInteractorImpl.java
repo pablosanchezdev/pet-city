@@ -2,20 +2,25 @@ package com.pablosanchezegido.petcity.features.registration;
 
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.pablosanchezegido.petcity.features.login.AuthInteractorImpl;
+import com.pablosanchezegido.petcity.models.Offer;
 import com.pablosanchezegido.petcity.models.User;
 import com.pablosanchezegido.petcity.utils.CalendarUtilsKt;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserInteractorImpl implements UserInteractor {
 
-    public interface OnUserFetchedListener {
-        void onSuccess(User user);
-        void onError(String error);
-    }
-
     private static final String USERS_REF = "users";
+    private static final String USER_RECENT_ACTIVITY_REF = "offers-accepted";
+    private static final int RECENT_ACTIVITY_LIMIT = 10;
 
     private CollectionReference usersRef;
+    private ListenerRegistration listenerRegistration;
 
     public UserInteractorImpl() {
         usersRef = FirebaseFirestore.getInstance().collection(USERS_REF);
@@ -23,7 +28,7 @@ public class UserInteractorImpl implements UserInteractor {
 
     @Override
     public void createUser(String id, String email, String name, String phoneNumber, String birthDate, OnUserCreatedListener listener) {
-        User user = new User(null, "photoUrl", email, name, phoneNumber, CalendarUtilsKt.getDateTimestamp(birthDate));
+        User user = new User("photoUrl", email, name, phoneNumber, CalendarUtilsKt.getDateTimestamp(birthDate), null);
         usersRef.document(id).set(user)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -36,15 +41,78 @@ public class UserInteractorImpl implements UserInteractor {
 
     @Override
     public void fetchAuthUser(OnUserFetchedListener listener) {
-        String userId = new AuthInteractorImpl().getUserId();
-        usersRef.document(userId).get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        User user = task.getResult().toObject(User.class);
+        String userId = AuthInteractorImpl.getUserId();
+        if (userId != null) {
+            usersRef.document(userId).get()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            User user = task.getResult().toObject(User.class);
+                            listener.onSuccess(user);
+                        } else {
+                            listener.onError(task.getException().getMessage());
+                        }
+                    });
+        }
+    }
+
+    @Override
+    public void fetchUserProfile(OnUserFetchedListener listener) {
+        fetchAuthUser(new OnUserFetchedListener() {
+            @Override
+            public void onSuccess(User user) {
+                fetchUserRecentActivity(new OnUserOffersFetchedListener() {
+                    @Override
+                    public void onSuccess(List<Offer> offers) {
+                        user.setRecentActivity(offers);
                         listener.onSuccess(user);
-                    } else {
-                        listener.onError(task.getException().getMessage());
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        listener.onError(error);
                     }
                 });
+            }
+
+            @Override
+            public void onError(String error) {
+                listener.onError(error);
+            }
+        });
+    }
+
+    @Override
+    public void detachUserProfileRealtimeListener() {
+        listenerRegistration.remove();
+    }
+
+    private void fetchUserRecentActivity(OnUserOffersFetchedListener listener) {
+        String userId = AuthInteractorImpl.getUserId();
+        if (userId != null) {
+            Query query = usersRef.document(userId)
+                    .collection(USER_RECENT_ACTIVITY_REF)
+                    .limit(RECENT_ACTIVITY_LIMIT);
+            listenerRegistration = query
+                    .addSnapshotListener((queryDocumentSnapshots, e) -> {
+                        if (e != null) {
+                            listener.onError(e.getLocalizedMessage());
+                            return;
+                        }
+
+                        List<Offer> offers = new ArrayList<>();
+                        if (queryDocumentSnapshots != null) {
+                            for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                                if (doc != null) {
+                                    offers.add(doc.toObject(Offer.class));
+                                }
+                            }
+
+                            listener.onSuccess(offers);
+                        } else {
+                            // Send empty array list when the user does not have recent offers accepted
+                            listener.onSuccess(new ArrayList<>());
+                        }
+                    });
+        }
     }
 }
