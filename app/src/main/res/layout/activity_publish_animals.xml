@@ -3,6 +3,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -126,15 +127,14 @@
         app:layout_constraintStart_toStartOf="@id/tv_price_label"
         app:layout_constraintTop_toBottomOf="@id/tv_price_label" />
 
-    <Button
+    <com.pablosanchezegido.petcity.views.custom.CircularProgressButton
         android:id="@+id/bt_publish"
-        style="@style/RoundedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/x_large_padding"
         android:layout_marginEnd="@dimen/x_large_padding"
         android:layout_marginStart="@dimen/x_large_padding"
-        android:text="@string/publish"
+        app:buttonText="@string/publish_offer"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

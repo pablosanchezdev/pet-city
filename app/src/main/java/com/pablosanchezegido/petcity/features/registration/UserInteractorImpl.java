@@ -2,10 +2,16 @@ package com.pablosanchezegido.petcity.features.registration;
 
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.pablosanchezegido.petcity.features.login.AuthInteractorImpl;
 import com.pablosanchezegido.petcity.models.User;
 import com.pablosanchezegido.petcity.utils.CalendarUtilsKt;
 
 public class UserInteractorImpl implements UserInteractor {
+
+    public interface OnUserFetchedListener {
+        void onSuccess(User user);
+        void onError(String error);
+    }
 
     private static final String USERS_REF = "users";
 
@@ -24,6 +30,20 @@ public class UserInteractorImpl implements UserInteractor {
                         listener.onSuccess();
                     } else {
                         listener.onError((task.getException() != null) ? task.getException().getMessage() : "Unknown error");
+                    }
+                });
+    }
+
+    @Override
+    public void fetchAuthUser(OnUserFetchedListener listener) {
+        String userId = new AuthInteractorImpl().getUserId();
+        usersRef.document(userId).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        User user = task.getResult().toObject(User.class);
+                        listener.onSuccess(user);
+                    } else {
+                        listener.onError(task.getException().getMessage());
                     }
                 });
     }

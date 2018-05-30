@@ -9,14 +9,14 @@ public class PublishAnimalsPresenterImpl implements PublishAnimalsPresenter {
     private PublishOfferInteractor interactor;
 
     private int numPets;
-    private boolean dogs, cats;
+    private PetType[] petTypes;
     private double price;
 
     PublishAnimalsPresenterImpl(PublishAnimalsView view, PublishOfferInteractor interactor) {
         this.view = view;
         this.interactor = interactor;
         numPets = 0;
-        dogs = cats = false;
+        petTypes = new PetType[2];
         price = 0.0;
         view.setNumPets(numPets);
     }
@@ -32,10 +32,18 @@ public class PublishAnimalsPresenterImpl implements PublishAnimalsPresenter {
     public void kindOfPetsChanged(PetType type, boolean checked) {
         switch (type) {
             case DOG:
-                dogs = checked;
+                if (checked) {
+                    petTypes[0] = PetType.DOG;
+                } else {
+                    petTypes[0] = null;
+                }
                 break;
             case CAT:
-                cats = checked;
+                if (checked) {
+                    petTypes[1] = PetType.CAT;
+                } else {
+                    petTypes[1] = null;
+                }
                 break;
         }
 
@@ -52,7 +60,10 @@ public class PublishAnimalsPresenterImpl implements PublishAnimalsPresenter {
     public void publishOfferRequested(String title, String detail, String firstImage, String secondImage,
                                       String placeName, double placeLat, double placeLng,
                                       long startDate, long endDate) {
-
+        view.setPublishButtonEnabled(false);
+        view.setPublishButtonProgressVisible(true);
+        interactor.publishOffer(title, detail, firstImage, secondImage, placeName, placeLat, placeLng,
+                startDate, endDate, numPets, petTypes, price, publishListener);
     }
 
     @Override
@@ -68,6 +79,22 @@ public class PublishAnimalsPresenterImpl implements PublishAnimalsPresenter {
     private boolean isInfoFilled() {
         /* Info is filled when user has entered number of pets, at least
            one kind of pet and a price */
-        return numPets > 0 && (dogs || cats) && price > 0.0;
+        return numPets > 0 && (petTypes[0] != null || petTypes[1] != null) && price > 0.0;
     }
+
+    private PublishOfferInteractor.OnPublishOfferListener publishListener = new PublishOfferInteractor.OnPublishOfferListener() {
+        @Override
+        public void onSuccess() {
+            view.setPublishButtonEnabled(true);
+            view.setPublishButtonProgressVisible(false);
+            view.onPublishSuccess();
+        }
+
+        @Override
+        public void onError(String error) {
+            view.setPublishButtonEnabled(true);
+            view.setPublishButtonProgressVisible(false);
+            view.onPublishError(error);
+        }
+    };
 }

@@ -8,4 +8,5 @@ public interface UserInteractor {
     }
 
     void createUser(String id, String email, String name, String phoneNumber, String birthDate, OnUserCreatedListener listener);
+    void fetchAuthUser(UserInteractorImpl.OnUserFetchedListener listener);
 }

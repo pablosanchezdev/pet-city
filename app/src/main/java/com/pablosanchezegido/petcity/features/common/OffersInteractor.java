@@ -19,6 +19,11 @@ public class OffersInteractor {
         void onError(String error);
     }
 
+    public interface OnOfferUploadListener {
+        void onSuccess();
+        void onError(String error);
+    }
+
     private static final String OFFERS_PATH = "offers";
     private static final String LOCATION_PATH = "location";
 
@@ -48,5 +53,31 @@ public class OffersInteractor {
                         listener.onError(task.getException().getMessage());
                     }
                 });
+    }
+
+    public void uploadOffer(Offer offer, OnOfferUploadListener listener) {
+        String offerId = offersRef.document().getId();
+        new ImagesInteractor().uploadImages(new String[] {offerId, offerId}, offer.getImages(),
+                new ImagesInteractor.OnImagesUploadListener() {
+            @Override
+            public void onSuccess(List<String> imageUrls) {
+                // Images have been successfully uploaded
+                offer.setImages(imageUrls); // Change image uris by image urls
+                offersRef.document(offerId)
+                        .set(offer)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                listener.onSuccess();
+                            } else {
+                                listener.onError(task.getException().getMessage());
+                            }
+                        });
+            }
+
+            @Override
+            public void onError(String error) {
+                listener.onError(error);
+            }
+        });
     }
 }
