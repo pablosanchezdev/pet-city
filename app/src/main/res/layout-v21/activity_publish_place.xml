@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_steps" />
 
     <TextView
-        android:id="@+id/tv_address"
+        android:id="@+id/tv_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/x_large_padding"
@@ -64,7 +64,7 @@
         android:text="@string/choose_place"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_address" />
+        app:layout_constraintTop_toBottomOf="@id/tv_name" />
 
     <Button
         android:id="@+id/bt_next"

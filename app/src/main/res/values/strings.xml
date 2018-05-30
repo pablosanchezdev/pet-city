@@ -48,5 +48,12 @@
     <string name="hint_start_date">Fecha de inicio</string>
     <string name="hint_end_date">Fecha de fin</string>
     <string name="error_first_date_previous_second">La primera fecha debe ser anterior a la segunda</string>
+    <string name="publish_animals">Indica tus últimas preferencias</string>
+    <string name="num_pets">Número de mascotas que puedes alojar</string>
+    <string name="dogs">Perros</string>
+    <string name="cats">Gatos</string>
+    <string name="pets_types">Tipos de mascotas</string>
+    <string name="price">Precio</string>
+    <string name="publish">Publicar oferta</string>
 
 </resources>

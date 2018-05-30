@@ -1,5 +1,6 @@
 package com.pablosanchezegido.petcity.features.publish.dates;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,10 @@ import android.widget.TextView;
 
 import com.pablosanchezegido.petcity.R;
 import com.pablosanchezegido.petcity.features.publish.SlideRightSlideBottomTransitionActivity;
+import com.pablosanchezegido.petcity.features.publish.animals.PublishAnimalsActivity;
+import com.pablosanchezegido.petcity.features.publish.images.PublishImagesActivity;
+import com.pablosanchezegido.petcity.features.publish.place.PublishPlaceActivity;
+import com.pablosanchezegido.petcity.features.publish.titledetail.PublishTitleDetailActivity;
 import com.pablosanchezegido.petcity.utils.CalendarUtilsKt;
 import com.pablosanchezegido.petcity.views.dialogs.DatePickerFragment;
 
@@ -18,6 +23,9 @@ import butterknife.OnClick;
 
 public class PublishDatesActivity extends SlideRightSlideBottomTransitionActivity
         implements PublishDatesView, DatePickerFragment.DateSetListener {
+
+    public static final String START_DATE = "startDate";
+    public static final String END_DATE = "endDate";
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.tv_steps) TextView tvSteps;
@@ -95,7 +103,18 @@ public class PublishDatesActivity extends SlideRightSlideBottomTransitionActivit
 
     @Override
     public void requestNextPage() {
-
+        Intent nextActivityIntent = new Intent(this, PublishAnimalsActivity.class);
+        Intent previousIntent = getIntent();
+        nextActivityIntent.putExtra(PublishTitleDetailActivity.TITLE, previousIntent.getStringExtra(PublishTitleDetailActivity.TITLE));
+        nextActivityIntent.putExtra(PublishTitleDetailActivity.DETAIL, previousIntent.getStringExtra(PublishTitleDetailActivity.DETAIL));
+        nextActivityIntent.putExtra(PublishImagesActivity.FIRST_IMAGE_URI, previousIntent.getStringExtra(PublishImagesActivity.FIRST_IMAGE_URI));
+        nextActivityIntent.putExtra(PublishImagesActivity.SECOND_IMAGE_URI, previousIntent.getStringExtra(PublishImagesActivity.SECOND_IMAGE_URI));
+        nextActivityIntent.putExtra(PublishPlaceActivity.PLACE_NAME, previousIntent.getStringExtra(PublishPlaceActivity.PLACE_NAME));
+        nextActivityIntent.putExtra(PublishPlaceActivity.PLACE_LAT, previousIntent.getDoubleExtra(PublishPlaceActivity.PLACE_LAT, 0.0));
+        nextActivityIntent.putExtra(PublishPlaceActivity.PLACE_LNG, previousIntent.getDoubleExtra(PublishPlaceActivity.PLACE_LNG, 0.0));
+        nextActivityIntent.putExtra(START_DATE, firstDateTimestamp);
+        nextActivityIntent.putExtra(END_DATE, secondDateTimestamp);
+        launchNextActivity(nextActivityIntent);
     }
 
     @Override

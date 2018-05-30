@@ -1,7 +1,6 @@
 package com.pablosanchezegido.petcity.features.publish.place;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -30,7 +29,9 @@ import butterknife.OnClick;
 
 public class PublishPlaceActivity extends SlideRightSlideBottomTransitionActivity implements PublishPlaceView {
 
-    public static final String PLACE_ADDRESS_KEY = "placeAddress";
+    public static final String PLACE_NAME = "placeName";
+    public static final String PLACE_LAT = "placeLat";
+    public static final String PLACE_LNG = "placeLng";
     private static final int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     private static final int PLAY_SERVICES_REPAIRABLE_EXCEPTION_CODE = 2;
     private static final int PLAY_SERVICES_NOT_AVAILABLE_EXCEPTION_CODE = 3;
@@ -38,12 +39,13 @@ public class PublishPlaceActivity extends SlideRightSlideBottomTransitionActivit
     @BindView(R.id.root_view) ConstraintLayout rootView;
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.tv_steps) TextView tvSteps;
-    @BindView(R.id.tv_address) TextView tvAddress;
+    @BindView(R.id.tv_name) TextView tvName;
     @BindView(R.id.bt_next) Button btNext;
 
     private PublishPlacePresenterImpl presenter;
 
-    private String placeAddress;
+    private String placeName;
+    private double placeLat, placeLng;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,7 +92,10 @@ public class PublishPlaceActivity extends SlideRightSlideBottomTransitionActivit
         if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(this, data);
-                presenter.placeSet(place.getAddress());
+                placeName = place.getName().toString();
+                placeLat = place.getLatLng().latitude;
+                placeLng = place.getLatLng().longitude;
+                presenter.placeSet(placeName);
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
                 String error = getString(R.string.error_google_places, status.getStatusCode());
@@ -122,9 +127,8 @@ public class PublishPlaceActivity extends SlideRightSlideBottomTransitionActivit
     }
 
     @Override
-    public void setPlaceAddress(CharSequence address) {
-        tvAddress.setText(address);
-        placeAddress = address.toString();
+    public void setPlaceName(String address) {
+        tvName.setText(address);
     }
 
     @Override
@@ -136,11 +140,13 @@ public class PublishPlaceActivity extends SlideRightSlideBottomTransitionActivit
     public void requestNextPage() {
         Intent nextActivityIntent = new Intent(this, PublishDatesActivity.class);
         Intent previousIntent = getIntent();
-        nextActivityIntent.putExtra(PublishTitleDetailActivity.TITLE_KEY, previousIntent.getStringExtra(PublishTitleDetailActivity.TITLE_KEY));
-        nextActivityIntent.putExtra(PublishTitleDetailActivity.DETAIL_KEY, previousIntent.getStringExtra(PublishTitleDetailActivity.DETAIL_KEY));
-        nextActivityIntent.putExtra(PublishImagesActivity.FIRST_IMAGE_URI_KEY, (Uri) previousIntent.getParcelableExtra(PublishImagesActivity.FIRST_IMAGE_URI_KEY));
-        nextActivityIntent.putExtra(PublishImagesActivity.SECOND_IMAGE_URI_KEY, (Uri) previousIntent.getParcelableExtra(PublishImagesActivity.SECOND_IMAGE_URI_KEY));
-        nextActivityIntent.putExtra(PLACE_ADDRESS_KEY, placeAddress);
+        nextActivityIntent.putExtra(PublishTitleDetailActivity.TITLE, previousIntent.getStringExtra(PublishTitleDetailActivity.TITLE));
+        nextActivityIntent.putExtra(PublishTitleDetailActivity.DETAIL, previousIntent.getStringExtra(PublishTitleDetailActivity.DETAIL));
+        nextActivityIntent.putExtra(PublishImagesActivity.FIRST_IMAGE_URI, previousIntent.getStringExtra(PublishImagesActivity.FIRST_IMAGE_URI));
+        nextActivityIntent.putExtra(PublishImagesActivity.SECOND_IMAGE_URI, previousIntent.getStringExtra(PublishImagesActivity.SECOND_IMAGE_URI));
+        nextActivityIntent.putExtra(PLACE_NAME, placeName);
+        nextActivityIntent.putExtra(PLACE_LAT, placeLat);
+        nextActivityIntent.putExtra(PLACE_LNG, placeLng);
         launchNextActivity(nextActivityIntent);
     }
 

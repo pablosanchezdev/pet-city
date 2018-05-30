@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -22,6 +23,7 @@ public abstract class SlideRightSlideBottomTransitionActivity extends AppCompatA
     protected abstract @LayoutRes int getLayoutRes();
     protected abstract void initViews();
 
+    @CallSuper
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setTheme(R.style.AppTheme_SlideRightSlideBottomTransition);

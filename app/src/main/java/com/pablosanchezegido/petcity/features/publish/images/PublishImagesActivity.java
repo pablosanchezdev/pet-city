@@ -34,8 +34,8 @@ import butterknife.OnClick;
 public class PublishImagesActivity extends SlideRightSlideBottomTransitionActivity
         implements PublishImagesView, CameraGalleryBottomSheet.OnItemClickListener {
 
-    public static final String FIRST_IMAGE_URI_KEY = "firstImageUri";
-    public static final String SECOND_IMAGE_URI_KEY = "secondImageUri";
+    public static final String FIRST_IMAGE_URI = "firstImageUri";
+    public static final String SECOND_IMAGE_URI = "secondImageUri";
     private static final String BUTTON_NEXT_VISIBILITY_KEY  = "buttonNextVisibility";
     private static final int CAMERA_PERMISSIONS_REQUEST_CODE = 1;
     private static final int GALLERY_PERMISSIONS_REQUEST_CODE = 2;
@@ -68,8 +68,8 @@ public class PublishImagesActivity extends SlideRightSlideBottomTransitionActivi
         super.onSaveInstanceState(outState);
 
         // Save activity state
-        outState.putParcelable(FIRST_IMAGE_URI_KEY, firstImageUri);
-        outState.putParcelable(SECOND_IMAGE_URI_KEY, secondImageUri);
+        outState.putParcelable(FIRST_IMAGE_URI, firstImageUri);
+        outState.putParcelable(SECOND_IMAGE_URI, secondImageUri);
         outState.putInt(BUTTON_NEXT_VISIBILITY_KEY, btNext.getVisibility());
     }
 
@@ -78,8 +78,8 @@ public class PublishImagesActivity extends SlideRightSlideBottomTransitionActivi
         super.onRestoreInstanceState(savedInstanceState);
 
         // Restore activity state
-        firstImageUri = savedInstanceState.getParcelable(FIRST_IMAGE_URI_KEY);
-        secondImageUri = savedInstanceState.getParcelable(SECOND_IMAGE_URI_KEY);
+        firstImageUri = savedInstanceState.getParcelable(FIRST_IMAGE_URI);
+        secondImageUri = savedInstanceState.getParcelable(SECOND_IMAGE_URI);
         int btNextVisibility = savedInstanceState.getInt(BUTTON_NEXT_VISIBILITY_KEY);
 
         if (firstImageUri != null) {
@@ -161,10 +161,10 @@ public class PublishImagesActivity extends SlideRightSlideBottomTransitionActivi
     public void requestNextPage() {
         Intent nextActivityIntent = new Intent(this, PublishPlaceActivity.class);
         Intent previousIntent = getIntent();
-        nextActivityIntent.putExtra(PublishTitleDetailActivity.TITLE_KEY, previousIntent.getStringExtra(PublishTitleDetailActivity.TITLE_KEY));
-        nextActivityIntent.putExtra(PublishTitleDetailActivity.DETAIL_KEY, previousIntent.getStringExtra(PublishTitleDetailActivity.DETAIL_KEY));
-        nextActivityIntent.putExtra(FIRST_IMAGE_URI_KEY, firstImageUri);
-        nextActivityIntent.putExtra(SECOND_IMAGE_URI_KEY, secondImageUri);
+        nextActivityIntent.putExtra(PublishTitleDetailActivity.TITLE, previousIntent.getStringExtra(PublishTitleDetailActivity.TITLE));
+        nextActivityIntent.putExtra(PublishTitleDetailActivity.DETAIL, previousIntent.getStringExtra(PublishTitleDetailActivity.DETAIL));
+        nextActivityIntent.putExtra(FIRST_IMAGE_URI, firstImageUri.toString());
+        nextActivityIntent.putExtra(SECOND_IMAGE_URI, secondImageUri.toString());
         launchNextActivity(nextActivityIntent);
     }
 

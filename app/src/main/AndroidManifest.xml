@@ -43,6 +43,8 @@
 
         <activity android:name=".features.publish.dates.PublishDatesActivity" />
 
+        <activity android:name=".features.publish.animals.PublishAnimalsActivity" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.pablosanchezegido.petcity.fileprovider"

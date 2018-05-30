@@ -14,8 +14,8 @@ public class PublishPlacePresenterImpl implements PublishPlacePresenter {
     }
 
     @Override
-    public void placeSet(CharSequence address) {
-        view.setPlaceAddress(address);
+    public void placeSet(String address) {
+        view.setPlaceName(address);
         view.setNextButtonVisible(true);
     }
 

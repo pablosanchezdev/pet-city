@@ -21,8 +21,8 @@ import butterknife.OnTextChanged;
 
 public class PublishTitleDetailActivity extends SlideRightSlideBottomTransitionActivity implements PublishTitleDetailView {
 
-    public static final String TITLE_KEY = "offerTitle";
-    public static final String DETAIL_KEY = "offerDetail";
+    public static final String TITLE = "offerTitle";
+    public static final String DETAIL = "offerDetail";
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.tv_steps) TextView tvSteps;
@@ -94,8 +94,8 @@ public class PublishTitleDetailActivity extends SlideRightSlideBottomTransitionA
     @Override
     public void requestNextPage() {
         Intent nextActivityIntent = new Intent(this, PublishImagesActivity.class);
-        nextActivityIntent.putExtra(TITLE_KEY, offerTitle);
-        nextActivityIntent.putExtra(DETAIL_KEY, offerDetail);
+        nextActivityIntent.putExtra(TITLE, offerTitle);
+        nextActivityIntent.putExtra(DETAIL, offerDetail);
         launchNextActivity(nextActivityIntent);
     }
 }

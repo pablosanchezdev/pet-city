@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/AppTheme.Toolbar"
+        android:layout_width="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back" />
+
+    <TextView
+        android:id="@+id/tv_steps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/large_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        tools:text="5/5" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/large_padding"
+        android:layout_marginStart="@dimen/large_padding"
+        android:layout_marginTop="@dimen/padding"
+        android:text="@string/publish_animals"
+        android:textAppearance="@style/WhiteEmphasisTextView.BlackEmphasisTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_steps" />
+
+    <TextView
+        android:id="@+id/tv_num_pets_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/x_large_padding"
+        android:layout_marginStart="@dimen/x_large_padding"
+        android:layout_marginTop="@dimen/x_large_padding"
+        android:text="@string/num_pets"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+    <SeekBar
+        android:id="@+id/sb_num_pets"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="@dimen/sb_num_pets_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding"
+        android:layout_marginTop="@dimen/large_padding"
+        android:max="@integer/pets_max_num"
+        android:progress="0"
+        app:layout_constraintStart_toStartOf="@id/tv_num_pets_label"
+        app:layout_constraintTop_toBottomOf="@id/tv_num_pets_label"
+        tools:progress="3" />
+
+    <TextView
+        android:id="@+id/tv_num_pets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/padding"
+        android:layout_marginStart="@dimen/padding"
+        android:textAppearance="@style/WhiteMediumTextView.BlackMediumTextView"
+        app:layout_constraintBottom_toBottomOf="@+id/sb_num_pets"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/sb_num_pets"
+        app:layout_constraintTop_toTopOf="@id/sb_num_pets"
+        tools:text="3" />
+
+    <TextView
+        android:id="@+id/tv_pets_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/very_large_padding"
+        android:text="@string/pets_types"
+        app:layout_constraintStart_toStartOf="@id/tv_num_pets_label"
+        app:layout_constraintTop_toBottomOf="@id/sb_num_pets" />
+
+    <CheckBox
+        android:id="@+id/cb_dogs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding"
+        android:layout_marginTop="@dimen/large_padding"
+        android:text="@string/dogs"
+        app:layout_constraintStart_toStartOf="@id/tv_pets_label"
+        app:layout_constraintTop_toBottomOf="@id/tv_pets_label" />
+
+    <CheckBox
+        android:id="@+id/cb_cats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x_large_padding"
+        android:text="@string/cats"
+        app:layout_constraintStart_toEndOf="@id/cb_dogs"
+        app:layout_constraintTop_toTopOf="@id/cb_dogs" />
+
+    <TextView
+        android:id="@+id/tv_price_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/very_large_padding"
+        android:labelFor="@id/ed_price"
+        android:text="@string/price"
+        app:layout_constraintStart_toStartOf="@id/tv_pets_label"
+        app:layout_constraintTop_toBottomOf="@id/cb_dogs" />
+
+    <EditText
+        android:id="@+id/ed_price"
+        style="@style/DrawableEditText"
+        android:layout_width="@dimen/ed_price_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/padding"
+        android:layout_marginTop="@dimen/large_padding"
+        android:drawableStart="@drawable/ic_euro"
+        android:gravity="end"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="@id/tv_price_label"
+        app:layout_constraintTop_toBottomOf="@id/tv_price_label" />
+
+    <Button
+        android:id="@+id/bt_publish"
+        style="@style/RoundedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x_large_padding"
+        android:layout_marginEnd="@dimen/x_large_padding"
+        android:layout_marginStart="@dimen/x_large_padding"
+        android:text="@string/publish"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
+
+</android.support.constraint.ConstraintLayout>
