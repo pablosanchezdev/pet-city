@@ -11,4 +11,5 @@ public interface OffersListView {
     void setNoResultsVisible(boolean visible);
     void layoutData(List<OfferView> offers);
     void setError(String error);
+    void openItemDetail(String itemId);
 }

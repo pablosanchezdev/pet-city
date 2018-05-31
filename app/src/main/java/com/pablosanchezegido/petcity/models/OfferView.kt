@@ -1,4 +1,4 @@
 package com.pablosanchezegido.petcity.models
 
-class OfferView(var image: String, var title: String, var startDate: Long, var endDate: Long,
-                var distance: Long, var price: Double)
+class OfferView(val id: String?, val image: String, val title: String, val startDate: Long,
+                val endDate: Long, val distance: Long, val price: Double)

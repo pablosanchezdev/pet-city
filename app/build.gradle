@@ -29,12 +29,12 @@ android {
     flavorDimensions "standard"
     productFlavors {
         free {
-            resValue "string", "googlePlacesKey", "AIzaSyDldGq5td19ROeQzuJxW096MNZW1z_ojuQ"
+            resValue "string", "google_places_maps_key", (project.findProperty("google_places_maps_free_key") ?: "")
             dimension "standard"
         }
         premium {
             applicationId "com.pablosanchezegido.petcitypremium"
-            resValue "string", "googlePlacesKey", "AIzaSyAp6j_bnQEZOXd0jdD0Bl01mzVsiWbOjmM"
+            resValue "string", "google_places_maps_key", (project.findProperty("google_places_maps_premium_key") ?: "")
             dimension "standard"
         }
     }

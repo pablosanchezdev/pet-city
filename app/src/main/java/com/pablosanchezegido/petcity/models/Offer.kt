@@ -1,9 +1,11 @@
 package com.pablosanchezegido.petcity.models
 
+import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.GeoPoint
 
 class Offer {
 
+    @get:Exclude var id: String? = null
     var images: List<String>
     var title: String
     var detail: String

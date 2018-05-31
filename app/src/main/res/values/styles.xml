@@ -80,4 +80,18 @@
         <item name="colorAccent">?attr/colorPrimary</item>
     </style>
 
+    <style name="DotTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabBackground">@drawable/tab_dot</item>
+        <item name="tabGravity">center</item>
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="tabMaxWidth">@dimen/large_padding</item>
+        <item name="tabMode">fixed</item>
+    </style>
+
+    <style name="CheckedTextView" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:checkMark">@drawable/ic_check</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textAppearance">@style/WhiteMediumTextView.BlackMediumTextView</item>
+    </style>
+
 </resources>

@@ -4,4 +4,5 @@ interface OffersListPresenter {
 
     void fetchData();
     void retryButtonClicked();
+    void itemRequested(String itemId);
 }

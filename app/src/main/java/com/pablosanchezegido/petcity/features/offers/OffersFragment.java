@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.pablosanchezegido.petcity.R;
-import com.pablosanchezegido.petcity.features.offers.calendar.OffersCalendarFragment;
 import com.pablosanchezegido.petcity.features.offers.list.OffersListFragment;
 import com.pablosanchezegido.petcity.features.offers.map.OffersMapFragment;
 import com.pablosanchezegido.petcity.views.adapters.TabsAdapter;
@@ -26,7 +25,6 @@ public class OffersFragment extends Fragment {
     @BindView(R.id.view_pager) ViewPager viewPager;
 
     @BindString(R.string.offers_list) String listFragmentTitle;
-    @BindString(R.string.offers_calendar) String calendarFragmentTitle;
     @BindString(R.string.offers_map) String mapFragmentTitle;
 
     public OffersFragment() { }
@@ -43,7 +41,6 @@ public class OffersFragment extends Fragment {
     private void initViews() {
         TabsAdapter adapter = new TabsAdapter(getChildFragmentManager());
         adapter.addFragment(new OffersListFragment(), listFragmentTitle);
-        adapter.addFragment(new OffersCalendarFragment(), calendarFragmentTitle);
         adapter.addFragment(new OffersMapFragment(), mapFragmentTitle);
 
         viewPager.setAdapter(adapter);

@@ -26,6 +26,11 @@ class OffersListPresenterImpl implements OffersListPresenter {
         interactor.fetchData(listener);
     }
 
+    @Override
+    public void itemRequested(String itemId) {
+        view.openItemDetail(itemId);
+    }
+
     private OffersListInteractor.OnFetchDataListener listener = new OffersListInteractor.OnFetchDataListener() {
         @Override
         public void onSuccess(List<Offer> offers) {

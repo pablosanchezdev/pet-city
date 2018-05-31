@@ -27,6 +27,7 @@ public class PublishOfferInteractorImpl implements PublishOfferInteractor {
         new UserInteractorImpl().fetchAuthUser(new UserInteractorImpl.OnUserFetchedListener() {
             @Override
             public void onSuccess(User user) {
+                user.setRecentActivity(null);
                 Offer offer = new Offer(Arrays.asList(firstImage, secondImage), title, detail, placeName, new GeoPoint(placeLatitude, placeLongitude),
                         startDate, endDate, numPets, types, price, user);
                 new OffersInteractor().uploadOffer(offer, new OffersInteractor.OnOfferUploadListener() {

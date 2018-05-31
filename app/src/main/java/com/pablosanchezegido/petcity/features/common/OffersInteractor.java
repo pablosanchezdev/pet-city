@@ -6,6 +6,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.pablosanchezegido.petcity.features.registration.UserInteractor;
+import com.pablosanchezegido.petcity.features.registration.UserInteractorImpl;
 import com.pablosanchezegido.petcity.models.Offer;
 import com.pablosanchezegido.petcity.utils.BoundaryLatLng;
 
@@ -20,6 +22,16 @@ public class OffersInteractor {
     }
 
     public interface OnOfferUploadListener {
+        void onSuccess();
+        void onError(String error);
+    }
+
+    public interface OnOfferFetchedListener {
+        void onSuccess(Offer offer);
+        void onError(String error);
+    }
+
+    public interface OnOfferAcceptedListener {
         void onSuccess();
         void onError(String error);
     }
@@ -46,7 +58,9 @@ public class OffersInteractor {
                     if (task.isSuccessful()) {
                         List<Offer> result = new ArrayList<>();
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            result.add(document.toObject(Offer.class));
+                            Offer offer = document.toObject(Offer.class);
+                            offer.setId(document.getId());
+                            result.add(offer);
                         }
                         listener.onSuccess(result);
                     } else {
@@ -65,6 +79,40 @@ public class OffersInteractor {
                 offer.setImages(imageUrls); // Change image uris by image urls
                 offersRef.document(offerId)
                         .set(offer)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                listener.onSuccess();
+                            } else {
+                                listener.onError(task.getException().getMessage());
+                            }
+                        });
+            }
+
+            @Override
+            public void onError(String error) {
+                listener.onError(error);
+            }
+        });
+    }
+
+    public void fetchOffer(String offerId, OnOfferFetchedListener listener) {
+        offersRef.document(offerId).get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Offer offer = task.getResult().toObject(Offer.class);
+                        offer.setId(offerId);
+                        listener.onSuccess(offer);
+                    } else {
+                        listener.onError(task.getException().getMessage());
+                    }
+                });
+    }
+
+    public void acceptOffer(Offer offer, OnOfferAcceptedListener listener) {
+        new UserInteractorImpl().insertOfferAccepted(offer, new UserInteractor.OnOfferAcceptedInsertedListener() {
+            @Override
+            public void onSuccess() {
+                offersRef.document(offer.getId()).delete()
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 listener.onSuccess();

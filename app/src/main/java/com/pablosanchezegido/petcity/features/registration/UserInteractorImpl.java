@@ -20,7 +20,7 @@ public class UserInteractorImpl implements UserInteractor {
 
     private static final String USERS_REF = "users";
     private static final String USERS_IMAGE_REF = "photoUrl";
-    private static final String USER_RECENT_ACTIVITY_REF = "offers-accepted";
+    private static final String USER_OFFERS_ACCEPTED_REF = "offers-accepted";
     private static final int RECENT_ACTIVITY_LIMIT = 10;
 
     private CollectionReference usersRef;
@@ -96,6 +96,25 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
+    public void insertOfferAccepted(Offer offer, OnOfferAcceptedInsertedListener listener) {
+        String userId = AuthInteractorImpl.getUserId();
+        if (userId != null) {
+            offer.setUser(null); // This offer is within users collection, so do not repeat data
+            usersRef.document(userId)
+                    .collection(USER_OFFERS_ACCEPTED_REF)
+                    .document(offer.getId())
+                    .set(offer)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            listener.onSuccess();
+                        } else {
+                            listener.onError(task.getException().getMessage());
+                        }
+                    });
+        }
+    }
+
+    @Override
     public void detachUserProfileRealtimeListener() {
         listenerRegistration.remove();
     }
@@ -104,7 +123,7 @@ public class UserInteractorImpl implements UserInteractor {
         String userId = AuthInteractorImpl.getUserId();
         if (userId != null) {
             Query query = usersRef.document(userId)
-                    .collection(USER_RECENT_ACTIVITY_REF)
+                    .collection(USER_OFFERS_ACCEPTED_REF)
                     .limit(RECENT_ACTIVITY_LIMIT);
             listenerRegistration = query
                     .addSnapshotListener((queryDocumentSnapshots, e) -> {

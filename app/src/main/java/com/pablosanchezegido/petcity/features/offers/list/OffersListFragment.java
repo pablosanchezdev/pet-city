@@ -1,5 +1,6 @@
 package com.pablosanchezegido.petcity.features.offers.list;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.pablosanchezegido.petcity.R;
+import com.pablosanchezegido.petcity.features.offers.detail.OfferDetailActivity;
 import com.pablosanchezegido.petcity.models.OfferView;
 import com.pablosanchezegido.petcity.utils.ExtensionsKt;
 import com.pablosanchezegido.petcity.views.adapters.OffersAdapter;
@@ -77,7 +79,7 @@ public class OffersListFragment extends Fragment implements OffersListView, Circ
     @Override
     public void layoutData(List<OfferView> offers) {
         btRetry.setProgressVisible(false);
-        rv.setAdapter(new OffersAdapter(offers));
+        rv.setAdapter(new OffersAdapter(offers, listener));
     }
 
     @Override
@@ -87,8 +89,17 @@ public class OffersListFragment extends Fragment implements OffersListView, Circ
     }
 
     @Override
+    public void openItemDetail(String itemId) {
+        Intent detailIntent = new Intent(getContext(), OfferDetailActivity.class);
+        detailIntent.putExtra(OfferDetailActivity.OFFER_ID, itemId);
+        startActivity(detailIntent);
+    }
+
+    @Override
     public void onButtonClick(View view) {
         btRetry.setProgressVisible(true);
         presenter.retryButtonClicked();
     }
+
+    private OffersAdapter.OnItemClickListener listener = itemId -> presenter.itemRequested(itemId);
 }

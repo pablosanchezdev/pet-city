@@ -2,6 +2,7 @@
 
 <resources>
 
+    <dimen name="super_xxx_large_padding">72dp</dimen>
     <dimen name="very_xxx_large_padding">64dp</dimen>
     <dimen name="xxx_large_padding">56dp</dimen>
     <dimen name="xx_large_padding">48dp</dimen>
@@ -38,5 +39,6 @@
     <dimen name="user_profile_circle_size">180dp</dimen>
     <dimen name="user_profile_image_size">160dp</dimen>
     <dimen name="user_profile_circle_width">2dp</dimen>
+    <dimen name="lite_map_height">300dp</dimen>
 
 </resources>

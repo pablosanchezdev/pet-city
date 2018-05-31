@@ -24,10 +24,16 @@ import butterknife.ButterKnife;
 
 public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersViewHolder> {
 
-    private List<OfferView> offers;
+    public interface OnItemClickListener {
+        void onItemClick(String itemId);
+    }
 
-    public OffersAdapter(List<OfferView> offers) {
+    private List<OfferView> offers;
+    private OnItemClickListener listener;
+
+    public OffersAdapter(List<OfferView> offers, OnItemClickListener listener) {
         this.offers = offers;
+        this.listener = listener;
     }
 
     @NonNull
@@ -39,7 +45,7 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
 
     @Override
     public void onBindViewHolder(@NonNull OffersViewHolder holder, int position) {
-        holder.bindOffer(offers.get(position));
+        holder.bindOffer(offers.get(position), listener);
     }
 
     @Override
@@ -61,9 +67,10 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
             ButterKnife.bind(this, itemView);
         }
 
-        void bindOffer(OfferView offer) {
+        void bindOffer(OfferView offer, final OnItemClickListener listener) {
             Picasso.get()
                     .load(offer.getImage())
+                    .error(R.drawable.ic_image_unavailable)
                     .into(ivOfferImage);
 
             tvTitle.setText(offer.getTitle());
@@ -80,6 +87,8 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
             int endIndex = price.indexOf(LocaleUtilsKt.getLocaleDecimalSeparator());
             SpannableString spannablePrice = SpannableFactoryKt.makeRelativeSizeSpan(price, 1.4f,  0, endIndex);
             tvPrice.setText(spannablePrice);
+
+            itemView.setOnClickListener(v -> listener.onItemClick(offer.getId()));
         }
     }
 }

@@ -20,7 +20,6 @@
     <string name="navigation_profile">Perfil</string>
     <string name="action_settings">Ajustes</string>
     <string name="offers_list">Lista</string>
-    <string name="offers_calendar">Calendario</string>
     <string name="offers_map">Mapa</string>
     <string name="offer_date">%1$s | %2$s</string>
     <string name="offer_distance">%1$d m</string>
@@ -57,5 +56,11 @@
     <string name="publish_success">Oferta publicada correctamente</string>
     <string name="view">Ver</string>
     <string name="last_activities">Actividad reciente</string>
+    <string name="whats_included">¿Qué incluye?</string>
+    <string name="num_pets_holded">Nº de mascotas: %1$d</string>
+    <string name="accept_offer">Aceptar oferta - %.2f €</string>
+    <string name="accept_offer_confirmation_title">Aceptar oferta</string>
+    <string name="accept_offer_confirmation_detail">¿Seguro que quiere aceptar esta oferta?</string>
+    <string name="accept_offer_successfully">Oferta aceptada correctamente. Serás notificado previamente</string>
 
 </resources>
