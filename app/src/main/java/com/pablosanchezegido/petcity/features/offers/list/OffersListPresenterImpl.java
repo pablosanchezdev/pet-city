@@ -1,29 +1,36 @@
 package com.pablosanchezegido.petcity.features.offers.list;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.pablosanchezegido.petcity.models.Offer;
 import com.pablosanchezegido.petcity.utils.ModelMapperKt;
 
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 class OffersListPresenterImpl implements OffersListPresenter {
 
     private OffersListView view;
     private OffersListInteractor interactor;
 
+    private LatLng position;
+
     OffersListPresenterImpl(OffersListView view, OffersListInteractor interactor) {
         this.view = view;
         this.interactor = interactor;
+        position = null;
     }
 
     @Override
-    public void fetchData() {
+    public void fetchData(@Nullable LatLng position) {
+        this.position = position;
         view.setProgressVisible(true);
-        interactor.fetchData(listener);
+        interactor.fetchData(position, listener);
     }
 
     @Override
     public void retryButtonClicked() {
-        interactor.fetchData(listener);
+        interactor.fetchData(position, listener);
     }
 
     @Override

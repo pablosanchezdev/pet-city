@@ -21,6 +21,8 @@
     <string name="action_settings">Ajustes</string>
     <string name="offers_list">Lista</string>
     <string name="offers_map">Mapa</string>
+    <string name="location_request_title">Permiso de localización</string>
+    <string name="location_request_detail">Pet City usa tu localización para filtrarte ofertas cercanas a tu posición.\nDesde ajustes puedes modificar el radio de búsqueda.\nEn caso de no dar permiso, todas las ofertas serán descargadas</string>
     <string name="offer_date">%1$s | %2$s</string>
     <string name="offer_distance">%1$d m</string>
     <string name="offer_price">%.2f €</string>

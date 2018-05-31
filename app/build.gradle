@@ -58,6 +58,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation "com.google.android.gms:play-services-places:$versions.google"
     implementation "com.google.android.gms:play-services-maps:$versions.google"
+    implementation "com.google.android.gms:play-services-location:$versions.google"
     implementation 'com.google.maps.android:android-maps-utils:0.5'
     implementation "com.google.firebase:firebase-auth:$versions.firebase"
     implementation 'com.google.firebase:firebase-firestore:17.0.1'

@@ -46,13 +46,20 @@ public class OffersInteractor {
     }
 
     public void fetchOffersWithinBounds(BoundaryLatLng boundary, OnOffersFetched listener) {
-        LatLng lowerBound = boundary.getMinLatLng();
-        LatLng upperBound = boundary.getMaxLatLng();
+        Query query;
+        // If user location is available, filter offers within radius
+        if (boundary != null) {
+            LatLng lowerBound = boundary.getMinLatLng();
+            LatLng upperBound = boundary.getMaxLatLng();
+            query = offersRef
+                    .whereGreaterThanOrEqualTo(LOCATION_PATH, new GeoPoint(lowerBound.latitude, lowerBound.longitude))
+                    .whereLessThanOrEqualTo(LOCATION_PATH, new GeoPoint(upperBound.latitude, upperBound.longitude));
+        } else {
+            // If not, query all offers
+            query = offersRef;
+        }
 
-        offersRef
-                .whereGreaterThanOrEqualTo(LOCATION_PATH, new GeoPoint(lowerBound.latitude, lowerBound.longitude))
-                .whereLessThanOrEqualTo(LOCATION_PATH, new GeoPoint(upperBound.latitude, upperBound.longitude))
-                .orderBy(LOCATION_PATH, Query.Direction.DESCENDING)
+        query.orderBy(LOCATION_PATH, Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

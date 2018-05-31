@@ -34,15 +34,8 @@ public class AlertDialogFragment extends DialogFragment implements DialogInterfa
 
     public AlertDialogFragment() { }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        if (context instanceof OnAlertDialogClickListener) {
-            listener = (OnAlertDialogClickListener) context;
-        } else {
-            throw new ClassCastException(context + " must implement OnAlertDialogClickListener");
-        }
+    public void setOnAlertDialogClickListener(OnAlertDialogClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -70,10 +63,14 @@ public class AlertDialogFragment extends DialogFragment implements DialogInterfa
     public void onClick(DialogInterface dialog, int which) {
         switch (which) {
             case DialogInterface.BUTTON_POSITIVE:
-                listener.onPositiveButtonClick();
+                if (listener != null) {
+                    listener.onPositiveButtonClick();
+                }
                 break;
             case DialogInterface.BUTTON_NEGATIVE:
-                listener.onNegativeButtonClick();
+                if (listener != null) {
+                    listener.onNegativeButtonClick();
+                }
                 break;
         }
     }

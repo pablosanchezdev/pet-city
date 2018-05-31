@@ -28,6 +28,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.pablosanchezegido.petcity.R;
@@ -239,6 +240,7 @@ public class OfferDetailActivity extends AppCompatActivity
         AlertDialogFragment confirmationDialog = AlertDialogFragment
                 .newInstance(R.string.accept_offer_confirmation_title, R.string.accept_offer_confirmation_detail);
         confirmationDialog.show(getSupportFragmentManager(), confirmationDialog.getClass().getSimpleName());
+        confirmationDialog.setOnAlertDialogClickListener(this);
     }
 
     @Override
@@ -276,8 +278,10 @@ public class OfferDetailActivity extends AppCompatActivity
 
     private void addMarkerToMapAndMove(double lat, double lng) {
         LatLng marker = new LatLng(lat, lng);
-        googleMap.addMarker(new MarkerOptions().position(marker)
-                .title(offerTitle));
+        googleMap.addMarker(new MarkerOptions()
+                .position(marker)
+                .title(offerTitle)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location)));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, MAP_ZOOM));
     }
 

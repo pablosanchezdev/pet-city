@@ -11,9 +11,12 @@ import java.util.List;
 class OffersListInteractorImpl implements OffersListInteractor {
 
     @Override
-    public void fetchData(OnFetchDataListener listener) {
+    public void fetchData(LatLng position, OnFetchDataListener listener) {
         // Mock user location and radius
-        BoundaryLatLng boundary = LocationUtilsKt.getBoundaryLatLngForRadius(new LatLng(40.974808, -5.6649207), 5000.0);
+        BoundaryLatLng boundary = null;
+        if (position != null) {
+            boundary = LocationUtilsKt.getBoundaryLatLngForRadius(position, 5000.0);
+        }
         new OffersInteractor().fetchOffersWithinBounds(boundary, new OffersInteractor.OnOffersFetched() {
             @Override
             public void onSuccess(List<Offer> offers) {
