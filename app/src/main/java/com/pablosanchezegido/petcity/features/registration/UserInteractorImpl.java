@@ -5,17 +5,21 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.pablosanchezegido.petcity.features.login.AuthInteractorImpl;
 import com.pablosanchezegido.petcity.models.Offer;
 import com.pablosanchezegido.petcity.models.User;
 import com.pablosanchezegido.petcity.utils.CalendarUtilsKt;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserInteractorImpl implements UserInteractor {
 
     private static final String USERS_REF = "users";
+    private static final String USERS_IMAGE_REF = "photoUrl";
     private static final String USER_RECENT_ACTIVITY_REF = "offers-accepted";
     private static final int RECENT_ACTIVITY_LIMIT = 10;
 
@@ -79,6 +83,16 @@ public class UserInteractorImpl implements UserInteractor {
                 listener.onError(error);
             }
         });
+    }
+
+    @Override
+    public void changeUserProfileImage(String url) {
+        String userId = AuthInteractorImpl.getUserId();
+        if (userId != null) {
+            Map<String, Object> data = new HashMap<>();
+            data.put(USERS_IMAGE_REF, url);
+            usersRef.document(userId).set(data, SetOptions.merge());
+        }
     }
 
     @Override

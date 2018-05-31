@@ -21,7 +21,13 @@ public class ImagesInteractor {
         void onError(String error);
     }
 
+    public enum ImageTypes {
+        POSTS,
+        USERS
+    }
+
     private static final String POST_IMAGES_PATH = "posts";
+    private static final String USERS_IMAGES_PATH = "users";
 
     private StorageReference rootRef;
     private AtomicInteger counter;  // Counter to know when both images are uploaded
@@ -40,7 +46,7 @@ public class ImagesInteractor {
 
         counter.set(0);
         for (int i = 0; i < ids.length; i++) {
-            uploadImage(ids[i], i+1, uris.get(i), new OnImageUploadListener() {
+            uploadImage(ids[i], i+1, uris.get(i), ImageTypes.POSTS, new OnImageUploadListener() {
                 @Override
                 public void onSuccess(String imageUrl) {
                     counter.incrementAndGet();
@@ -58,8 +64,9 @@ public class ImagesInteractor {
         }
     }
 
-    public void uploadImage(String id, int number, String uri, OnImageUploadListener listener) {
-        final String path = String.format("%s/%s", POST_IMAGES_PATH, id);
+    public void uploadImage(String id, int number, String uri, ImageTypes type, OnImageUploadListener listener) {
+        final String imagePath = (type == ImageTypes.POSTS) ? POST_IMAGES_PATH : USERS_IMAGES_PATH;
+        final String path = String.format("%s/%s", imagePath, id);
         final StorageReference imageRef = rootRef.child(path).child("image" + number + ".jpg");
         imageRef.putFile(Uri.parse(uri))
                 .addOnCompleteListener(task -> {

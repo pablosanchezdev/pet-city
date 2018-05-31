@@ -14,6 +14,27 @@ public class ProfilePresenterImpl implements ProfilePresenter {
     }
 
     @Override
+    public void changePictureRequested() {
+        view.openDialog();
+    }
+
+    @Override
+    public void cameraItemClicked() {
+        view.launchCamera();
+    }
+
+    @Override
+    public void galleryItemClicked() {
+        view.launchGallery();
+    }
+
+    @Override
+    public void photoUploadRequested(String imageUri) {
+        view.setLoadingVisible(true);
+        interactor.uploadUserImage(imageUri, imageChangedListener);
+    }
+
+    @Override
     public void fetchData() {
         view.setLoadingVisible(true);
         interactor.fetchUserProfile(listener);
@@ -37,6 +58,22 @@ public class ProfilePresenterImpl implements ProfilePresenter {
         @Override
         public void onError(String error) {
             view.setLoadingVisible(false);
+            view.setError(error);
+        }
+    };
+
+    private ProfileInteractor.OnUserImageChangedListener imageChangedListener =
+            new ProfileInteractor.OnUserImageChangedListener() {
+        @Override
+        public void onSuccess(String imageUrl) {
+            view.changeImage(imageUrl);
+            view.setLoadingVisible(false);
+        }
+
+        @Override
+        public void onError(String error) {
+            view.setLoadingVisible(false);
+            view.setError(error);
         }
     };
 }

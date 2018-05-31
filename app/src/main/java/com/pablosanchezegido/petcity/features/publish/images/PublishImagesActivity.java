@@ -128,6 +128,7 @@ public class PublishImagesActivity extends SlideRightSlideBottomTransitionActivi
     public void openDialog() {
         CameraGalleryBottomSheet bottomSheet = new CameraGalleryBottomSheet();
         bottomSheet.show(getSupportFragmentManager(), bottomSheet.getClass().getSimpleName());
+        bottomSheet.setOnItemClickListener(this);
     }
 
     @Override
@@ -228,7 +229,7 @@ public class PublishImagesActivity extends SlideRightSlideBottomTransitionActivi
 
     private void launchCameraIntent() {
         try {
-            new CameraUtils(this).launchCamera();
+            new CameraUtils(this, null).launchCamera();
         } catch (PetCityException e) {
             showMessage(e.getMessage());
         }
@@ -236,7 +237,7 @@ public class PublishImagesActivity extends SlideRightSlideBottomTransitionActivi
 
     private void launchGalleryIntent() {
         try {
-            new GalleryUtils(this).launchGallery();
+            new GalleryUtils(this, null).launchGallery();
         } catch (PetCityException e) {
             showMessage(e.getMessage());
         }

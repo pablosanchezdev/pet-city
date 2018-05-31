@@ -9,6 +9,12 @@ public interface ProfileInteractor {
         void onError(String error);
     }
 
+    interface OnUserImageChangedListener {
+        void onSuccess(String imageUrl);
+        void onError(String error);
+    }
+
     void fetchUserProfile(OnUserProfileFetchedListener listener);
+    void uploadUserImage(String imageUri, OnUserImageChangedListener listener);
     void detachRealtimeListener();
 }

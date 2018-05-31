@@ -25,5 +25,6 @@ public interface UserInteractor {
     void createUser(String id, String email, String name, String phoneNumber, String birthDate, OnUserCreatedListener listener);
     void fetchAuthUser(OnUserFetchedListener listener);
     void fetchUserProfile(OnUserFetchedListener listener);
+    void changeUserProfileImage(String url);
     void detachUserProfileRealtimeListener();
 }
