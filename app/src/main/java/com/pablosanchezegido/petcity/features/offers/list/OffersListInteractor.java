@@ -12,5 +12,5 @@ interface OffersListInteractor {
         void onError(String error);
     }
 
-    void fetchData(LatLng position, OnFetchDataListener listener);
+    void fetchData(LatLng position, double radius, OnFetchDataListener listener);
 }

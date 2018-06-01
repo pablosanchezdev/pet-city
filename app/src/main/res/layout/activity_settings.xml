@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:elevation="@dimen/elevation"
+        android:padding="@dimen/large_padding"
+        android:text="@string/action_settings"
+        android:textAppearance="@style/WhiteEmphasisTextView" />
+
+    <TextView
+        android:id="@+id/tv_led_color_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_title"
+        android:layout_marginStart="@dimen/very_large_padding"
+        android:layout_marginTop="@dimen/very_large_padding"
+        android:text="@string/led_color"
+        android:textAppearance="@style/WhiteMediumTextView.BlackMediumTextView" />
+
+    <ImageView
+        android:id="@+id/iv_color_picker"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignBottom="@id/tv_led_color_label"
+        android:layout_alignEnd="@id/ed_radius"
+        android:layout_alignStart="@id/ed_radius"
+        android:layout_alignTop="@id/tv_led_color_label"
+        android:src="@drawable/circle" />
+
+    <TextView
+        android:id="@+id/tv_radius_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/tv_led_color_label"
+        android:layout_below="@id/tv_led_color_label"
+        android:layout_marginTop="@dimen/x_large_padding"
+        android:labelFor="@id/ed_radius"
+        android:text="@string/search_radius"
+        android:textAppearance="@style/WhiteMediumTextView.BlackMediumTextView" />
+
+    <EditText
+        android:id="@+id/ed_radius"
+        android:layout_width="@dimen/super_xxx_large_padding"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/tv_radius_label"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/large_padding"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:id="@+id/tv_max_recent_activity_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/tv_radius_label"
+        android:layout_below="@id/tv_radius_label"
+        android:layout_marginTop="@dimen/x_large_padding"
+        android:labelFor="@id/ed_num_max_recent_activity"
+        android:text="@string/max_recent_activity"
+        android:textAppearance="@style/WhiteMediumTextView.BlackMediumTextView" />
+
+    <EditText
+        android:id="@+id/ed_num_max_recent_activity"
+        android:layout_width="@dimen/super_xxx_large_padding"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/tv_max_recent_activity_label"
+        android:layout_alignEnd="@id/ed_radius"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/bt_save"
+        style="@style/BorderlessColoredButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_max_recent_activity_label"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/very_large_padding"
+        android:layout_marginTop="@dimen/x_large_padding"
+        android:text="@string/save" />
+
+</RelativeLayout>

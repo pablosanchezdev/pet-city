@@ -21,7 +21,6 @@ public class UserInteractorImpl implements UserInteractor {
     private static final String USERS_REF = "users";
     private static final String USERS_IMAGE_REF = "photoUrl";
     private static final String USER_OFFERS_ACCEPTED_REF = "offers-accepted";
-    private static final int RECENT_ACTIVITY_LIMIT = 10;
 
     private CollectionReference usersRef;
     private ListenerRegistration listenerRegistration;
@@ -60,11 +59,11 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
-    public void fetchUserProfile(OnUserFetchedListener listener) {
+    public void fetchUserProfile(int maxRecentActivity, OnUserFetchedListener listener) {
         fetchAuthUser(new OnUserFetchedListener() {
             @Override
             public void onSuccess(User user) {
-                fetchUserRecentActivity(new OnUserOffersFetchedListener() {
+                fetchUserRecentActivity(maxRecentActivity, new OnUserOffersFetchedListener() {
                     @Override
                     public void onSuccess(List<Offer> offers) {
                         user.setRecentActivity(offers);
@@ -119,12 +118,12 @@ public class UserInteractorImpl implements UserInteractor {
         listenerRegistration.remove();
     }
 
-    private void fetchUserRecentActivity(OnUserOffersFetchedListener listener) {
+    private void fetchUserRecentActivity(int maxRecentActivity, OnUserOffersFetchedListener listener) {
         String userId = AuthInteractorImpl.getUserId();
         if (userId != null) {
             Query query = usersRef.document(userId)
                     .collection(USER_OFFERS_ACCEPTED_REF)
-                    .limit(RECENT_ACTIVITY_LIMIT);
+                    .limit(maxRecentActivity);
             listenerRegistration = query
                     .addSnapshotListener((queryDocumentSnapshots, e) -> {
                         if (e != null) {

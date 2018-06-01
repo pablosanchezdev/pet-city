@@ -56,6 +56,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.fxn769:oblique:2.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.github.QuadFlask:colorpicker:0.0.13'
     implementation "com.google.android.gms:play-services-places:$versions.google"
     implementation "com.google.android.gms:play-services-maps:$versions.google"
     implementation "com.google.android.gms:play-services-location:$versions.google"

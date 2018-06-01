@@ -53,6 +53,7 @@ public class OffersListFragment extends Fragment
     @BindView(R.id.tv_no_results) TextView tvNoResults;
 
     private OffersListPresenterImpl presenter;
+    private double radius;
     private GoogleApiClient googleApiClient;
 
     public OffersListFragment() { }
@@ -65,6 +66,7 @@ public class OffersListFragment extends Fragment
         initViews();
         presenter = new OffersListPresenterImpl(this, new OffersListInteractorImpl());
         checkToShowLocationDialog();
+        radius = new PreferencesManager(getContext()).getSearchRadius();
         return view;
     }
 
@@ -137,7 +139,7 @@ public class OffersListFragment extends Fragment
 
     @Override
     public void onNegativeButtonClick() {
-        presenter.fetchData(null);
+        presenter.fetchData(null, radius);
     }
 
     @Override
@@ -146,7 +148,7 @@ public class OffersListFragment extends Fragment
             if (grantResults.length > 0) {
                 boolean somePermissionNotGranted = PermissionUtilsKt.checkGrantPermissionResults(grantResults);
                 if (somePermissionNotGranted) {
-                    presenter.fetchData(null);
+                    presenter.fetchData(null, radius);
                 } else {
                     askForUserLocation();
                 }
@@ -179,20 +181,20 @@ public class OffersListFragment extends Fragment
         // This method is executed only when the user has given permission
         Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
         if (lastLocation != null) {
-            presenter.fetchData(new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude()));
+            presenter.fetchData(new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude()), radius);
         } else {
-            presenter.fetchData(null);
+            presenter.fetchData(null, radius);
         }
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-        presenter.fetchData(null);
+        presenter.fetchData(null, radius);
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         setError(connectionResult.getErrorMessage());
-        presenter.fetchData(null);
+        presenter.fetchData(null, radius);
     }
 }

@@ -29,7 +29,7 @@
             android:layout_width="@dimen/very_large_padding"
             android:layout_height="@dimen/very_large_padding"
             android:layout_centerInParent="true"
-            android:background="@drawable/recent_activity_circle" />
+            android:background="@drawable/circle" />
 
     </RelativeLayout>
 

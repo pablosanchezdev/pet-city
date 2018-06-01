@@ -14,7 +14,7 @@ public interface ProfileInteractor {
         void onError(String error);
     }
 
-    void fetchUserProfile(OnUserProfileFetchedListener listener);
+    void fetchUserProfile(int maxRecentActivity, OnUserProfileFetchedListener listener);
     void uploadUserImage(String imageUri, OnUserImageChangedListener listener);
     void detachRealtimeListener();
 }

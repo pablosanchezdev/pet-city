@@ -56,6 +56,10 @@
             android:name=".features.offers.detail.OfferDetailActivity"
             android:theme="@style/AppTheme.TranslucentStatusBar" />
 
+        <activity
+            android:name=".features.settings.SettingsActivity"
+            android:theme="@style/AppTheme.Dialog" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.pablosanchezegido.petcity.fileprovider"

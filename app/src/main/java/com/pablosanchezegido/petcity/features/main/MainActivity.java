@@ -16,6 +16,7 @@ import com.pablosanchezegido.petcity.features.login.LoginActivity;
 import com.pablosanchezegido.petcity.features.offers.OffersFragment;
 import com.pablosanchezegido.petcity.features.profile.ProfileFragment;
 import com.pablosanchezegido.petcity.features.publish.PublishFragment;
+import com.pablosanchezegido.petcity.features.settings.SettingsActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
                 setFragment(new ProfileFragment(), R.string.navigation_profile);
                 return true;
             case R.id.action_settings:
+                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+                startActivity(settingsIntent);
                 return true;
             case R.id.action_logout:
                 new AuthInteractorImpl().logoutUser();

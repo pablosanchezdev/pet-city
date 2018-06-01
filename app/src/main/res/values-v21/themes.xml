@@ -28,4 +28,8 @@
         <item name="android:windowReturnTransition">@transition/slide_bottom_exclude_status</item>
     </style>
 
+    <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="windowNoTitle">true</item>
+    </style>
+
 </resources>

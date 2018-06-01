@@ -14,6 +14,7 @@ class OffersListPresenterImpl implements OffersListPresenter {
     private OffersListInteractor interactor;
 
     private LatLng position;
+    private double radius;
 
     OffersListPresenterImpl(OffersListView view, OffersListInteractor interactor) {
         this.view = view;
@@ -22,15 +23,16 @@ class OffersListPresenterImpl implements OffersListPresenter {
     }
 
     @Override
-    public void fetchData(@Nullable LatLng position) {
+    public void fetchData(@Nullable LatLng position, double radius) {
         this.position = position;
+        this.radius = radius;
         view.setProgressVisible(true);
-        interactor.fetchData(position, listener);
+        interactor.fetchData(position, radius, listener);
     }
 
     @Override
     public void retryButtonClicked() {
-        interactor.fetchData(position, listener);
+        interactor.fetchData(position, radius, listener);
     }
 
     @Override
@@ -47,7 +49,7 @@ class OffersListPresenterImpl implements OffersListPresenter {
                 view.setNoResultsVisible(true);
             } else {
                 view.setNoResultsVisible(false);
-                view.layoutData(ModelMapperKt.offersToOfferViews(offers));
+                view.layoutData(ModelMapperKt.offersToOfferViews(position, offers));
             }
         }
 

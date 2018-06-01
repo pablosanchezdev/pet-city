@@ -14,6 +14,7 @@ import com.pablosanchezegido.petcity.models.OfferView;
 import com.pablosanchezegido.petcity.utils.CalendarUtilsKt;
 import com.pablosanchezegido.petcity.utils.ExtensionsKt;
 import com.pablosanchezegido.petcity.utils.LocaleUtilsKt;
+import com.pablosanchezegido.petcity.utils.ModelMapperKt;
 import com.pablosanchezegido.petcity.utils.SpannableFactoryKt;
 import com.squareup.picasso.Picasso;
 
@@ -80,8 +81,12 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
             String endDate = CalendarUtilsKt.getDateFromTimestamp(offer.getEndDate(), null);
             tvDate.setText(res.getString(R.string.offer_date, startDate, endDate));
 
-            String distance = res.getString(R.string.offer_distance, offer.getDistance());
-            tvDistance.setText(distance);
+            if (offer.getDistance() == ModelMapperKt.DISTANCE_NOT_AVAILABLE) {
+                tvDistance.setText(R.string.radius_not_available);
+            } else {
+                String distance = res.getString(R.string.offer_distance, offer.getDistance());
+                tvDistance.setText(distance);
+            }
 
             String price = res.getString(R.string.offer_price, offer.getPrice());
             int endIndex = price.indexOf(LocaleUtilsKt.getLocaleDecimalSeparator());

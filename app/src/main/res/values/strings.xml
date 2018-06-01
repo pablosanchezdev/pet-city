@@ -25,7 +25,8 @@
     <string name="location_request_title">Permiso de localización</string>
     <string name="location_request_detail">Pet City usa tu localización para filtrarte ofertas cercanas a tu posición.\nDesde ajustes puedes modificar el radio de búsqueda.\nEn caso de no dar permiso, todas las ofertas serán descargadas</string>
     <string name="offer_date">%1$s | %2$s</string>
-    <string name="offer_distance">%1$d m</string>
+    <string name="offer_distance">%.3f km</string>
+    <string name="radius_not_available">Radio no disponible</string>
     <string name="offer_price">%.2f €</string>
     <string name="retry">Reintentar</string>
     <string name="no_results_search">Búsqueda sin resultados</string>
@@ -65,5 +66,10 @@
     <string name="accept_offer_confirmation_title">Aceptar oferta</string>
     <string name="accept_offer_confirmation_detail">¿Seguro que quiere aceptar esta oferta?</string>
     <string name="accept_offer_successfully">Oferta aceptada correctamente. Serás notificado previamente</string>
+    <string name="led_color">Color led notificaciones</string>
+    <string name="search_radius">Radio ofertas (km)</string>
+    <string name="max_recent_activity">Máx. actividad perfil</string>
+    <string name="save">Guardar</string>
+    <string name="choose_color">Escoge color</string>
 
 </resources>

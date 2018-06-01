@@ -6,6 +6,6 @@ public interface ProfilePresenter {
     void cameraItemClicked();
     void galleryItemClicked();
     void photoUploadRequested(String imageUri);
-    void fetchData();
+    void fetchData(int maxRecentActivity);
     void destroy();
 }

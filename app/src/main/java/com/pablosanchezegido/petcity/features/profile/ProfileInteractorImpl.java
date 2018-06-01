@@ -15,8 +15,8 @@ public class ProfileInteractorImpl implements ProfileInteractor {
     }
 
     @Override
-    public void fetchUserProfile(OnUserProfileFetchedListener listener) {
-        userInteractor.fetchUserProfile(new UserInteractor.OnUserFetchedListener() {
+    public void fetchUserProfile(int maxRecentActivity, OnUserProfileFetchedListener listener) {
+        userInteractor.fetchUserProfile(maxRecentActivity, new UserInteractor.OnUserFetchedListener() {
             @Override
             public void onSuccess(User user) {
                 listener.onSuccess(user);

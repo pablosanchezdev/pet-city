@@ -35,9 +35,9 @@ public class ProfilePresenterImpl implements ProfilePresenter {
     }
 
     @Override
-    public void fetchData() {
+    public void fetchData(int maxRecentActivity) {
         view.setLoadingVisible(true);
-        interactor.fetchUserProfile(listener);
+        interactor.fetchUserProfile(maxRecentActivity, listener);
     }
 
     @Override

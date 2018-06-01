@@ -25,7 +25,7 @@
         android:layout_width="@dimen/user_profile_circle_size"
         android:layout_height="@dimen/user_profile_circle_size"
         android:layout_marginTop="@dimen/xx_large_padding"
-        android:background="@drawable/user_image_circle"
+        android:background="@drawable/circle_outline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

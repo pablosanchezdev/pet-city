@@ -27,6 +27,7 @@ import com.pablosanchezegido.petcity.utils.CameraUtils;
 import com.pablosanchezegido.petcity.utils.ExtensionsKt;
 import com.pablosanchezegido.petcity.utils.GalleryUtils;
 import com.pablosanchezegido.petcity.utils.PermissionUtilsKt;
+import com.pablosanchezegido.petcity.utils.PreferencesManager;
 import com.pablosanchezegido.petcity.views.adapters.RecentActivityAdapter;
 import com.pablosanchezegido.petcity.views.dialogs.CameraGalleryBottomSheet;
 import com.squareup.picasso.Picasso;
@@ -51,6 +52,7 @@ public class ProfileFragment extends Fragment implements ProfileView, CameraGall
     @BindString(R.string.permissions_not_granted) String permissionsNotGranted;
 
     private ProfilePresenterImpl presenter;
+    private int maxRecentActivity;
 
     public ProfileFragment() { }
 
@@ -61,12 +63,13 @@ public class ProfileFragment extends Fragment implements ProfileView, CameraGall
         ButterKnife.bind(this, view);
         initRecyclerView();
         presenter = new ProfilePresenterImpl(this, new ProfileInteractorImpl());
+        maxRecentActivity = new PreferencesManager(getContext()).getNumMaxRecentActivity();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        presenter.fetchData();
+        presenter.fetchData(maxRecentActivity);
     }
 
     @Override
