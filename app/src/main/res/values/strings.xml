@@ -19,6 +19,7 @@
     <string name="navigation_publish">Publicar</string>
     <string name="navigation_profile">Perfil</string>
     <string name="action_settings">Ajustes</string>
+    <string name="action_logout">Cerrar sesión</string>
     <string name="offers_list">Lista</string>
     <string name="offers_map">Mapa</string>
     <string name="location_request_title">Permiso de localización</string>

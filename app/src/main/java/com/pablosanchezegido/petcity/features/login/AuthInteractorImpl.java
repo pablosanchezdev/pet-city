@@ -62,7 +62,12 @@ public class AuthInteractorImpl implements AuthInteractor {
                     }
                 });
     }
-    
+
+    @Override
+    public void logoutUser() {
+        auth.signOut();
+    }
+
     public static String getUserId() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         return (user != null) ? user.getUid() : null;
