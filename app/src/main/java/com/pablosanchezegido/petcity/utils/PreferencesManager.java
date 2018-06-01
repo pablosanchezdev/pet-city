@@ -12,7 +12,7 @@ public class PreferencesManager {
     private static final String SEARCH_RADIUS = "searchRadius";
     private static final String NUM_MAX_RECENT_ACTIVITY = "numMaxRecentActivity";
 
-    private static final float DEFAULT_SEARCH_RADIUS = 1000;  // kilometers
+    private static final float DEFAULT_SEARCH_RADIUS = 1;  // kilometers
     private static final int DEFAULT_NUM_MAX_RECENT_ACTIVITY = 10;
 
     private SharedPreferences preferences;

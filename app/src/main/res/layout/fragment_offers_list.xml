@@ -15,12 +15,19 @@
         android:layout_marginTop="@dimen/xxx_large_padding"
         android:visibility="gone" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/small_padding"
-        tools:listitem="@layout/item_offer" />
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/small_padding"
+            tools:listitem="@layout/item_offer" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <com.pablosanchezegido.petcity.views.custom.CircularProgressButton
         android:id="@+id/bt_retry"
