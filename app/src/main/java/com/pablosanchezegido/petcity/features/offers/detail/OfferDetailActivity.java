@@ -53,7 +53,7 @@ public class OfferDetailActivity extends AppCompatActivity
 
     public static final String OFFER_ID = "offerId";
     private static final float COLLAPSING_RELATIVE_HEIGHT = 0.8f;
-    private static final float MAP_ZOOM = 15.0f;
+    private static final float MAP_ZOOM = 16.0f;
 
     @BindView(R.id.root_view) LinearLayout rootView;
     @BindView(R.id.appbar_layout) AppBarLayout appBarLayout;
@@ -281,7 +281,7 @@ public class OfferDetailActivity extends AppCompatActivity
         googleMap.addMarker(new MarkerOptions()
                 .position(marker)
                 .title(offerTitle)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location)));
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker)));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, MAP_ZOOM));
     }
 
