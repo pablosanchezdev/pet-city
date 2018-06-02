@@ -27,7 +27,7 @@ public interface UserInteractor {
         void onError(String error);
     }
 
-    void createUser(String id, String email, String name, String phoneNumber, String birthDate, OnUserCreatedListener listener);
+    void createUser(String id, String email, String name, String phoneNumber, OnUserCreatedListener listener);
     void fetchAuthUser(OnUserFetchedListener listener);
     void fetchUserProfile(int maxRecentActivity, OnUserFetchedListener listener);
     void changeUserProfileImage(String url);

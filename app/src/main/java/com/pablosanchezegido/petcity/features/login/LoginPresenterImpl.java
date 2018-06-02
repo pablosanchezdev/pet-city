@@ -1,6 +1,6 @@
 package com.pablosanchezegido.petcity.features.login;
 
-import android.util.Patterns;
+import com.pablosanchezegido.petcity.utils.ValidationUtilsKt;
 
 public class LoginPresenterImpl implements LoginPresenter {
 
@@ -12,31 +12,6 @@ public class LoginPresenterImpl implements LoginPresenter {
         this.interactor = interactor;
     }
 
-    private boolean validateEmail(String email) {
-        return Patterns.EMAIL_ADDRESS.matcher(email).matches();
-    }
-
-    private boolean validatePassword(String password, int pwdMinLength) {
-        return password.length() >= pwdMinLength;
-    }
-
-    private final AuthInteractor.OnAuthFinishedListener loginListener =
-            new AuthInteractor.OnAuthFinishedListener() {
-        @Override
-        public void onSuccess() {
-            view.setProgressIndicatorVisible(false);
-            view.setLoginButtonEnabled(true);
-            view.onLoginSuccess();
-        }
-
-        @Override
-        public void onError(String error) {
-            view.setProgressIndicatorVisible(false);
-            view.onLoginError(error);
-            view.setLoginButtonEnabled(true);
-        }
-    };
-
     @Override
     public boolean isUserLoggedIn() {
         return interactor.isUserLoggedIn();
@@ -44,17 +19,16 @@ public class LoginPresenterImpl implements LoginPresenter {
 
     @Override
     public void loginButtonClicked(String email, String pwd, int pwdMinLength) {
-        if (!validateEmail(email)) {
-            view.setEmailError();
-            view.setEmailErrorVisible(true);
-            view.setPasswordErrorVisible(false);
-        } else if (!validatePassword(pwd, pwdMinLength)) {
-            view.setPasswordError();
-            view.setEmailErrorVisible(false);
-            view.setPasswordErrorVisible(true);
+        if (!ValidationUtilsKt.validateEmail(email)) {
+            view.setEmailError(true);
+            view.requestEmailFocus();
+        } else if (!ValidationUtilsKt.validatePassword(pwd, pwdMinLength)) {
+            view.setEmailError(false);
+            view.setPasswordError(true);
+            view.requestPasswordFocus();
         } else {
-            view.setEmailErrorVisible(false);
-            view.setPasswordErrorVisible(false);
+            view.setEmailError(false);
+            view.setPasswordError(false);
             view.setProgressIndicatorVisible(true);
             view.setLoginButtonEnabled(false);
             interactor.loginUser(email, pwd, loginListener);
@@ -71,4 +45,21 @@ public class LoginPresenterImpl implements LoginPresenter {
         view = null;
         interactor = null;
     }
+
+    private final AuthInteractor.OnAuthFinishedListener loginListener =
+            new AuthInteractor.OnAuthFinishedListener() {
+                @Override
+                public void onSuccess() {
+                    view.setProgressIndicatorVisible(false);
+                    view.setLoginButtonEnabled(true);
+                    view.onLoginSuccess();
+                }
+
+                @Override
+                public void onError(String error) {
+                    view.setProgressIndicatorVisible(false);
+                    view.onLoginError(error);
+                    view.setLoginButtonEnabled(true);
+                }
+            };
 }

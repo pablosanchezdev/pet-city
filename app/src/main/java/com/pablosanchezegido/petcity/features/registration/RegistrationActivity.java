@@ -1,6 +1,5 @@
 package com.pablosanchezegido.petcity.features.registration;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -11,85 +10,43 @@ import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 
-import com.pablosanchezegido.petcity.features.main.MainActivity;
 import com.pablosanchezegido.petcity.R;
 import com.pablosanchezegido.petcity.features.login.AuthInteractorImpl;
-import com.pablosanchezegido.petcity.utils.CalendarUtilsKt;
+import com.pablosanchezegido.petcity.features.main.MainActivity;
 import com.pablosanchezegido.petcity.utils.ExtensionsKt;
 import com.pablosanchezegido.petcity.views.custom.CircularProgressButton;
-import com.pablosanchezegido.petcity.views.dialogs.DatePickerFragment;
 
 import butterknife.BindColor;
 import butterknife.BindInt;
 import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnEditorAction;
 import butterknife.OnFocusChange;
 
-public class RegistrationActivity extends AppCompatActivity implements RegistrationView, DatePickerFragment.DateSetListener {
+public class RegistrationActivity extends AppCompatActivity implements RegistrationView {
 
-    @BindView(R.id.root_view)
-    LinearLayout rootView;
+    @BindView(R.id.root_view) LinearLayout rootView;
+    @BindView(R.id.til_email) TextInputLayout tilEmail;
+    @BindView(R.id.ed_email) TextInputEditText edEmail;
+    @BindView(R.id.til_password) TextInputLayout tilPassword;
+    @BindView(R.id.ed_password) TextInputEditText edPassword;
+    @BindView(R.id.til_name) TextInputLayout tilName;
+    @BindView(R.id.ed_name) TextInputEditText edName;
+    @BindView(R.id.til_phone_number) TextInputLayout tilPhoneNumber;
+    @BindView(R.id.ed_phone_number) TextInputEditText edPhoneNumber;
+    @BindView(R.id.bt_register) CircularProgressButton btRegister;
 
-    @BindView(R.id.til_email)
-    TextInputLayout tilEmail;
+    @BindInt(R.integer.password_min_length) int passwordMinLength;
+    @BindInt(R.integer.phone_number_length) int phoneNumberLength;
 
-    @BindView(R.id.ed_email)
-    TextInputEditText edEmail;
+    @BindColor(R.color.primary_dark) int focusedColor;
+    @BindColor(R.color.black) int unfocusedColor;
 
-    @BindView(R.id.til_password)
-    TextInputLayout tilPassword;
-
-    @BindView(R.id.ed_password)
-    TextInputEditText edPassword;
-
-    @BindView(R.id.til_name)
-    TextInputLayout tilName;
-
-    @BindView(R.id.ed_name)
-    TextInputEditText edName;
-
-    @BindView(R.id.til_phone_number)
-    TextInputLayout tilPhoneNumber;
-
-    @BindView(R.id.ed_phone_number)
-    TextInputEditText edPhoneNumber;
-
-    @BindView(R.id.til_birth_date)
-    TextInputLayout tilBirthDate;
-
-    @BindView(R.id.ed_birth_date)
-    TextInputEditText edBirthDate;
-
-    @BindView(R.id.bt_register)
-    CircularProgressButton btRegister;
-
-    @BindInt(R.integer.password_min_length)
-    int passwordMinLength;
-
-    @BindInt(R.integer.phone_number_length)
-    int phoneNumberLength;
-
-    @BindColor(R.color.primary_dark)
-    int focusedColor;
-
-    @BindColor(R.color.black)
-    int unfocusedColor;
-
-    @BindString(R.string.error_email)
-    String emailError;
-
-    @BindString(R.string.error_name)
-    String nameError;
-
-    @BindString(R.string.error_birth_date)
-    String birthDateError;
+    @BindString(R.string.error_email) String emailError;
+    @BindString(R.string.error_name) String nameError;
+    @BindString(R.string.error_birth_date) String birthDateError;
 
     RegistrationPresenterImpl presenter;
 
@@ -116,8 +73,7 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
             String password = edPassword.getText().toString();
             String fullName = edName.getText().toString();
             String phoneNumber = edPhoneNumber.getText().toString();
-            String birthDate = edBirthDate.getText().toString();
-            presenter.registerButtonClicked(email, password, passwordMinLength, fullName, phoneNumber, birthDate);
+            presenter.registerButtonClicked(email, password, passwordMinLength, fullName, phoneNumber);
         });
     }
 
@@ -130,21 +86,6 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
             int color = hasFocus ? focusedColor : unfocusedColor;
             leftDrawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
         }
-    }
-
-    @OnClick(R.id.ed_birth_date)
-    public void onBirthDateClicked() {
-        presenter.birthDateClicked();
-    }
-
-    @OnEditorAction(R.id.ed_phone_number)
-    public boolean onEditAction(int actionId) {
-        if (actionId == EditorInfo.IME_ACTION_GO) {
-            presenter.birthDateClicked();
-            return true;
-        }
-
-        return false;
     }
 
     @Override
@@ -190,32 +131,6 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
     }
 
     @Override
-    public void setBirthDateError(boolean error) {
-        tilBirthDate.setError(error ? birthDateError : null);
-    }
-
-    @Override
-    public void hideKeyboard() {
-        View view = getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            if (imm != null) {
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            }
-        }
-    }
-
-    @Override
-    public void showDatePickerDialog() {
-        int year = CalendarUtilsKt.getCurrentYear();
-        int month = CalendarUtilsKt.getCurrentMonth();
-        int day = CalendarUtilsKt.getCurrentDay();
-        DatePickerFragment dialog = DatePickerFragment
-                .newInstance(year, month, day, DatePickerFragment.DATE_BOUNDS_NOT_SET, CalendarUtilsKt.getDateTimestamp(year, month, day));
-        dialog.show(getSupportFragmentManager(), dialog.getClass().getSimpleName());
-    }
-
-    @Override
     public void setProgressIndicatorVisible(boolean visible) {
         btRegister.setProgressVisible(visible);
     }
@@ -238,10 +153,5 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
         mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(mainActivityIntent);
         finish();
-    }
-
-    @Override
-    public void onDateSet(int year, int month, int day) {
-        edBirthDate.setText(CalendarUtilsKt.getDateFormatted(year, month, day));
     }
 }

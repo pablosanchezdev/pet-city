@@ -6,7 +6,6 @@
     <string name="hint_password">Constraseña</string>
     <string name="hint_name">Nombre completo</string>
     <string name="hint_phone_number">Teléfono</string>
-    <string name="hint_birth_date">Fecha de nacimiento</string>
     <string name="login">Iniciar sesión</string>
     <string name="not_account">¿No tienes cuenta aún? Regístrate</string>
     <string name="register">Registrarse</string>

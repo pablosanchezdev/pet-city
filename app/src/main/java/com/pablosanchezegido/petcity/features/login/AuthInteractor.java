@@ -9,6 +9,6 @@ public interface AuthInteractor {
 
     boolean isUserLoggedIn();
     void loginUser(String email, String password, OnAuthFinishedListener listener);
-    void registerUser(String email, String password, String fullName, String phoneNumber, String birthDate, OnAuthFinishedListener listener);
+    void registerUser(String email, String password, String fullName, String phoneNumber, OnAuthFinishedListener listener);
     void logoutUser();
 }

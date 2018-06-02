@@ -228,6 +228,7 @@ public class OfferDetailActivity extends AppCompatActivity
         ExtensionsKt.makeSnackbar(rootView, offerAcceptedSuccessfully, Snackbar.LENGTH_LONG);
         new Handler().postDelayed(() -> {
             Intent mainActivityIntent = new Intent(OfferDetailActivity.this, MainActivity.class);
+            mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(mainActivityIntent);
             finish();
         }, 1500);

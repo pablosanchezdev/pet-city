@@ -13,6 +13,3 @@ fun String.validateFullName(): Boolean =
 
 fun String.validatePhoneNumber(): Boolean =
         this.matches("[0-9]{9}".toRegex())  // 9 numbers without spaces
-
-fun String.validateBirthDate(): Boolean =
-        !this.isEmpty()

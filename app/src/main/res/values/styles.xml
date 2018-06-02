@@ -19,16 +19,16 @@
         <item name="android:textSize">@dimen/sub_heading_text_size</item>
     </style>
 
-    <style name="RoundedEditText" parent="Widget.AppCompat.EditText">
-        <item name="android:background">@drawable/rounded_edittext</item>
-        <item name="android:drawablePadding">@dimen/ed_drawable_padding</item>
-        <item name="android:padding">@dimen/ed_rounded_padding</item>
-        <item name="android:textColorHint">@color/white_smoke</item>
-    </style>
-
     <style name="DrawableEditText" parent="Widget.AppCompat.EditText">
         <item name="android:drawablePadding">@dimen/ed_drawable_padding</item>
         <item name="android:paddingBottom">@dimen/large_padding</item>
+    </style>
+
+    <style name="DrawableEditText.Colored">
+        <item name="android:drawablePadding">@dimen/ed_drawable_padding</item>
+        <item name="android:paddingBottom">@dimen/large_padding</item>
+        <item name="android:textColorHint">@color/low_light_black</item>
+        <item name="colorAccent">@color/primary</item>
     </style>
 
     <style name="ErrorNormalTextView" parent="TextAppearance.AppCompat.Caption">

@@ -2,10 +2,10 @@ package com.pablosanchezegido.petcity.features.login;
 
 public interface LoginView {
 
-    void setEmailErrorVisible(boolean visible);
-    void setEmailError();
-    void setPasswordErrorVisible(boolean visible);
-    void setPasswordError();
+    void setEmailError(boolean error);
+    void requestEmailFocus();
+    void setPasswordError(boolean error);
+    void requestPasswordFocus();
     void setProgressIndicatorVisible(boolean visible);
     void setLoginButtonEnabled(boolean enabled);
     void onLoginError(String error);

@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -31,38 +32,19 @@ import butterknife.OnFocusChange;
 
 public class LoginActivity extends AppCompatActivity implements LoginView {
 
-    @BindView(R.id.root_view)
-    LinearLayout rootView;
+    @BindView(R.id.root_view) LinearLayout rootView;
+    @BindView(R.id.til_email) TextInputLayout tilEmail;
+    @BindView(R.id.ed_email) TextInputEditText edEmail;
+    @BindView(R.id.til_password) TextInputLayout tilPassword;
+    @BindView(R.id.ed_password) TextInputEditText edPassword;
+    @BindView(R.id.bt_login) CircularProgressButton btLogin;
+    @BindView(R.id.tv_register) TextView tvRegister;
 
-    @BindView(R.id.ed_email)
-    TextInputEditText edEmail;
-
-    @BindView(R.id.tv_error_email)
-    TextView tvErrorEmail;
-
-    @BindView(R.id.ed_password)
-    TextInputEditText edPassword;
-
-    @BindView(R.id.tv_error_password)
-    TextView tvErrorPassword;
-
-    @BindView(R.id.bt_login)
-    CircularProgressButton btLogin;
-
-    @BindInt(R.integer.password_min_length)
-    int passwordMinLength;
-
-    @BindView(R.id.tv_register)
-    TextView tvRegister;
-
-    @BindString(R.string.not_account)
-    String notAccount;
-
-    @BindColor(R.color.primary_dark)
-    int focusedColor;
-
-    @BindColor(R.color.black)
-    int unfocusedColor;
+    @BindString(R.string.error_email) String emailError;
+    @BindInt(R.integer.password_min_length) int passwordMinLength;
+    @BindString(R.string.not_account) String notAccount;
+    @BindColor(R.color.primary_dark) int focusedColor;
+    @BindColor(R.color.black) int unfocusedColor;
 
     private LoginPresenterImpl presenter;
 
@@ -137,24 +119,24 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
-    public void setEmailErrorVisible(boolean visible) {
-        tvErrorEmail.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
+    public void setEmailError(boolean error) {
+        tilEmail.setError(error ? emailError : null);
     }
 
     @Override
-    public void setEmailError() {
-        tvErrorEmail.setText(R.string.error_email);
+    public void requestEmailFocus() {
+        tilEmail.requestFocus();
     }
 
     @Override
-    public void setPasswordErrorVisible(boolean visible) {
-        tvErrorPassword.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
+    public void setPasswordError(boolean error) {
+        String passwordError = getString(R.string.error_password, passwordMinLength);
+        tilPassword.setError(error ? passwordError : null);
     }
 
     @Override
-    public void setPasswordError() {
-        String error = getString(R.string.error_password, passwordMinLength);
-        tvErrorPassword.setText(error);
+    public void requestPasswordFocus() {
+        tilPassword.requestFocus();
     }
 
     @Override

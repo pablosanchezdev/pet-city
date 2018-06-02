@@ -37,11 +37,11 @@ public class AuthInteractorImpl implements AuthInteractor {
     }
 
     @Override
-    public void registerUser(String email, String password, String fullName, String phoneNumber, String birthDate, OnAuthFinishedListener listener) {
+    public void registerUser(String email, String password, String fullName, String phoneNumber, OnAuthFinishedListener listener) {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        userInteractor.createUser(getCurrentUser().getUid(), email, fullName, phoneNumber, birthDate,
+                        userInteractor.createUser(getCurrentUser().getUid(), email, fullName, phoneNumber,
                                 new UserInteractor.OnUserCreatedListener() {
                             @Override
                             public void onSuccess() {

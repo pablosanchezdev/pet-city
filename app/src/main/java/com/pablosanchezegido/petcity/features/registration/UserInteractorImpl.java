@@ -9,7 +9,6 @@ import com.google.firebase.firestore.SetOptions;
 import com.pablosanchezegido.petcity.features.login.AuthInteractorImpl;
 import com.pablosanchezegido.petcity.models.Offer;
 import com.pablosanchezegido.petcity.models.User;
-import com.pablosanchezegido.petcity.utils.CalendarUtilsKt;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,8 +29,8 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
-    public void createUser(String id, String email, String name, String phoneNumber, String birthDate, OnUserCreatedListener listener) {
-        User user = new User("photoUrl", email, name, phoneNumber, CalendarUtilsKt.getDateTimestamp(birthDate), null);
+    public void createUser(String id, String email, String name, String phoneNumber, OnUserCreatedListener listener) {
+        User user = new User("photoUrl", email, name, phoneNumber, null);
         usersRef.document(id).set(user)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

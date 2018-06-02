@@ -10,9 +10,6 @@ interface RegistrationView {
     void requestFullNameFocus();
     void setPhoneNumberError(boolean error);
     void requestPhoneNumberFocus();
-    void setBirthDateError(boolean error);
-    void hideKeyboard();
-    void showDatePickerDialog();
     void setProgressIndicatorVisible(boolean visible);
     void setLoginButtonEnabled(boolean enabled);
     void onRegisterError(String error);

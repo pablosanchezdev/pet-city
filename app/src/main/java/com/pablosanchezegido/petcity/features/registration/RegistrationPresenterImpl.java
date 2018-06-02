@@ -14,13 +14,7 @@ class RegistrationPresenterImpl implements RegistrationPresenter {
     }
 
     @Override
-    public void birthDateClicked() {
-        view.hideKeyboard();
-        view.showDatePickerDialog();
-    }
-
-    @Override
-    public void registerButtonClicked(String email, String password, int passWordMinLength, String fullName, String phoneNumber, String birthDate) {
+    public void registerButtonClicked(String email, String password, int passWordMinLength, String fullName, String phoneNumber) {
         if (!ValidationUtilsKt.validateEmail(email)) {
             view.setEmailError(true);
             view.requestEmailFocus();
@@ -39,21 +33,14 @@ class RegistrationPresenterImpl implements RegistrationPresenter {
             view.setFullNameError(false);
             view.setPhoneNumberError(true);
             view.requestPhoneNumberFocus();
-        } else if (!ValidationUtilsKt.validateBirthDate(birthDate)) {
-            view.setEmailError(false);
-            view.setPasswordError(false);
-            view.setFullNameError(false);
-            view.setPhoneNumberError(false);
-            view.setBirthDateError(true);
         } else {
             view.setEmailError(false);
             view.setPasswordError(false);
             view.setFullNameError(false);
             view.setPhoneNumberError(false);
-            view.setBirthDateError(false);
             view.setProgressIndicatorVisible(true);
             view.setLoginButtonEnabled(false);
-            interactor.registerUser(email, password, fullName, phoneNumber, birthDate, registerListener);
+            interactor.registerUser(email, password, fullName, phoneNumber, registerListener);
         }
     }
 
