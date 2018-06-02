@@ -1,10 +1,11 @@
 package com.pablosanchezegido.petcity.features.offers.list;
 
-import com.google.android.gms.maps.model.LatLng;
+import com.pablosanchezegido.petcity.models.LatLng;
 
 interface OffersListPresenter {
 
-    void fetchData(LatLng position, double radius);
+    void fetchData(LatLng location, double radius);
+    void fetchDataWithoutLocation();
     void retryButtonClicked();
     void itemRequested(String itemId);
 }

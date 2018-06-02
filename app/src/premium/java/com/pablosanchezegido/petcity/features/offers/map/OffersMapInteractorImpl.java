@@ -1,26 +1,42 @@
 package com.pablosanchezegido.petcity.features.offers.map;
 
-import android.support.annotation.Nullable;
-
 import com.pablosanchezegido.petcity.features.common.OffersInteractor;
+import com.pablosanchezegido.petcity.models.LatLng;
 import com.pablosanchezegido.petcity.models.Offer;
 import com.pablosanchezegido.petcity.utils.BoundaryLatLng;
-import com.pablosanchezegido.petcity.models.LatLng;
 import com.pablosanchezegido.petcity.utils.LocationUtilsKt;
+import com.pablosanchezegido.petcity.utils.ModelMapperKt;
 
 import java.util.List;
 
 class OffersMapInteractorImpl implements OffersMapInteractor {
 
-    OffersMapInteractorImpl() { }
+    private OffersInteractor offersInteractor;
+
+    OffersMapInteractorImpl() {
+        offersInteractor = new OffersInteractor();
+    }
 
     @Override
-    public void fetchData(@Nullable LatLng latLng, double radius, OnOffersFetchedListener listener) {
-        BoundaryLatLng boundary = null;
-        if (latLng != null) {
-            boundary = LocationUtilsKt.getBoundaryLatLngForRadius(new com.google.android.gms.maps.model.LatLng(latLng.getLat(), latLng.getLng()), radius);
-        }
-        new OffersInteractor().fetchOffersWithinBounds(boundary, new OffersInteractor.OnOffersFetched() {
+    public void fetchData(LatLng latLng, double radius, OnOffersFetchedListener listener) {
+        BoundaryLatLng boundary = LocationUtilsKt.getBoundaryLatLngForRadius(ModelMapperKt.latLngToLatLng(latLng), radius);
+
+        offersInteractor.fetchOffersWithinBounds(boundary, new OffersInteractor.OnOffersFetched() {
+            @Override
+            public void onSuccess(List<Offer> offers) {
+                listener.onSuccess(offers);
+            }
+
+            @Override
+            public void onError(String error) {
+                listener.onError(error);
+            }
+        });
+    }
+
+    @Override
+    public void fetchDataWithoutLocation(OnOffersFetchedListener listener) {
+        offersInteractor.fetchAllOffers(new OffersInteractor.OnOffersFetched() {
             @Override
             public void onSuccess(List<Offer> offers) {
                 listener.onSuccess(offers);

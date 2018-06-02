@@ -3,7 +3,6 @@ package com.pablosanchezegido.petcity.features.offers.list;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,14 +19,12 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
 import com.pablosanchezegido.petcity.R;
 import com.pablosanchezegido.petcity.features.offers.detail.OfferDetailActivity;
+import com.pablosanchezegido.petcity.models.LatLng;
 import com.pablosanchezegido.petcity.models.OfferView;
 import com.pablosanchezegido.petcity.utils.ExtensionsKt;
+import com.pablosanchezegido.petcity.utils.LocationManager;
 import com.pablosanchezegido.petcity.utils.PermissionUtilsKt;
 import com.pablosanchezegido.petcity.utils.PreferencesManager;
 import com.pablosanchezegido.petcity.views.adapters.OffersAdapter;
@@ -42,8 +39,7 @@ import butterknife.ButterKnife;
 
 public class OffersListFragment extends Fragment
         implements OffersListView, CircularProgressButton.OnButtonClickListener,
-        AlertDialogFragment.OnAlertDialogClickListener,
-        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+        AlertDialogFragment.OnAlertDialogClickListener {
 
     public static final float CARD_VIEW_HEIGHT_RATIO = 0.75f;
     private static final int LOCATION_PERMISSIONS_REQUEST_CODE = 1;
@@ -56,8 +52,7 @@ public class OffersListFragment extends Fragment
     @BindView(R.id.tv_no_results) TextView tvNoResults;
 
     private OffersListPresenterImpl presenter;
-    private double radius;
-    private GoogleApiClient googleApiClient;
+    private double searchRadius;
 
     public OffersListFragment() { }
 
@@ -68,8 +63,8 @@ public class OffersListFragment extends Fragment
         ButterKnife.bind(this, view);
         initViews();
         presenter = new OffersListPresenterImpl(this, new OffersListInteractorImpl());
+        searchRadius = new PreferencesManager(getContext()).getSearchRadius();
         checkToShowLocationDialog();
-        radius = new PreferencesManager(getContext()).getSearchRadius();
         return view;
     }
 
@@ -147,7 +142,7 @@ public class OffersListFragment extends Fragment
 
     @Override
     public void onNegativeButtonClick() {
-        presenter.fetchData(null, radius);
+        locationPermissionNotGranted();
     }
 
     @Override
@@ -156,9 +151,9 @@ public class OffersListFragment extends Fragment
             if (grantResults.length > 0) {
                 boolean somePermissionNotGranted = PermissionUtilsKt.checkGrantPermissionResults(grantResults);
                 if (somePermissionNotGranted) {
-                    presenter.fetchData(null, radius);
+                    locationPermissionNotGranted();
                 } else {
-                    askForUserLocation();
+                    locationPermissionGranted();
                 }
             }
         }
@@ -168,41 +163,24 @@ public class OffersListFragment extends Fragment
         String[] permissionsToRequest = PermissionUtilsKt.permissionsToRequest(getContext(),
                 new String[] {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION});
         if (permissionsToRequest.length == 0) {  // All permissions are granted
-            askForUserLocation();
+            locationPermissionGranted();
         } else {
             requestPermissions(permissionsToRequest, LOCATION_PERMISSIONS_REQUEST_CODE);
         }
     }
 
-    private void askForUserLocation() {
-        googleApiClient = new GoogleApiClient.Builder(getContext())
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .build();
-        googleApiClient.connect();
-    }
-
     @SuppressLint("MissingPermission")
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        // This method is executed only when the user has given permission
-        Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
-        if (lastLocation != null) {
-            presenter.fetchData(new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude()), radius);
-        } else {
-            presenter.fetchData(null, radius);
-        }
+    private void locationPermissionGranted() {
+        LocationManager.getLastLocation(getContext(), location -> {
+            if (location != null) {
+                presenter.fetchData(new LatLng(location.getLatitude(), location.getLongitude()), searchRadius);
+            } else {
+                presenter.fetchDataWithoutLocation();
+            }
+        });
     }
 
-    @Override
-    public void onConnectionSuspended(int i) {
-        presenter.fetchData(null, radius);
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        setError(connectionResult.getErrorMessage());
-        presenter.fetchData(null, radius);
+    private void locationPermissionNotGranted() {
+        presenter.fetchDataWithoutLocation();
     }
 }

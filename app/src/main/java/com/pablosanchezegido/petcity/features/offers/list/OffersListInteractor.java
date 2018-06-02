@@ -1,6 +1,6 @@
 package com.pablosanchezegido.petcity.features.offers.list;
 
-import com.google.android.gms.maps.model.LatLng;
+import com.pablosanchezegido.petcity.models.LatLng;
 import com.pablosanchezegido.petcity.models.Offer;
 
 import java.util.List;
@@ -13,4 +13,5 @@ interface OffersListInteractor {
     }
 
     void fetchData(LatLng position, double radius, OnFetchDataListener listener);
+    void fetchDataWithoutLocation(OnFetchDataListener listener);
 }

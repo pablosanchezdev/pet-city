@@ -152,12 +152,16 @@ public class OffersMapFragment extends Fragment implements OffersMapView, OnMapR
     @SuppressLint("MissingPermission")
     private void locationPermissionGranted() {
         LocationManager.getLastLocation(getContext(), location -> {
-            presenter.fetchData(location != null ? new LatLng(location.getLatitude(), location.getLongitude()) : null, searchRadius);
+            if (location != null) {
+                presenter.fetchData(new LatLng(location.getLatitude(), location.getLongitude()), searchRadius);
+            } else {
+                presenter.fetchDataWithoutLocation();
+            }
         });
     }
 
     private void locationPermissionNotGranted() {
-        presenter.fetchData(null, searchRadius);
+        presenter.fetchDataWithoutLocation();
     }
 
     @Override

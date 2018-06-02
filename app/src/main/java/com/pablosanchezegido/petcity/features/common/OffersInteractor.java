@@ -45,21 +45,33 @@ public class OffersInteractor {
         this.offersRef = FirebaseFirestore.getInstance().collection(OFFERS_PATH);
     }
 
-    public void fetchOffersWithinBounds(BoundaryLatLng boundary, OnOffersFetched listener) {
-        Query query;
-        // If user location is available, filter offers within radius
-        if (boundary != null) {
-            LatLng lowerBound = boundary.getMinLatLng();
-            LatLng upperBound = boundary.getMaxLatLng();
-            query = offersRef
-                    .whereGreaterThanOrEqualTo(LOCATION_PATH, new GeoPoint(lowerBound.latitude, lowerBound.longitude))
-                    .whereLessThanOrEqualTo(LOCATION_PATH, new GeoPoint(upperBound.latitude, upperBound.longitude));
-        } else {
-            // If not, query all offers
-            query = offersRef;
-        }
+    public void fetchAllOffers(OnOffersFetched listener) {
+        offersRef
+                .orderBy(LOCATION_PATH, Query.Direction.DESCENDING)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<Offer> result = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Offer offer = document.toObject(Offer.class);
+                            offer.setId(document.getId());
+                            result.add(offer);
+                        }
+                        listener.onSuccess(result);
+                    } else {
+                        listener.onError(task.getException().getMessage());
+                    }
+                });
+    }
 
-        query.orderBy(LOCATION_PATH, Query.Direction.DESCENDING)
+    public void fetchOffersWithinBounds(BoundaryLatLng boundary, OnOffersFetched listener) {
+        LatLng lowerBound = boundary.getMinLatLng();
+        LatLng upperBound = boundary.getMaxLatLng();
+
+        offersRef
+                .whereGreaterThanOrEqualTo(LOCATION_PATH, new GeoPoint(lowerBound.latitude, lowerBound.longitude))
+                .whereLessThanOrEqualTo(LOCATION_PATH, new GeoPoint(upperBound.latitude, upperBound.longitude))
+                .orderBy(LOCATION_PATH, Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

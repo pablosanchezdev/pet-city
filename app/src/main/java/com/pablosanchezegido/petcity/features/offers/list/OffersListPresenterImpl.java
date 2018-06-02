@@ -1,12 +1,10 @@
 package com.pablosanchezegido.petcity.features.offers.list;
 
-import com.google.android.gms.maps.model.LatLng;
+import com.pablosanchezegido.petcity.models.LatLng;
 import com.pablosanchezegido.petcity.models.Offer;
 import com.pablosanchezegido.petcity.utils.ModelMapperKt;
 
 import java.util.List;
-
-import javax.annotation.Nullable;
 
 class OffersListPresenterImpl implements OffersListPresenter {
 
@@ -23,16 +21,26 @@ class OffersListPresenterImpl implements OffersListPresenter {
     }
 
     @Override
-    public void fetchData(@Nullable LatLng position, double radius) {
-        this.position = position;
+    public void fetchData(LatLng location, double radius) {
+        this.position = location;
         this.radius = radius;
         view.setProgressVisible(true);
-        interactor.fetchData(position, radius, listener);
+        interactor.fetchData(location, radius, listener);
+    }
+
+    @Override
+    public void fetchDataWithoutLocation() {
+        this.position = null;
+        interactor.fetchDataWithoutLocation(listener);
     }
 
     @Override
     public void retryButtonClicked() {
-        interactor.fetchData(position, radius, listener);
+        if (position != null) {
+            interactor.fetchData(position, radius, listener);
+        } else {
+            interactor.fetchDataWithoutLocation(listener);
+        }
     }
 
     @Override
@@ -49,7 +57,11 @@ class OffersListPresenterImpl implements OffersListPresenter {
                 view.setNoResultsVisible(true);
             } else {
                 view.setNoResultsVisible(false);
-                view.layoutData(ModelMapperKt.offersToOfferViews(position, offers));
+                if (position != null) {
+                    view.layoutData(ModelMapperKt.offersToOfferViews(ModelMapperKt.latLngToLatLng(position), offers));
+                } else {
+                    view.layoutData(ModelMapperKt.offersToOfferViews(null, offers));
+                }
             }
         }
 

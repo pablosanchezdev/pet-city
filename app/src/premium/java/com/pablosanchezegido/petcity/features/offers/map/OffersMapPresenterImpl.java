@@ -19,9 +19,14 @@ public class OffersMapPresenterImpl implements OffersMapPresenter {
     }
 
     @Override
-    public void fetchData(@Nullable LatLng latLng, double radius) {
+    public void fetchData(@Nullable LatLng location, double radius) {
         view.setProgressVisible(true);
-        interactor.fetchData(latLng, radius, offersListener);
+        interactor.fetchData(location, radius, offersListener);
+    }
+
+    @Override
+    public void fetchDataWithoutLocation() {
+        interactor.fetchDataWithoutLocation(offersListener);
     }
 
     @Override
