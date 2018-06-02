@@ -27,3 +27,9 @@ fun offersToOfferViews(location: LatLng?, offers: List<Offer>?): List<OfferView>
 fun userToUserView(user: User): UserView {
     return UserView(user.photoUrl, user.name, offersToOfferViews(null, user.recentActivity))
 }
+
+fun latLngToLatLng(latLng: LatLng): com.pablosanchezegido.petcity.utils.LatLng =
+        com.pablosanchezegido.petcity.utils.LatLng(latLng.latitude, latLng.longitude)
+
+fun latLngToLatLng(latLng: com.pablosanchezegido.petcity.utils.LatLng): LatLng =
+        LatLng(latLng.lat, latLng.lng)

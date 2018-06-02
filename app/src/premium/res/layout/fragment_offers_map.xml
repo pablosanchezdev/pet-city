@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/very_x_large_padding">
+    android:layout_height="match_parent">
 
-    <TextView
-        style="@style/WhiteEmphasisTextView.BlackEmphasisTextView"
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ProgressBar
+        android:id="@+id/pb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Map Premium" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/very_xxx_large_padding"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
 </FrameLayout>
