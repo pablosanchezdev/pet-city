@@ -71,5 +71,7 @@
     <string name="max_recent_activity">Máx. actividad perfil</string>
     <string name="save">Guardar</string>
     <string name="choose_color">Escoge color</string>
+    <string name="noti_title">Recordatorio</string>
+    <string name="noti_detail">Mañana tienes que cuidar animales</string>
 
 </resources>

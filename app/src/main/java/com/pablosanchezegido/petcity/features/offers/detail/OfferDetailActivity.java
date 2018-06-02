@@ -33,6 +33,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.pablosanchezegido.petcity.R;
 import com.pablosanchezegido.petcity.features.main.MainActivity;
+import com.pablosanchezegido.petcity.utils.AlarmHelper;
 import com.pablosanchezegido.petcity.utils.CalendarUtilsKt;
 import com.pablosanchezegido.petcity.utils.ExtensionsKt;
 import com.pablosanchezegido.petcity.utils.SpannableFactoryKt;
@@ -79,6 +80,7 @@ public class OfferDetailActivity extends AppCompatActivity
     private OfferDetailPresenterImpl presenter;
 
     private String offerTitle, offerDates;
+    private long offerStartDate;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -165,6 +167,7 @@ public class OfferDetailActivity extends AppCompatActivity
         String dates = getString(R.string.offer_date, start, end);
         tvDates.setText(dates);
         this.offerDates = dates;
+        this.offerStartDate = startDate;
     }
 
     @Override
@@ -228,6 +231,7 @@ public class OfferDetailActivity extends AppCompatActivity
             startActivity(mainActivityIntent);
             finish();
         }, 1500);
+        new AlarmHelper(this).scheduleAlarmAt(offerStartDate);
     }
 
     @Override
