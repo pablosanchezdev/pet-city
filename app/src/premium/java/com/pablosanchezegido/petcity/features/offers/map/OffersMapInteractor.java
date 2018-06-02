@@ -3,7 +3,7 @@ package com.pablosanchezegido.petcity.features.offers.map;
 import android.support.annotation.Nullable;
 
 import com.pablosanchezegido.petcity.models.Offer;
-import com.pablosanchezegido.petcity.utils.LatLng;
+import com.pablosanchezegido.petcity.models.LatLng;
 
 import java.util.List;
 

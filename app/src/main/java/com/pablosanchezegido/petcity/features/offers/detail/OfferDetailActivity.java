@@ -52,7 +52,7 @@ public class OfferDetailActivity extends AppCompatActivity
         implements OfferDetailView, AppBarLayout.OnOffsetChangedListener, OnMapReadyCallback, AlertDialogFragment.OnAlertDialogClickListener {
 
     public static final String OFFER_ID = "offerId";
-    private static final float COLLAPSING_RELATIVE_HEIGHT = 0.8f;
+    public static final float COLLAPSING_RELATIVE_HEIGHT = 0.8f;
     private static final float MAP_ZOOM = 16.0f;
 
     @BindView(R.id.root_view) LinearLayout rootView;
@@ -147,7 +147,7 @@ public class OfferDetailActivity extends AppCompatActivity
 
     @Override
     public void setOfferImages(List<String> imageUrls) {
-        ImagePagerAdapter adapter = new ImagePagerAdapter(imageUrls);
+        ImagePagerAdapter adapter = new ImagePagerAdapter(getWindowManager(), imageUrls);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
     }

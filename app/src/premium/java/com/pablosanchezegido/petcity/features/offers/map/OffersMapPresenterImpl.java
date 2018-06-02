@@ -3,7 +3,7 @@ package com.pablosanchezegido.petcity.features.offers.map;
 import android.support.annotation.Nullable;
 
 import com.pablosanchezegido.petcity.models.Offer;
-import com.pablosanchezegido.petcity.utils.LatLng;
+import com.pablosanchezegido.petcity.models.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,6 @@ public class OffersMapPresenterImpl implements OffersMapPresenter {
 
     private OffersMapView view;
     private OffersMapInteractor interactor;
-
-    private List<LatLng> latLngs;
 
     OffersMapPresenterImpl(OffersMapView view, OffersMapInteractor interactor) {
         this.view = view;
@@ -24,11 +22,6 @@ public class OffersMapPresenterImpl implements OffersMapPresenter {
     public void fetchData(@Nullable LatLng latLng, double radius) {
         view.setProgressVisible(true);
         interactor.fetchData(latLng, radius, offersListener);
-    }
-
-    @Override
-    public void viewHasFocus() {
-        view.setViewPosition(latLngs);
     }
 
     @Override
@@ -47,12 +40,13 @@ public class OffersMapPresenterImpl implements OffersMapPresenter {
                 @Override
                 public void onSuccess(List<Offer> offers) {
                     view.setProgressVisible(false);
-                    latLngs = new ArrayList<>();
+                    List<LatLng> latLngs = new ArrayList<>();
                     for (Offer offer : offers) {
                         view.addMarker(offer.getLocation().getLatitude(),
                                 offer.getLocation().getLongitude(), offer.getTitle(), offer.getId());
                         latLngs.add(new LatLng(offer.getLocation().getLatitude(), offer.getLocation().getLongitude()));
                     }
+                    view.setViewPosition(latLngs);
                 }
 
                 @Override

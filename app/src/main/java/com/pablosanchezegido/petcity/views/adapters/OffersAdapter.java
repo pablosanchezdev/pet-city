@@ -6,15 +6,19 @@ import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pablosanchezegido.petcity.R;
+import com.pablosanchezegido.petcity.features.offers.list.OffersListFragment;
 import com.pablosanchezegido.petcity.models.OfferView;
+import com.pablosanchezegido.petcity.models.Size;
 import com.pablosanchezegido.petcity.utils.CalendarUtilsKt;
 import com.pablosanchezegido.petcity.utils.ExtensionsKt;
 import com.pablosanchezegido.petcity.utils.LocaleUtilsKt;
 import com.pablosanchezegido.petcity.utils.ModelMapperKt;
+import com.pablosanchezegido.petcity.utils.SizeCalculator;
 import com.pablosanchezegido.petcity.utils.SpannableFactoryKt;
 import com.squareup.picasso.Picasso;
 
@@ -30,10 +34,12 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
     }
 
     private List<OfferView> offers;
+    private WindowManager windowManager;
     private OnItemClickListener listener;
 
-    public OffersAdapter(List<OfferView> offers, OnItemClickListener listener) {
+    public OffersAdapter(List<OfferView> offers, WindowManager windowManager, OnItemClickListener listener) {
         this.offers = offers;
+        this.windowManager = windowManager;
         this.listener = listener;
     }
 
@@ -46,7 +52,7 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
 
     @Override
     public void onBindViewHolder(@NonNull OffersViewHolder holder, int position) {
-        holder.bindOffer(offers.get(position), listener);
+        holder.bindOffer(offers.get(position), windowManager, listener);
     }
 
     @Override
@@ -68,10 +74,14 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
             ButterKnife.bind(this, itemView);
         }
 
-        void bindOffer(OfferView offer, final OnItemClickListener listener) {
+        void bindOffer(OfferView offer, WindowManager windowManager, final OnItemClickListener listener) {
+            SizeCalculator sizeCalculator = new SizeCalculator(windowManager, OffersListFragment.CARD_VIEW_HEIGHT_RATIO);
+            Size size = sizeCalculator.calculateSize();
             Picasso.get()
                     .load(offer.getImage())
                     .error(R.drawable.ic_image_unavailable)
+                    .resize(size.getWidth(), size.getHeight())
+                    .onlyScaleDown()
                     .into(ivOfferImage);
 
             tvTitle.setText(offer.getTitle());

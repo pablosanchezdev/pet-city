@@ -5,9 +5,13 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.pablosanchezegido.petcity.R;
+import com.pablosanchezegido.petcity.features.offers.detail.OfferDetailActivity;
+import com.pablosanchezegido.petcity.models.Size;
+import com.pablosanchezegido.petcity.utils.SizeCalculator;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -20,9 +24,11 @@ public class ImagePagerAdapter extends PagerAdapter {
 
     private OnImageClickListener listener;
 
+    private WindowManager windowManager;
     private List<String> imageUrls;
 
-    public ImagePagerAdapter(List<String> imageUrls) {
+    public ImagePagerAdapter(WindowManager windowManager, List<String> imageUrls) {
+        this.windowManager = windowManager;
         this.imageUrls = imageUrls;
     }
 
@@ -35,7 +41,13 @@ public class ImagePagerAdapter extends PagerAdapter {
         ImageView iv = itemView.findViewById(R.id.iv);
         String url = imageUrls.get(position);
         if (url != null) {
-            Picasso.get().load(url).error(R.drawable.ic_image_unavailable).into(iv);
+            Size size = new SizeCalculator(windowManager, OfferDetailActivity.COLLAPSING_RELATIVE_HEIGHT).calculateSize();
+            Picasso.get()
+                    .load(url)
+                    .error(R.drawable.ic_image_unavailable)
+                    .resize(size.getWidth(), size.getHeight())
+                    .onlyScaleDown()
+                    .into(iv);
         }
         iv.setOnClickListener(v -> {
             if (listener != null) {

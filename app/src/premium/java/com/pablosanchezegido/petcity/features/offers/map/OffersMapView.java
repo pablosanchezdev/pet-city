@@ -1,6 +1,6 @@
 package com.pablosanchezegido.petcity.features.offers.map;
 
-import com.pablosanchezegido.petcity.utils.LatLng;
+import com.pablosanchezegido.petcity.models.LatLng;
 
 import java.util.List;
 

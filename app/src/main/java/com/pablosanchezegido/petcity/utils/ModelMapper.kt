@@ -28,8 +28,5 @@ fun userToUserView(user: User): UserView {
     return UserView(user.photoUrl, user.name, offersToOfferViews(null, user.recentActivity))
 }
 
-fun latLngToLatLng(latLng: LatLng): com.pablosanchezegido.petcity.utils.LatLng =
-        com.pablosanchezegido.petcity.utils.LatLng(latLng.latitude, latLng.longitude)
-
-fun latLngToLatLng(latLng: com.pablosanchezegido.petcity.utils.LatLng): LatLng =
+fun latLngToLatLng(latLng: com.pablosanchezegido.petcity.models.LatLng): LatLng =
         LatLng(latLng.lat, latLng.lng)

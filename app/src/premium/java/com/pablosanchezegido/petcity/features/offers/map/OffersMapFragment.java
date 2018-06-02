@@ -25,8 +25,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.pablosanchezegido.petcity.R;
 import com.pablosanchezegido.petcity.features.offers.detail.OfferDetailActivity;
+import com.pablosanchezegido.petcity.models.LatLng;
 import com.pablosanchezegido.petcity.utils.ExtensionsKt;
-import com.pablosanchezegido.petcity.utils.LatLng;
 import com.pablosanchezegido.petcity.utils.LocationManager;
 import com.pablosanchezegido.petcity.utils.ModelMapperKt;
 import com.pablosanchezegido.petcity.utils.PermissionUtilsKt;
@@ -45,7 +45,6 @@ public class OffersMapFragment extends Fragment implements OffersMapView, OnMapR
     @BindView(R.id.pb) ProgressBar pb;
 
     private GoogleMap googleMap;
-    private LatLngBounds.Builder builder;
 
     private OffersMapPresenterImpl presenter;
     private double searchRadius;
@@ -65,15 +64,13 @@ public class OffersMapFragment extends Fragment implements OffersMapView, OnMapR
         presenter = new OffersMapPresenterImpl(this, new OffersMapInteractorImpl());
         searchRadius = new PreferencesManager(getContext()).getSearchRadius();
 
-        checkLocationPermissions();
-
         return view;
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         if (isVisibleToUser) {
-            presenter.viewHasFocus();
+            checkLocationPermissions();
         }
     }
 
@@ -113,7 +110,7 @@ public class OffersMapFragment extends Fragment implements OffersMapView, OnMapR
 
     @Override
     public void setViewPosition(List<LatLng> latLngs) {
-        builder = new LatLngBounds.Builder();
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
         for (LatLng latLng : latLngs) {
             builder.include(ModelMapperKt.latLngToLatLng(latLng));
         }

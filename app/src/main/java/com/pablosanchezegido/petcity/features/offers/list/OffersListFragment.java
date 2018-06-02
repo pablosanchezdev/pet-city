@@ -45,7 +45,7 @@ public class OffersListFragment extends Fragment
         AlertDialogFragment.OnAlertDialogClickListener,
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    private static final float CARD_VIEW_HEIGHT_RATIO = 0.75f;
+    public static final float CARD_VIEW_HEIGHT_RATIO = 0.75f;
     private static final int LOCATION_PERMISSIONS_REQUEST_CODE = 1;
 
     @BindView(R.id.root_view) FrameLayout rootView;
@@ -76,7 +76,7 @@ public class OffersListFragment extends Fragment
     private void initViews() {
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        rv.addItemDecoration(new BigCardItemDecoration(CARD_VIEW_HEIGHT_RATIO));
+        rv.addItemDecoration(new BigCardItemDecoration(getActivity().getWindowManager(), CARD_VIEW_HEIGHT_RATIO));
 
         btRetry.setOnButtonClickListener(this);
 
@@ -116,7 +116,7 @@ public class OffersListFragment extends Fragment
     public void layoutData(List<OfferView> offers) {
         btRetry.setProgressVisible(false);
         swipeRefresh.setRefreshing(false);
-        rv.setAdapter(new OffersAdapter(offers, listener));
+        rv.setAdapter(new OffersAdapter(offers, getActivity().getWindowManager(), listener));
     }
 
     @Override

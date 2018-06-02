@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import com.pablosanchezegido.petcity.features.common.OffersInteractor;
 import com.pablosanchezegido.petcity.models.Offer;
 import com.pablosanchezegido.petcity.utils.BoundaryLatLng;
-import com.pablosanchezegido.petcity.utils.LatLng;
+import com.pablosanchezegido.petcity.models.LatLng;
 import com.pablosanchezegido.petcity.utils.LocationUtilsKt;
 
 import java.util.List;
