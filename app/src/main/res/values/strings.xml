@@ -72,5 +72,6 @@
     <string name="choose_color">Escoge color</string>
     <string name="noti_title">Recordatorio</string>
     <string name="noti_detail">Mañana tienes que cuidar animales</string>
+    <string name="no_recent_activity">No hay actividad reciente</string>
 
 </resources>

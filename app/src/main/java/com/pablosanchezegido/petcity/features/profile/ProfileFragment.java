@@ -48,6 +48,7 @@ public class ProfileFragment extends Fragment implements ProfileView, CameraGall
     @BindView(R.id.civ_image) CircleImageView civImage;
     @BindView(R.id.tv_name) TextView tvName;
     @BindView(R.id.rv) RecyclerView rv;
+    @BindView(R.id.tv_no_recent_activity) TextView tvNoRecentActivity;
 
     @BindString(R.string.permissions_not_granted) String permissionsNotGranted;
 
@@ -167,12 +168,20 @@ public class ProfileFragment extends Fragment implements ProfileView, CameraGall
 
     @Override
     public void layoutData(UserView user) {
+        int imageSize = getResources().getDimensionPixelSize(R.dimen.user_profile_image_size);
         Picasso.get()
                 .load(user.getImageUrl())
                 .error(R.drawable.ic_person)
+                .resize(imageSize, imageSize)
+                .onlyScaleDown()
                 .into(civImage);
         tvName.setText(user.getName());
         rv.setAdapter(new RecentActivityAdapter(user.getRecentActivity()));
+    }
+
+    @Override
+    public void setNoRecentActivityVisible(boolean visible) {
+        tvNoRecentActivity.setVisibility(visible ? View.VISIBLE : View.GONE);
     }
 
     @Override

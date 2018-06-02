@@ -53,6 +53,10 @@ public class ProfilePresenterImpl implements ProfilePresenter {
         public void onSuccess(User user) {
             view.setLoadingVisible(false);
             view.layoutData(ModelMapperKt.userToUserView(user));
+            view.setNoRecentActivityVisible(false);
+            if (user.getRecentActivity() != null && user.getRecentActivity().isEmpty()) {
+                view.setNoRecentActivityVisible(true);
+            }
         }
 
         @Override

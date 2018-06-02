@@ -27,7 +27,7 @@
     <style name="DrawableEditText.Colored">
         <item name="android:drawablePadding">@dimen/ed_drawable_padding</item>
         <item name="android:paddingBottom">@dimen/large_padding</item>
-        <item name="android:textColorHint">@color/low_light_black</item>
+        <item name="android:textColorHint">@color/white</item>
         <item name="colorAccent">@color/primary</item>
     </style>
 

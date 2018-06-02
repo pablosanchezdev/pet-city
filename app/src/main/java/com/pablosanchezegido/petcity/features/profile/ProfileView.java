@@ -9,6 +9,7 @@ public interface ProfileView {
     void launchCamera();
     void launchGallery();
     void layoutData(UserView user);
+    void setNoRecentActivityVisible(boolean visible);
     void changeImage(String url);
     void setError(String error);
 }
