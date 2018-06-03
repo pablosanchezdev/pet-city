@@ -1,7 +1,10 @@
 package com.pablosanchezegido.petcity.views.adapters;
 
 import android.content.res.Resources;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.view.View;
@@ -90,6 +93,7 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
             String startDate = CalendarUtilsKt.getDateFromTimestamp(offer.getStartDate(), null);
             String endDate = CalendarUtilsKt.getDateFromTimestamp(offer.getEndDate(), null);
             tvDate.setText(res.getString(R.string.offer_date, startDate, endDate));
+            tintDrawable(tvDate.getCompoundDrawablesRelative()[0]);
 
             if (offer.getDistance() == ModelMapperKt.DISTANCE_NOT_AVAILABLE) {
                 tvDistance.setText(R.string.radius_not_available);
@@ -97,6 +101,7 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
                 String distance = res.getString(R.string.offer_distance, offer.getDistance());
                 tvDistance.setText(distance);
             }
+            tintDrawable(tvDistance.getCompoundDrawablesRelative()[0]);
 
             String price = res.getString(R.string.offer_price, offer.getPrice());
             int endIndex = price.indexOf(LocaleUtilsKt.getLocaleDecimalSeparator());
@@ -104,6 +109,12 @@ public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.OffersView
             tvPrice.setText(spannablePrice);
 
             itemView.setOnClickListener(v -> listener.onItemClick(offer.getId()));
+        }
+
+        private void tintDrawable(Drawable drawable) {
+            if (drawable != null) {
+                drawable.setColorFilter(ContextCompat.getColor(itemView.getContext(), R.color.dark_gray), PorterDuff.Mode.SRC_ATOP);
+            }
         }
     }
 }

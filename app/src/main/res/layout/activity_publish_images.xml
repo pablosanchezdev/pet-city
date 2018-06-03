@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:transitionGroup="true"
+    tools:targetApi="lollipop">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -46,11 +48,11 @@
         android:layout_marginStart="@dimen/x_large_padding"
         android:layout_marginTop="@dimen/x_large_padding"
         android:scaleType="fitCenter"
+        android:src="@drawable/ic_image"
         app:layout_constraintDimensionRatio="h,1:1"
         app:layout_constraintEnd_toStartOf="@id/iv_image_second"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title"
-        android:src="@drawable/ic_image" />
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
     <ImageView
         android:id="@+id/iv_image_second"
@@ -59,11 +61,11 @@
         android:layout_marginEnd="@dimen/x_large_padding"
         android:layout_marginStart="@dimen/very_large_padding"
         android:scaleType="fitCenter"
+        android:src="@drawable/ic_image"
         app:layout_constraintDimensionRatio="h,1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_image_first"
-        app:layout_constraintTop_toTopOf="@id/iv_image_first"
-        android:src="@drawable/ic_image" />
+        app:layout_constraintTop_toTopOf="@id/iv_image_first" />
 
     <Button
         android:id="@+id/bt_image_first"

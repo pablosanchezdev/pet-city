@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -120,11 +122,13 @@ public class OffersListFragment extends Fragment
         ExtensionsKt.makeSnackbar(rootView, error, Snackbar.LENGTH_LONG);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void openItemDetail(String itemId) {
         Intent detailIntent = new Intent(getContext(), OfferDetailActivity.class);
         detailIntent.putExtra(OfferDetailActivity.OFFER_ID, itemId);
-        startActivity(detailIntent);
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity());
+        ActivityCompat.startActivity(getContext(), detailIntent, options.toBundle());
     }
 
     @Override

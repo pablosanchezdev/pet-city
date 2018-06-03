@@ -1,8 +1,10 @@
 package com.pablosanchezegido.petcity.features.offers.detail;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,11 +12,14 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -84,6 +89,7 @@ public class OfferDetailActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        initTransitions();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offer_detail);
         ButterKnife.bind(this);
@@ -112,9 +118,17 @@ public class OfferDetailActivity extends AppCompatActivity
         super.onDestroy();
     }
 
+    private void initTransitions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().setEnterTransition(new Slide(Gravity.RIGHT).setDuration(300));
+            getWindow().setReturnTransition(new Slide(Gravity.BOTTOM).setDuration(300));
+        }
+    }
+
     private void initViews() {
         initToolbar();
         initAppBarLayout();
+        initTvDates();
         initMap();
     }
 
@@ -129,6 +143,13 @@ public class OfferDetailActivity extends AppCompatActivity
                         (int) (parent.getMeasuredWidth() * COLLAPSING_RELATIVE_HEIGHT));
 
         appBarLayout.addOnOffsetChangedListener(this);
+    }
+
+    private void initTvDates() {
+        Drawable leftDrawable = tvDates.getCompoundDrawablesRelative()[0];
+        if (leftDrawable != null) {
+            leftDrawable.setColorFilter(ContextCompat.getColor(this, R.color.dark_gray), PorterDuff.Mode.SRC_ATOP);
+        }
     }
 
     private void initMap() {
@@ -231,7 +252,7 @@ public class OfferDetailActivity extends AppCompatActivity
             mainActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(mainActivityIntent);
             finish();
-        }, 1500);
+        }, 2000);
         new AlarmHelper(this).scheduleAlarmAt(offerStartDate);
     }
 

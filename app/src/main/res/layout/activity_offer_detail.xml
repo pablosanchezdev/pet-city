@@ -7,7 +7,9 @@
     android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:transitionGroup="true"
+    android:orientation="vertical"
+    tools:targetApi="lollipop">
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"

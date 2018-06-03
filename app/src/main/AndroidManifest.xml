@@ -38,26 +38,39 @@
             android:theme="@style/AppTheme.TranslucentStatusBar"
             android:windowSoftInputMode="adjustPan" />
 
-        <activity android:name=".features.main.MainActivity" />
+        <activity
+            android:name=".features.main.MainActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".features.publish.titledetail.PublishTitleDetailActivity"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible" />
 
-        <activity android:name=".features.publish.images.PublishImagesActivity" />
+        <activity
+            android:name=".features.publish.images.PublishImagesActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".features.publish.place.PublishPlaceActivity" />
+        <activity
+            android:name=".features.publish.place.PublishPlaceActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".features.publish.dates.PublishDatesActivity" />
+        <activity
+            android:name=".features.publish.dates.PublishDatesActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".features.publish.animals.PublishAnimalsActivity" />
+        <activity
+            android:name=".features.publish.animals.PublishAnimalsActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".features.offers.detail.OfferDetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.TranslucentStatusBar" />
 
         <activity
             android:name=".features.settings.SettingsActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Dialog" />
 
         <provider
