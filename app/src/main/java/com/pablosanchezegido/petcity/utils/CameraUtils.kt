@@ -6,6 +6,7 @@ import android.provider.MediaStore
 import android.support.v4.app.Fragment
 import android.support.v4.content.FileProvider
 import android.support.v7.app.AppCompatActivity
+import com.pablosanchezegido.petcity.BuildConfig
 import com.pablosanchezegido.petcity.R
 import com.pablosanchezegido.petcity.models.PetCityException
 import java.io.File
@@ -23,11 +24,20 @@ class CameraUtils(private val activity: AppCompatActivity?, private val fragment
     fun launchCamera() {
         val pictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
+        val authority: String
+        if (BuildConfig.FLAVOR.equals("free")) {
+            authority = "com.pablosanchezegido.petcity.fileprovider"
+        } else if (BuildConfig.FLAVOR.equals("premium")) {
+            authority = "com.pablosanchezegido.petcitypremium.fileprovider"
+        } else {
+            authority = ""
+        }
+
         if (activity != null) {
             if (pictureIntent.resolveActivity(activity.packageManager) != null) {
                 val photoFile = createImageFile(activity)
                 photoPath = photoFile.absolutePath
-                val photoURI = FileProvider.getUriForFile(activity, "com.pablosanchezegido.petcity.fileprovider", photoFile)
+                val photoURI = FileProvider.getUriForFile(activity, authority, photoFile)
                 pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                 activity.startActivityForResult(pictureIntent, CAMERA_REQUEST_CODE)
                 galleryAddPic()
@@ -39,7 +49,7 @@ class CameraUtils(private val activity: AppCompatActivity?, private val fragment
             if (pictureIntent.resolveActivity(fragment.context!!.packageManager) != null) {
                 val photoFile = createImageFile(fragment.context!!)
                 photoPath = photoFile.absolutePath
-                val photoURI = FileProvider.getUriForFile(fragment.context!!, "com.pablosanchezegido.petcity.fileprovider", photoFile)
+                val photoURI = FileProvider.getUriForFile(fragment.context!!, authority, photoFile)
                 pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
                 fragment.startActivityForResult(pictureIntent, CAMERA_REQUEST_CODE)
                 galleryAddPic()

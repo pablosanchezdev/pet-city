@@ -15,32 +15,12 @@
         android:textAppearance="@style/WhiteEmphasisTextView" />
 
     <TextView
-        android:id="@+id/tv_led_color_label"
+        android:id="@+id/tv_radius_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_title"
         android:layout_marginStart="@dimen/very_large_padding"
         android:layout_marginTop="@dimen/very_large_padding"
-        android:text="@string/led_color"
-        android:textAppearance="@style/WhiteMediumTextView.BlackMediumTextView" />
-
-    <ImageView
-        android:id="@+id/iv_color_picker"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_alignBottom="@id/tv_led_color_label"
-        android:layout_alignEnd="@id/ed_radius"
-        android:layout_alignStart="@id/ed_radius"
-        android:layout_alignTop="@id/tv_led_color_label"
-        android:src="@drawable/circle" />
-
-    <TextView
-        android:id="@+id/tv_radius_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@id/tv_led_color_label"
-        android:layout_below="@id/tv_led_color_label"
-        android:layout_marginTop="@dimen/x_large_padding"
         android:labelFor="@id/ed_radius"
         android:text="@string/search_radius"
         android:textAppearance="@style/WhiteMediumTextView.BlackMediumTextView" />

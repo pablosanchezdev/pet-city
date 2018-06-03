@@ -10,11 +10,6 @@ class SettingsPresenterImpl implements SettingsPresenter {
     }
 
     @Override
-    public void enterColorRequested() {
-        view.openColorDialog();
-    }
-
-    @Override
     public void saveSettingsRequested() {
         view.commitSettings();
     }

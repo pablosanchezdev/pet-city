@@ -32,7 +32,6 @@ public class NotificationBuilder {
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(context.getString(R.string.noti_detail, userFullName)))
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
-                .setColor(new PreferencesManager(context).getLedColor())
                 .setAutoCancel(true);
 
         notificationManager.notify(generateUniqueId(), builder.build());

@@ -65,7 +65,6 @@
     <string name="accept_offer_confirmation_title">Aceptar oferta</string>
     <string name="accept_offer_confirmation_detail">¿Seguro que quiere aceptar esta oferta?</string>
     <string name="accept_offer_successfully">Oferta aceptada correctamente. Serás notificado previamente</string>
-    <string name="led_color">Color led notificaciones</string>
     <string name="search_radius">Radio ofertas (km)</string>
     <string name="max_recent_activity">Máx. actividad perfil</string>
     <string name="save">Guardar</string>

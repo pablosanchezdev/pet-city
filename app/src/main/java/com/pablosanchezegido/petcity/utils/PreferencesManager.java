@@ -8,7 +8,6 @@ import android.preference.PreferenceManager;
 public class PreferencesManager {
 
     private static final String FIRST_TIME_LAUNCHED = "firstTimeLaunched";
-    private static final String LED_COLOR = "ledColor";
     private static final String SEARCH_RADIUS = "searchRadius";
     private static final String NUM_MAX_RECENT_ACTIVITY = "numMaxRecentActivity";
 
@@ -32,15 +31,10 @@ public class PreferencesManager {
         editor.apply();
     }
 
-    public void saveSettings(int color, float radius, int numMax) {
-        editor.putInt(LED_COLOR, color);
+    public void saveSettings(float radius, int numMax) {
         editor.putFloat(SEARCH_RADIUS, radius);
         editor.putInt(NUM_MAX_RECENT_ACTIVITY, numMax);
         editor.apply();
-    }
-
-    public int getLedColor() {
-        return preferences.getInt(LED_COLOR, Color.parseColor("#2196F3"));  // Primary color
     }
 
     public float getSearchRadius() {
