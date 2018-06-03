@@ -112,7 +112,7 @@ public class OffersMapFragment extends Fragment implements OffersMapView, OnMapR
 
     @Override
     public void setViewPosition(List<LatLng> latLngs) {
-        if (googleMap != null) {
+        if (googleMap != null && latLngs.size() > 0) {
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
             for (LatLng latLng : latLngs) {
                 builder.include(ModelMapperKt.latLngToLatLng(latLng));
