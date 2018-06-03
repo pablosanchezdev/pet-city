@@ -5,9 +5,9 @@ import com.pablosanchezegido.petcity.utils.ValidationUtilsKt;
 public class LoginPresenterImpl implements LoginPresenter {
 
     private LoginView view;
-    private AuthInteractor interactor;
+    private LoginInteractor interactor;
 
-    LoginPresenterImpl(LoginView view, AuthInteractor interactor) {
+    LoginPresenterImpl(LoginView view, LoginInteractor interactor) {
         this.view = view;
         this.interactor = interactor;
     }
@@ -46,8 +46,8 @@ public class LoginPresenterImpl implements LoginPresenter {
         interactor = null;
     }
 
-    private final AuthInteractor.OnAuthFinishedListener loginListener =
-            new AuthInteractor.OnAuthFinishedListener() {
+    private final LoginInteractor.OnAuthFinishedListener loginListener =
+            new LoginInteractor.OnAuthFinishedListener() {
                 @Override
                 public void onSuccess() {
                     view.setProgressIndicatorVisible(false);

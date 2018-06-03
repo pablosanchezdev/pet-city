@@ -1,17 +1,16 @@
 package com.pablosanchezegido.petcity.features.profile;
 
 import com.pablosanchezegido.petcity.features.common.ImagesInteractor;
-import com.pablosanchezegido.petcity.features.login.AuthInteractorImpl;
-import com.pablosanchezegido.petcity.features.registration.UserInteractor;
-import com.pablosanchezegido.petcity.features.registration.UserInteractorImpl;
+import com.pablosanchezegido.petcity.features.common.AuthInteractor;
+import com.pablosanchezegido.petcity.features.common.UserInteractor;
 import com.pablosanchezegido.petcity.models.User;
 
 public class ProfileInteractorImpl implements ProfileInteractor {
 
-    private UserInteractorImpl userInteractor;
+    private UserInteractor userInteractor;
 
     ProfileInteractorImpl() {
-        userInteractor = new UserInteractorImpl();
+        userInteractor = new UserInteractor();
     }
 
     @Override
@@ -31,7 +30,7 @@ public class ProfileInteractorImpl implements ProfileInteractor {
 
     @Override
     public void uploadUserImage(String imageUri, OnUserImageChangedListener listener) {
-        String userId = AuthInteractorImpl.getUserId();
+        String userId = AuthInteractor.getUserId();
         new ImagesInteractor().uploadImage(userId, 1, imageUri, ImagesInteractor.ImageTypes.USERS,
                 new ImagesInteractor.OnImageUploadListener() {
             @Override

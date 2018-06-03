@@ -2,7 +2,7 @@ package com.pablosanchezegido.petcity.features.publish;
 
 import com.google.firebase.firestore.GeoPoint;
 import com.pablosanchezegido.petcity.features.common.OffersInteractor;
-import com.pablosanchezegido.petcity.features.registration.UserInteractorImpl;
+import com.pablosanchezegido.petcity.features.common.UserInteractor;
 import com.pablosanchezegido.petcity.models.Offer;
 import com.pablosanchezegido.petcity.models.PetType;
 import com.pablosanchezegido.petcity.models.User;
@@ -24,7 +24,7 @@ public class PublishOfferInteractorImpl implements PublishOfferInteractor {
             }
         }
 
-        new UserInteractorImpl().fetchAuthUser(new UserInteractorImpl.OnUserFetchedListener() {
+        new UserInteractor().fetchAuthUser(new UserInteractor.OnUserFetchedListener() {
             @Override
             public void onSuccess(User user) {
                 user.setRecentActivity(null);

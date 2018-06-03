@@ -1,4 +1,4 @@
-package com.pablosanchezegido.petcity.features.registration;
+package com.pablosanchezegido.petcity.features.common;
 
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -6,7 +6,6 @@ import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.SetOptions;
-import com.pablosanchezegido.petcity.features.login.AuthInteractorImpl;
 import com.pablosanchezegido.petcity.models.Offer;
 import com.pablosanchezegido.petcity.models.User;
 
@@ -15,7 +14,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserInteractorImpl implements UserInteractor {
+public class UserInteractor {
+
+    public interface OnUserCreatedListener {
+        void onSuccess();
+        void onError(String error);
+    }
+
+    public interface OnUserFetchedListener {
+        void onSuccess(User user);
+        void onError(String error);
+    }
+
+    public interface OnUserOffersFetchedListener {
+        void onSuccess(List<Offer> offers);
+        void onError(String error);
+    }
+
+    public interface OnOfferAcceptedInsertedListener {
+        void onSuccess();
+        void onError(String error);
+    }
 
     private static final String USERS_REF = "users";
     private static final String USERS_IMAGE_REF = "photoUrl";
@@ -24,13 +43,12 @@ public class UserInteractorImpl implements UserInteractor {
     private CollectionReference usersRef;
     private ListenerRegistration listenerRegistration;
 
-    public UserInteractorImpl() {
+    public UserInteractor() {
         usersRef = FirebaseFirestore.getInstance().collection(USERS_REF);
     }
 
-    @Override
     public void createUser(String id, String email, String name, String phoneNumber, OnUserCreatedListener listener) {
-        User user = new User("", email, name, phoneNumber, null);
+        User user = new User("photoUrl", email, name, phoneNumber, null);
         usersRef.document(id).set(user)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -41,9 +59,8 @@ public class UserInteractorImpl implements UserInteractor {
                 });
     }
 
-    @Override
     public void fetchAuthUser(OnUserFetchedListener listener) {
-        String userId = AuthInteractorImpl.getUserId();
+        String userId = AuthInteractor.getUserId();
         if (userId != null) {
             usersRef.document(userId).get()
                     .addOnCompleteListener(task -> {
@@ -57,7 +74,7 @@ public class UserInteractorImpl implements UserInteractor {
         }
     }
 
-    @Override
+
     public void fetchUserProfile(int maxRecentActivity, OnUserFetchedListener listener) {
         fetchAuthUser(new OnUserFetchedListener() {
             @Override
@@ -83,9 +100,8 @@ public class UserInteractorImpl implements UserInteractor {
         });
     }
 
-    @Override
     public void changeUserProfileImage(String url) {
-        String userId = AuthInteractorImpl.getUserId();
+        String userId = AuthInteractor.getUserId();
         if (userId != null) {
             Map<String, Object> data = new HashMap<>();
             data.put(USERS_IMAGE_REF, url);
@@ -93,9 +109,8 @@ public class UserInteractorImpl implements UserInteractor {
         }
     }
 
-    @Override
     public void insertOfferAccepted(Offer offer, OnOfferAcceptedInsertedListener listener) {
-        String userId = AuthInteractorImpl.getUserId();
+        String userId = AuthInteractor.getUserId();
         if (userId != null) {
             usersRef.document(userId)
                     .collection(USER_OFFERS_ACCEPTED_REF)
@@ -111,13 +126,12 @@ public class UserInteractorImpl implements UserInteractor {
         }
     }
 
-    @Override
     public void detachUserProfileRealtimeListener() {
         listenerRegistration.remove();
     }
 
     private void fetchUserRecentActivity(int maxRecentActivity, OnUserOffersFetchedListener listener) {
-        String userId = AuthInteractorImpl.getUserId();
+        String userId = AuthInteractor.getUserId();
         if (userId != null) {
             Query query = usersRef.document(userId)
                     .collection(USER_OFFERS_ACCEPTED_REF)

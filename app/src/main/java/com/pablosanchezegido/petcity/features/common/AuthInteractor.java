@@ -1,26 +1,27 @@
-package com.pablosanchezegido.petcity.features.login;
+package com.pablosanchezegido.petcity.features.common;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.pablosanchezegido.petcity.features.registration.UserInteractor;
-import com.pablosanchezegido.petcity.features.registration.UserInteractorImpl;
 
-public class AuthInteractorImpl implements AuthInteractor {
+public class AuthInteractor {
+
+    public interface OnAuthFinishedListener {
+        void onSuccess();
+        void onError(String error);
+    }
 
     private final FirebaseAuth auth;
     private UserInteractor userInteractor;
 
-    public AuthInteractorImpl() {
+    public AuthInteractor() {
         this.auth = FirebaseAuth.getInstance();
-        this.userInteractor = new UserInteractorImpl();
+        this.userInteractor = new UserInteractor();
     }
 
-    @Override
     public boolean isUserLoggedIn() {
         return auth.getCurrentUser() != null;
     }
 
-    @Override
     public void loginUser(String email, String password, OnAuthFinishedListener listener) {
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
@@ -36,7 +37,6 @@ public class AuthInteractorImpl implements AuthInteractor {
                 });
     }
 
-    @Override
     public void registerUser(String email, String password, String fullName, String phoneNumber, OnAuthFinishedListener listener) {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
@@ -63,7 +63,6 @@ public class AuthInteractorImpl implements AuthInteractor {
                 });
     }
 
-    @Override
     public void logoutUser() {
         auth.signOut();
     }

@@ -1,14 +1,13 @@
 package com.pablosanchezegido.petcity.features.registration;
 
-import com.pablosanchezegido.petcity.features.login.AuthInteractor;
 import com.pablosanchezegido.petcity.utils.ValidationUtilsKt;
 
 class RegistrationPresenterImpl implements RegistrationPresenter {
 
     private RegistrationView view;
-    private AuthInteractor interactor;
+    private RegistrationInteractor interactor;
 
-    RegistrationPresenterImpl(RegistrationView view, AuthInteractor interactor) {
+    RegistrationPresenterImpl(RegistrationView view, RegistrationInteractor interactor) {
         this.view = view;
         this.interactor = interactor;
     }
@@ -50,8 +49,8 @@ class RegistrationPresenterImpl implements RegistrationPresenter {
         interactor = null;
     }
 
-    private AuthInteractor.OnAuthFinishedListener registerListener =
-            new AuthInteractor.OnAuthFinishedListener() {
+    private RegistrationInteractor.OnAuthFinishedListener registerListener =
+            new RegistrationInteractor.OnAuthFinishedListener() {
         @Override
         public void onSuccess() {
             view.setProgressIndicatorVisible(false);

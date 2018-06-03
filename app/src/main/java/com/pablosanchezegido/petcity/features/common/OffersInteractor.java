@@ -6,8 +6,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.pablosanchezegido.petcity.features.registration.UserInteractor;
-import com.pablosanchezegido.petcity.features.registration.UserInteractorImpl;
 import com.pablosanchezegido.petcity.models.Offer;
 import com.pablosanchezegido.petcity.utils.BoundaryLatLng;
 
@@ -128,7 +126,7 @@ public class OffersInteractor {
     }
 
     public void acceptOffer(Offer offer, OnOfferAcceptedListener listener) {
-        new UserInteractorImpl().insertOfferAccepted(offer, new UserInteractor.OnOfferAcceptedInsertedListener() {
+        new UserInteractor().insertOfferAccepted(offer, new UserInteractor.OnOfferAcceptedInsertedListener() {
             @Override
             public void onSuccess() {
                 offersRef.document(offer.getId()).delete()

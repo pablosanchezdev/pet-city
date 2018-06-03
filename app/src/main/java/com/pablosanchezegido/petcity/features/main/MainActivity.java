@@ -11,7 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.pablosanchezegido.petcity.R;
-import com.pablosanchezegido.petcity.features.login.AuthInteractorImpl;
+import com.pablosanchezegido.petcity.features.common.AuthInteractor;
 import com.pablosanchezegido.petcity.features.login.LoginActivity;
 import com.pablosanchezegido.petcity.features.offers.OffersFragment;
 import com.pablosanchezegido.petcity.features.profile.ProfileFragment;
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(settingsIntent);
                 return true;
             case R.id.action_logout:
-                new AuthInteractorImpl().logoutUser();
+                new AuthInteractor().logoutUser();
                 Intent loginIntent = new Intent(this, LoginActivity.class);
                 loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(loginIntent);

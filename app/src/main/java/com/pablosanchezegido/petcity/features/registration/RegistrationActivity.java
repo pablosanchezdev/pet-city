@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.pablosanchezegido.petcity.R;
-import com.pablosanchezegido.petcity.features.login.AuthInteractorImpl;
 import com.pablosanchezegido.petcity.features.main.MainActivity;
 import com.pablosanchezegido.petcity.utils.ExtensionsKt;
 import com.pablosanchezegido.petcity.views.custom.CircularProgressButton;
@@ -55,7 +54,7 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        presenter = new RegistrationPresenterImpl(this, new AuthInteractorImpl());
+        presenter = new RegistrationPresenterImpl(this, new RegistrationInteractorImpl());
 
         ButterKnife.bind(this);
         bindListeners();
