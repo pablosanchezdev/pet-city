@@ -26,6 +26,7 @@ public class OffersMapPresenterImpl implements OffersMapPresenter {
 
     @Override
     public void fetchDataWithoutLocation() {
+        view.setProgressVisible(true);
         interactor.fetchDataWithoutLocation(offersListener);
     }
 

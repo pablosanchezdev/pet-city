@@ -32,6 +32,13 @@ fun getDateFormatted(format: String): String {
     return formatter.format(calendar.time)
 }
 
+fun getDateInteger(format: String): Int {
+    val calendar = Calendar.getInstance()
+    val formatter = SimpleDateFormat(format, Locale.getDefault())
+
+    return Integer.parseInt(formatter.format(calendar.time))
+}
+
 fun getDateTimestamp(year: Int, month: Int, day: Int): Long {
     val calendar = Calendar.getInstance()
     calendar.set(Calendar.YEAR, year)

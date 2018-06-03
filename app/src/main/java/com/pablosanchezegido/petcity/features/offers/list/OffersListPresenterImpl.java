@@ -31,6 +31,7 @@ class OffersListPresenterImpl implements OffersListPresenter {
     @Override
     public void fetchDataWithoutLocation() {
         this.position = null;
+        view.setProgressVisible(true);
         interactor.fetchDataWithoutLocation(listener);
     }
 

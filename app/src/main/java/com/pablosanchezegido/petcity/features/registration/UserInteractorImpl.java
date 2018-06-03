@@ -30,7 +30,7 @@ public class UserInteractorImpl implements UserInteractor {
 
     @Override
     public void createUser(String id, String email, String name, String phoneNumber, OnUserCreatedListener listener) {
-        User user = new User("photoUrl", email, name, phoneNumber, null);
+        User user = new User("", email, name, phoneNumber, null);
         usersRef.document(id).set(user)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -97,7 +97,6 @@ public class UserInteractorImpl implements UserInteractor {
     public void insertOfferAccepted(Offer offer, OnOfferAcceptedInsertedListener listener) {
         String userId = AuthInteractorImpl.getUserId();
         if (userId != null) {
-            offer.setUser(null); // This offer is within users collection, so do not repeat data
             usersRef.document(userId)
                     .collection(USER_OFFERS_ACCEPTED_REF)
                     .document(offer.getId())

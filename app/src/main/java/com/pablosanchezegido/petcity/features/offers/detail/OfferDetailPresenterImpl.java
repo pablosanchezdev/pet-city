@@ -69,7 +69,7 @@ public class OfferDetailPresenterImpl implements OfferDetailPresenter {
                 @Override
                 public void onSuccess() {
                     view.setProgressVisible(false);
-                    view.setOfferAcceptedSuccessfuly();
+                    view.setOfferAcceptedSuccessfully(offer.getUser() != null ? offer.getUser().getName() : null);
                 }
 
                 @Override

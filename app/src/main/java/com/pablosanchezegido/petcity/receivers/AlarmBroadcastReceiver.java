@@ -10,6 +10,7 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        NotificationBuilder.createReminderLocalNotification(context, NotificationBuilder.REMINDERS_CHANNEL_ID);
+        NotificationBuilder.createReminderLocalNotification(context,
+                NotificationBuilder.REMINDERS_CHANNEL_ID, intent.getStringExtra(NotificationBuilder.USER_FULL_NAME));
     }
 }

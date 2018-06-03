@@ -245,7 +245,7 @@ public class OfferDetailActivity extends AppCompatActivity
     }
 
     @Override
-    public void setOfferAcceptedSuccessfuly() {
+    public void setOfferAcceptedSuccessfully(String userFullName) {
         ExtensionsKt.makeSnackbar(rootView, offerAcceptedSuccessfully, Snackbar.LENGTH_LONG);
         new Handler().postDelayed(() -> {
             Intent mainActivityIntent = new Intent(OfferDetailActivity.this, MainActivity.class);
@@ -253,7 +253,7 @@ public class OfferDetailActivity extends AppCompatActivity
             startActivity(mainActivityIntent);
             finish();
         }, 2000);
-        new AlarmHelper(this).scheduleAlarmAt(offerStartDate);
+        new AlarmHelper(this).scheduleAlarmAt(offerStartDate, userFullName);
     }
 
     @Override

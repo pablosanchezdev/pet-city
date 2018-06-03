@@ -19,8 +19,9 @@ public class AlarmHelper {
         alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
     }
 
-    public void scheduleAlarmAt(long timestamp) {
+    public void scheduleAlarmAt(long timestamp, String userFullName) {
         Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
+        intent.putExtra(NotificationBuilder.USER_FULL_NAME, userFullName);
         PendingIntent pi = PendingIntent.getBroadcast(context, 1, intent, 0);
 
         alarmManager.set(AlarmManager.RTC, getTargetTimestamp(timestamp), pi);

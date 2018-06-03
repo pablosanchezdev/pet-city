@@ -17,7 +17,7 @@ public interface OfferDetailView {
     void setOfferPlace(String place);
     void setOfferLocation(double lat, double lng);
     void setOfferPrice(double price);
-    void setOfferAcceptedSuccessfuly();
+    void setOfferAcceptedSuccessfully(String userFullName);
     void setError(String error);
     void showConfirmationDialog();
 }
