@@ -304,11 +304,13 @@ public class OfferDetailActivity extends AppCompatActivity
 
     private void addMarkerToMapAndMove(double lat, double lng) {
         LatLng marker = new LatLng(lat, lng);
-        googleMap.addMarker(new MarkerOptions()
-                .position(marker)
-                .title(offerTitle)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker)));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, MAP_ZOOM));
+        if (googleMap != null) {
+            googleMap.addMarker(new MarkerOptions()
+                    .position(marker)
+                    .title(offerTitle)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker)));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker, MAP_ZOOM));
+        }
     }
 
     @Override

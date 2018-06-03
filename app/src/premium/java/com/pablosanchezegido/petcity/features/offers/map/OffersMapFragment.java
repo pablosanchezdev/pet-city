@@ -101,23 +101,27 @@ public class OffersMapFragment extends Fragment implements OffersMapView, OnMapR
 
     @Override
     public void addMarker(double lat, double lng, String title, String id) {
-        Marker marker = googleMap.addMarker(new MarkerOptions()
-                .position(new com.google.android.gms.maps.model.LatLng(lat, lng))
-                .title(title)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker)));
-        marker.setTag(id);
+        if (googleMap != null) {
+            Marker marker = googleMap.addMarker(new MarkerOptions()
+                    .position(new com.google.android.gms.maps.model.LatLng(lat, lng))
+                    .title(title)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker)));
+            marker.setTag(id);
+        }
     }
 
     @Override
     public void setViewPosition(List<LatLng> latLngs) {
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        for (LatLng latLng : latLngs) {
-            builder.include(ModelMapperKt.latLngToLatLng(latLng));
-        }
-        LatLngBounds bounds = builder.build();
+        if (googleMap != null) {
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for (LatLng latLng : latLngs) {
+                builder.include(ModelMapperKt.latLngToLatLng(latLng));
+            }
+            LatLngBounds bounds = builder.build();
 
-        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 250);
-        googleMap.animateCamera(cu, 2000, null);
+            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 200);
+            googleMap.animateCamera(cu, 2000, null);
+        }
     }
 
     @Override

@@ -37,7 +37,7 @@ public class OffersMapFragment extends Fragment implements OffersMapView {
 
     @Override
     public void openLink() {
-        String url = "https://play.google.com";
+        String url = "https://play.google.com/store/apps/details?id=com.pablosanchezegido.petcitypremium";
         Intent playStoreIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(playStoreIntent);
     }

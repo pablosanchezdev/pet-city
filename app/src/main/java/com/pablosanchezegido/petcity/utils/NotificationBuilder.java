@@ -3,6 +3,7 @@ package com.pablosanchezegido.petcity.utils;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
@@ -30,6 +31,8 @@ public class NotificationBuilder {
                 .setContentText(context.getString(R.string.noti_detail, userFullName))
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(context.getString(R.string.noti_detail, userFullName)))
                 .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher))
+                .setColor(new PreferencesManager(context).getLedColor())
                 .setAutoCancel(true);
 
         notificationManager.notify(generateUniqueId(), builder.build());
